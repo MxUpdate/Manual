@@ -1,17 +1,12 @@
-#summary Describes the special handling of Triggers as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Triggers as configuration item.
 
 ----
-
-= Introduction =
-Trigger objects are used from the "emxTriggerManager" to define called JPOs
-with defined arguments.
+##Introduction
+Trigger objects are used from the "emxTriggerManager" to define called JPOs with defined arguments.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # TRIGGER:
 # ~~~~~~~~
@@ -66,4 +61,4 @@ mql escape mod bus "${OBJECTID}" \
     "eService Sequence Number" "1" \
     "eService Target States" ""
 mql escape promote bus "${OBJECTID}"
-}}}
+```
