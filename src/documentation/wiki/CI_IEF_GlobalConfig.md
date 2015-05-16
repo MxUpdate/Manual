@@ -1,31 +1,19 @@
-#summary Describes the special handling of IEF Global Config Objects as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of IEF Global Config Objects as configuration item.
 
 ----
+##Introduction
+The IEF Global Configuration objects are used to configure integrations and the related mapping between the CAD application and MX.
 
-= Introduction =
-The IEF Global Configuration objects are used to configure integrations and the
-related mapping between the CAD application and MX.
-
-The configuration item itself is stored as business object. The IEF Global
-Configuration depends on the used integration. This means that all
-configuration items are from a type derived from {{{MCADInteg-GlobalConfig}}}.
-So the type of the configuration object is important and must be part of the
+The configuration item itself is stored as business object. The IEF Global Configuration depends on the used integration. This means that all configuration items are from a type derived from `MCADInteg-GlobalConfig`. So the type of the configuration object is important and must be part of the
 file name.
 
-The file name is a concatenation of the global configuration type, the name and
-revision. As separator 16 underscores are used between the type and name and 8
-underscores between name and revision.
+The file name is a concatenation of the global configuration type, the name and revision. As separator 16 underscores are used between the type and name and 8 underscores between name and revision.
 
-If no global configuration type is defined in the file name (e.g. if an upgrade
-from {{{emxGerLibUpdate}}} is done), the default global configuration type
-{{{MCADInteg-GlobalConfig}}} is used.
+If no global configuration type is defined in the file name (e.g. if an upgrade from `emxGerLibUpdate` is done), the default global configuration type `MCADInteg-GlobalConfig` is used.
 
 ----
-
-= Example (Snippet) =
-{{{
+##Example (Snippet)
+```TCL
 ################################################################################
 # IEFGLOBALCONFIG:
 # ~~~~~~~~~~~~~~~~
@@ -51,4 +39,4 @@ mql escape mod bus "${OBJECTID}" \
     "IEF-DerivedOutputParameterObjTypeMapping" "" \
     "IEF-DerivedOutputTypeDefaultParameterObjectMapping" "" \
           :
-}}}
+```
