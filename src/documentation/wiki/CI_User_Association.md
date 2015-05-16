@@ -1,16 +1,12 @@
-#summary Describes the special handling of associations as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of associations as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 Associations are a list of persons which could be defined as expression.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # ASSOCIATION:
 # ~~~~~~~~~~~~
@@ -34,4 +30,4 @@ mql escape mod association "${NAME}" \
     description "Used to give rights in a state expression testing if user has check in rights (like OOTB public read)." \
     !hidden \
     definition "\"!User Agent\""
-}}}
+```
