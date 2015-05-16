@@ -1,18 +1,14 @@
-#summary Describes the special handling of Menus as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Menus as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 Menus are used to define group buttons for the web user interface. In some
 cases a menu could also be a button with action. For a deep instruction see the
 "MQL Guide" or "Business Modeler Guide" of the "ENOVIAvStudio Modeling
 Platform".
 
 ----
-
-= Handled Menu Properties =
+##Handled Menu Properties
 This menu properties could be handled from !MxUpdate:
   * description
   * hidden flag
@@ -23,9 +19,8 @@ This menu properties could be handled from !MxUpdate:
   * properties
 
 ----
-
-= Steps of the Update Flow =
-== Cleanup ==
+##Steps of the Update Flow
+###Cleanup
 Following steps are done before the TCL update file is executed:
   * The description is set to an empty string.
   * The menu is set to not hidden.
@@ -35,18 +30,16 @@ Following steps are done before the TCL update file is executed:
   * All properties are removed.
   * All sub commands and menus are removed.
 
-== Update ==
+###Update
 The TCL update file is executed.
 
 ----
-
-= Parameter Definitions =
+##Parameter Definitions
 No further parameters are defined.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # MENU:
 # ~~~~~
@@ -72,4 +65,4 @@ mql escape mod menu "${NAME}" \
     alt "" \
     add setting "Registered Suite" "Framework" \
     add command "MxUpdate_Test"
-}}}
+```
