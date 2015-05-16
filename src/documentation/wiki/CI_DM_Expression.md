@@ -1,17 +1,13 @@
-#summary Describes the special handling of Expressions as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Expressions as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 Expressions are evaluated against business objects or connections. For a deep
 instruction see the "MQL Guide" or "Business Modeler Guide" of the
 "ENOVIAvStudio Modeling Platform".
 
 ----
-
-= Handled Properties =
+##Handled Properties
 This expression properties could be handled from !MxUpdate:
  * description
  * hidden flag
@@ -19,22 +15,20 @@ This expression properties could be handled from !MxUpdate:
  * properties
 
 ----
+##Steps of the Update Flow
 
-= Steps of the Update Flow =
-
-== Cleanup ==
+###Cleanup
 Following steps are done before the TCL update file is executed:
  * set to not hidden
  * reset description
  * remove value (no expression)
 
-== Update ==
+###Update
 The TCL update file is executed.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # EXPRESSION:
 # ~~~~~~~~~~~
@@ -57,4 +51,4 @@ mql escape mod expression "${NAME}" \
     description "Expression for test purposes." \
     !hidden \
     value "current"
-}}}
+```
