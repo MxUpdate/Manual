@@ -1,16 +1,12 @@
-#summary Describes the special handling of MQL Programs as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of MQL Programs as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 The source code of programs are handled as configuration item. The name of the
 configuration item file is the same name as they are used within MX.
 
 ----
-
-= "Standard" Property and Symbolic Name Handling =
+##"Standard" Property and Symbolic Name Handling
 All non "standard" properties are removed before the program is updated and the
 embedded TCL code is execute. At the end all the "standard" properties
 "version", "file date", "application" and "author" are updated (depending on the
@@ -18,53 +14,52 @@ used parameters). The "standard" properties "installer" and "original name" are
 only set if not already defined.
 
 The symbolic name of the program is the automatically calculated string
-{{{program_[PROGRAM_NAME]}}}. If the {{{[PROGRAM_NAME]}}} includes some spaces
+`program_[PROGRAM_NAME]`. If the `[PROGRAM_NAME]` includes some spaces
 or slashes, they are removed.
 
 ----
-
-= Embedded TCL Code =
+##Embedded TCL Code
 Sometimes some further TCL update code is required, e.g. to define a program
-user, or some properties for the program. The !MxUpdate Update deployment tool
+user, or some properties for the program. The MxUpdate Update deployment tool
 could handle this within the same program source code. Before the code is
 updated in MX, the TCL update code itself will be removed (see parameter
-{{{ProgramTclUpdateNeeded}}}).
+`ProgramTclUpdateNeeded`).
 
 Because all non "standard" properties are removed before the embedded TCL code
-is execute, project specific properties could be set by using {{{add}}}.
+is execute, project specific properties could be set by using `add`.
 
-== Start and End Markers ==
+###Start and End Markers
 To identify the TCL update code some markers must be defined in the source code.
 For the beginning of TCL update code the marker
-{{{
+```TCL
 ################################################################################
 # START NEEDED MQL UPDATE FOR THIS PROGRAM                                     #
 ################################################################################
-}}}
+```
 is used. At the end, the marker
-{{{
+```TCL
 ################################################################################
 # END NEEDED MQL UPDATE FOR THIS PROGRAM                                       #
 ################################################################################
-}}}
+```
 must be defined.
 
-== File Extensions ==
+###File Extensions
 Embedded TCL update code is only executed for programs with the extensions
 ".xml", ".xsl", ".xslt", ".mql" and ".tcl". If some embedded TCL update code is
 identified for files with other extensions a warning message is shown in the
 console.
 
-== Line Prefixes for TCL / MQL Programs ==
+###Line Prefixes for TCL / MQL Programs
 Because e.g. for TCL and MQL programs the embedded TCL update code will be
-executed, the line prefix {{{#}}} is defined. The line prefix depends on the
+executed, the line prefix `#` is defined. The line prefix depends on the
 file extension (".tcl" for TCL programs and ".mql" for MQL programs).
 
 *Attention! The line prefix must be also defined for the start and end markers!*
 
-== TCL Program Example ==
+###TCL Program Example
 So for a TCL program the source code could look like this:
-{{{
+```TCL
 #################################################################################
 ## START NEEDED MQL UPDATE FOR THIS PROGRAM                                     #
 #################################################################################
@@ -79,13 +74,13 @@ tcl;
 eval  {
   .... SOME CODE ....
 }
-}}}
+```
 
-== XML Program Example ==
+###XML Program Example
 For XML and XSL(T) files the code could be embedded between start
-comment {{{<!‑‑}}} and end comment {{{‑‑>}}}. So the snippet for a XML program
+comment `<!‑‑` and end comment `‑‑>`. So the snippet for a XML program
 could like this:
-{{{
+```XML
 <!--
    Some Comment...
 
@@ -100,15 +95,28 @@ mql mod program "MXPROG.XML"  \
 # END NEEDED MQL UPDATE FOR THIS PROGRAM                                       #
 ################################################################################
 -->
-}}}
+```
 
 ----
+###Parameter Definitions
+*   **Name:** `ProgramTclUpdateExtension`
+    **Default Value:** `.xml=,.xsl=,.xslt=,.mql=#,.tcl=#`
+    Defines the list of all file extensions which could embed TCL update code and depending on the extension the related line prefixes.
+*   **Name:** `ProgramTclUpdateMarkEnd`
+    **Default Value:** _see the end marker_
+    Defines the string to mark the end of embedded TCL update code within program source code.
+*   **Name:** `ProgramTclUpdateMarkStart`
+    **Default Value:** _see the start marker_
+    Defines the string to mark the start of embedded TCL update code within program source code.
+*   **Name:** `ProgramTclUpdateNeeded`
+    **Parameter:** `‑‑noProgramTclUpdateNeeded`
+    **Default Value:** `true`
+    Embedded TCL update code within a program is not executed. Instead a warning is shown because of existing TCL update code.
+    ***Attention!*** The default value is `true`, but if the parameter is defined the flag will be `false`!
+*   **Name:** `ProgramTclUpdateRemoveInCode` 
+    **Parameter:** `‑‑noProgramTclUpdateCodeRemove`
+    **Default Value:** `true`
+    Embedded TCL update code within a MQL program is removed from the code. This means that in MX the code does not include the TCL update code.
+    ***Attention!*** The default value is `true`, but if the parameter is defined the flag will be `false`!
 
-= Parameter Definitions =
-|| *Name:* {{{ProgramTclUpdateExtension}}}                                                            <p>*Default Value:* {{{.xml=,.xsl=,.xslt=,.mql=#,.tcl=#}}}</p><p>Defines the list of all file extensions which could embed TCL update code and depending on the extension the related line prefixes.</p> ||
-|| *Name:* {{{ProgramTclUpdateMarkEnd}}}                                                              <p>*Default Value:* _see the end marker_ </p>                 <p>Defines the string to mark the end of embedded TCL update code within program source code.</p> ||
-|| *Name:* {{{ProgramTclUpdateMarkStart}}}                                                            <p>*Default Value:* _see the start marker_ </p>               <p>Defines the string to mark the start of embedded TCL update code within program source code.</p> ||
-|| *Name:* {{{ProgramTclUpdateNeeded}}}           <p>*Parameter:* {{{‑‑noProgramTclUpdateNeeded}}}</p><p>*Default Value:* {{{true}}} </p>                           <p>Embedded TCL update code within a program is not executed. Instead a warning is shown because of existing TCL update code.</p><p>*Attention!* The default value is {{{true}}}, but if the parameter is defined the flag will be {{{false}}}!</p> ||
-|| *Name:* {{{ProgramTclUpdateRemoveInCode}}} <p>*Parameter:* {{{‑‑noProgramTclUpdateCodeRemove}}}</p><p>*Default Value:* {{{true}}} </p>                           <p>Embedded TCL update code within a MQL program is removed from the code. This means that in MX the code does not include the TCL update code.</p><p>*Attention!* The default value is {{{true}}}, but if the parameter is defined the flag will be {{{false}}}!</p> ||
-
-The parameters could be changed depending on project needs. For further information see the [UpdatePropertyFileFormat_ParameterDef Parameter Definition Format].
+The parameters could be changed depending on project needs. For further information see the [Parameter Definition Format](UpdatePropertyFileFormat_ParameterDef.md).
