@@ -1,17 +1,12 @@
-#summary Describes the special handling of Object Generators as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Object Generators as configuration item.
 
 ----
-
-= Introduction =
-An object generator is used to create new business object instances depending on
-a number generator.
+##Introduction
+An object generator is used to create new business object instances depending on a number generator.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # OBJECTGENERATOR:
 # ~~~~~~~~~~~~~~~~
@@ -38,4 +33,4 @@ mql mod bus "${OBJECTID}" \
 mql connect bus  "${OBJECTID}" \
     relationship "eService Number Generator" \
     to "eService Number Generator" "type_MxUpdateTestType" ""
-}}}
+```
