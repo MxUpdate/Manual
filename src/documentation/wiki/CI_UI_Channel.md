@@ -1,10 +1,7 @@
-#summary Describes the special handling of Channels as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Channels as configuration item.
 
 ----
-
-= Introduction =
+## Introduction
 A channels is a collection of commands. Multiple channels are used to define the
 content of MX portals. For a deep instruction see the "MQL Guide" or "Business
 Modeler Guide" of the "ENOVIAvStudio Modeling Platform".
@@ -13,8 +10,7 @@ The configuration item 'channel' of the !MxUpdate Update tool does not handle
 channels which are defined as user's workspace item.
 
 ----
-
-= Handled Properties =
+##Handled Properties
 This channel properties could be handled from !MxUpdate:
   * description
   * hidden flag
@@ -24,10 +20,9 @@ This channel properties could be handled from !MxUpdate:
   * assigned commands
 
 ----
+##Steps of the Update Flow
 
-= Steps of the Update Flow =
-
-== Cleanup ==
+###Cleanup
 Following steps are done before the TCL update file is executed:
   * The description is set to an empty string.
   * The channel is set to not hidden.
@@ -35,18 +30,16 @@ Following steps are done before the TCL update file is executed:
   * The channel height is set to "0".
   * All assigned commands are removed.
 
-== Update ==
+###Update
 The TCL update file is executed.
 
 ----
-
-= Parameter Definitions =
+##Parameter Definitions
 No further parameters are defined.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # CHANNEL:
 # ~~~~~~~~
@@ -72,4 +65,4 @@ mql escape mod channel "${NAME}" \
     add setting "Registered Suite" "MxUpdateCentral" \
     place "First Test Command" after "" \
     place "Second Test Command" after ""
-}}}
+```
