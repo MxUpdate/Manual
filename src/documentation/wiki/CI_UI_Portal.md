@@ -1,10 +1,7 @@
-#summary Describes the special handling of Portals as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Portals as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 A portal is a collection of channels. A portal is used as power view in the
 user interface. For a deep instruction see the "MQL Guide" or "Business Modeler
 Guide" of the "ENOVIAvStudio Modeling Platform".
@@ -13,8 +10,7 @@ The configuration item 'portal' of the !MxUpdate Update tool does not handle
 portals which are defined as user's workspace item.
 
 ----
-
-= Handled Properties =
+##Handled Properties
 This portal properties could be handled from !MxUpdate:
   * description
   * hidden flag
@@ -24,10 +20,9 @@ This portal properties could be handled from !MxUpdate:
   * assigned channels
 
 ----
+##Steps of the Update Flow
 
-= Steps of the Update Flow =
-
-== Cleanup ==
+###Cleanup
 Following steps are done before the TCL update file is executed:
   * The description is set to an empty string.
   * The portal is set to not hidden.
@@ -36,18 +31,16 @@ Following steps are done before the TCL update file is executed:
   * All properties are removed.
   * All assigned channels are removed.
 
-== Update ==
+##Update
 The TCL update file is executed.
 
 ----
-
-= Parameter Definitions =
+##Parameter Definitions
 No further parameters are defined.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # PORTAL:
 # ~~~~~~~
@@ -71,4 +64,4 @@ mql escape mod portal "${NAME}" \
     label "" \
     add setting "Registered Suite" "MxUpdateCentral" \
     place "TestChannel" after ""
-}}}
+```
