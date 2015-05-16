@@ -1,17 +1,13 @@
-#summary Describes the special handling of IEF Mass Promote Configuration Objects as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of IEF Mass Promote Configuration Objects as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 
 The Mass Promote Configuration Objects are used from the IEF integrations.
 
 ----
-
-= Example (Snippet) =
-{{{
+##Example (Snippet)
+```TCL
 ################################################################################
 # IEFMASSPROMOTECONFIG:
 # ~~~~~~~~~~~~~~~~~~~~~
@@ -32,4 +28,4 @@ mql escape mod bus "${OBJECTID}" \
     "IEF-MassPromoteValidationRuleJPO" "" \
     "IEF-ValidateObjectPromotion" "TRUE" \
     "IEF-ValidateObjectSelection" "TRUE"
-}}}
+```
