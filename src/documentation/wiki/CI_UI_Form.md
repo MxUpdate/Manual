@@ -1,51 +1,43 @@
-#summary Describes the special handling of Web Forms as configuration item.
-
-<wiki:toc max_depth="3"/>
-
+#Describes the special handling of Web Forms as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 A form is used to display information related to an object. For a deep
 instruction see the "MQL Guide" or "Business Modeler Guide" of the
 "ENOVIAvStudio Modeling Platform".
 
 ----
-
-= Handled Form Properties =
+##Handled Form Properties
 This form properties could be handled from !MxUpdate:
   * description
   * hidden flag
   * fields
 
 ----
-
-= Steps of the Update Flow =
-== Cleanup ==
+##Steps of the Update Flow
+###Cleanup
 Following steps are done before the TCL update file is executed:
   * The description is set to an empty string.
   * The form is set to not hidden.
   * All fields of the web form are removed.
 
-== Update ==
+###Update
 The description is updated and all fields are new created and appended.
 
-== Correct Order of Fiels ==
+###Correct Order of Fiels
 Because there is an issue in MX of correct order for new created and appended
 fields (after all fields was removed), !MxUpdate specific TCL procedure
 {{{orderFields}}} must be called. This TCL procedure orders all fields
 correctly (by reordering them via MQL statements).
 
 ----
-
-= Parameter Definitions =
+##Parameter Definitions
 No further parameters are defined.
 
 ----
+##Example
 
-= Example =
-
-{{{
+```TCL
 ################################################################################
 # FORM:
 # ~~~~~
@@ -110,4 +102,4 @@ orderFields "${NAME}" [list \
     "name" \
     "revision" \
 ]
-}}}
+```
