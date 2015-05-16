@@ -1,44 +1,36 @@
-#summary Describes the special handling of Tables as configuration item.
-
-<wiki:toc max_depth="3"/>
-
+#Describes the special handling of Tables as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 A web table is used to display multiple business objects with related
 information. For a deep instruction see the "MQL Guide" or "Business Modeler
 Guide" of the "ENOVIAvStudio Modeling Platform".
 
 ----
-
-= Handled Table Properties =
+##Handled Table Properties
 This table properties could be handled from !MxUpdate:
   * description
   * hidden flag
   * fields
 
 ----
-
-= Steps of the Update Flow =
-== Cleanup ==
+##Steps of the Update Flow
+###Cleanup
 Following steps are done before the TCL update file is executed:
   * The description is set to an empty string.
   * The table is set to not hidden.
   * All columns of the web table are removed.
 
-== Update ==
+###Update
 The TCL update file is executed.
 
 ----
-
-= Parameter Definitions =
+##Parameter Definitions =
 No further parameters are defined.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # TABLE:
 # ~~~~~~
@@ -93,4 +85,4 @@ mql escape mod table "${NAME}" system \
         href "" \
         alt "" \
         setting "Registered Suite" "Framework"
-}}}
+```
