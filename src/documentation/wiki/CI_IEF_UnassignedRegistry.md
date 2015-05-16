@@ -1,17 +1,13 @@
-#summary Describes the special handling of IEF Unassigned Registry Objects as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of IEF Unassigned Registry Objects as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 
 The Unassigned Registry Objects are used from the IEF integrations.
 
 ----
-
-= Example (Snippet) =
-{{{
+##Example (Snippet)
+```TCL
 ################################################################################
 # IEFUNASSIGNEDREGISTRY:
 # ~~~~~~~~~~~~~~~~~~~~~~
@@ -31,4 +27,4 @@ mql escape mod bus "${OBJECTID}" \
     description "MxUpdate Test IEF unassigned registry." \
     "DSCAllowedFeatures" "WhereUsed,Lifecycle" \
     "IEF-IntegrationToGCOMapping" ""
-}}}
+```
