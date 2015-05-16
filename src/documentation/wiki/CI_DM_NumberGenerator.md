@@ -1,17 +1,12 @@
-#summary Describes the special handling of Number Generators as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Number Generators as configuration item.
 
 ----
-
-= Introduction =
-A number generator is used to create new numbers which e.g. could be used for
-names of business objects.
+##Introduction
+A number generator is used to create new numbers which e.g. could be used for names of business objects.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # NUMBERGENERATOR:
 # ~~~~~~~~~~~~~~~~
@@ -34,4 +29,4 @@ set sTmp [mql print bus "${OBJECTID}" select attribute\[eService Next Number\] d
 if {[string length "${sTmp}"]==0}  {
   mql mod bus "${OBJECTID}" "eService Next Number" "0000001"
 }
-}}}
+```
