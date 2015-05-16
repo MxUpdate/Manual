@@ -1,23 +1,14 @@
-#summary Describes the special handling of Notifications as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Notifications as configuration item.
 
 ----
+##Introduction
+The notification objects are used from the generic email utility to define the subject, text and recipients of notifications (emails). The generic email utility is described in the "Business Process Services Administrator's Guide" (Live Collaboration Admin).
 
-= Introduction =
-The notification objects are used from the generic email utility to define the
-subject, text and recipients of notifications (emails). The generic email
-utility is described in the "Business Process Services Administrator's Guide"
-(Live Collaboration Admin).
-
-The notification object itself is internally stored in MX as business object
-from type "Notification" with policy "Business Rule" in vault
-"eService Administration".
+The notification object itself is internally stored in MX as business object from type "Notification" with policy "Business Rule" in vault "eService Administration".
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # NOTIFICATION:
 # ~~~~~~~~~~~~~
@@ -52,4 +43,4 @@ mql escape mod bus "${OBJECTID}" \
     "Subject Text" "Text Subject" \
     "URL Suffix" ""
 mql promote bus "${OBJECTID}"
-}}}
+```
