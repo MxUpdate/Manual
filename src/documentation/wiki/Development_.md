@@ -1,38 +1,28 @@
-#summary Describes how to develop MxUpdate
-
-<wiki:toc max_depth="3"/>
+#Describes how to develop MxUpdate
 
 ----
-
-= Introduction =
+##Introduction
 For the development of !MxUpdate [http://maven.apache.org Maven] is used. For
-the specific configuration see the related developer description for the
-[Development_Update MxUpdate Update Tool], the
-[Development_EclipsePlugIn MxUpdate Eclipse Plug-In] and the
-[Development_Manual MxUpdate Manual].
+the specific configuration see the related developer description for the [MxUpdate Update Tool](Development_Update.md), the [MxUpdate Eclipse Plug-In](Development_EclipsePlugIn.md) and the [MxUpdate Manual](Development_Manual.md).
 
 ----
+##Maven Environment Specific Settings
+Depending on the environment some specific settings could be defined. For maven the settings are located in the file `~/.m2/settings.xml` (home directory of current user and then sub directory `.m2`.
 
-= Maven Environment Specific Settings =
-Depending on the environment some specific settings could be defined. For maven
-the settings are located in the file {{{~/.m2/settings.xml}}} (home
-directory of current user and then sub directory {{{.m2}}}).
+###Link to the MX Environment
+The used link to the MX environment is defined via following properties in the settings:
 
-== Link to the MX Environment ==
-The used link to the MX environment is defined via following properties in the
-settings:
-|| *Key*                         || *Description* ||
-|| org.mxupdate.mx.url           || URL to the MX database, if not defined the MX shared library is used. ||
-|| org.mxupdate.mx.user          || User for the login. ||
-|| org.mxupdate.mx.password      || Password for the login. ||
-|| org.mxupdate.mx.jar.ematrix   || File path for the {{{eMatrixServletRMI.jar}}} file. ||
-|| org.mxupdate.mx.jar.m1jsystem || File path for the {{{m1jsystem.jar}}} file. ||
+Key                             | Description
+--------------------------------|-------------------
+`org.mxupdate.mx.url`           | URL to the MX database, if not defined the MX shared library is used.
+`org.mxupdate.mx.user`          | User for the login.
+`org.mxupdate.mx.password`      | Password for the login.
+`org.mxupdate.mx.jar.ematrix`   | File path for the `eMatrixServletRMI.jar` file.
+`org.mxupdate.mx.jar.m1jsystem` | File path for the `m1jsystem.jar` file.
 
-*Example:*
-The MX Jar libraries are located in the Eclipse {{{mxupdate}}} project
-(directory). The same Jar files are used for the Eclipse Plug-In and Update
-Tool.
-{{{
+###Example
+The MX Jar libraries are located in the Eclipse `mxupdate` project (directory). The same Jar files are used for the Eclipse Plug-In and Update Tool.
+```XML
 <settings>
     :
   <profiles>
@@ -55,15 +45,13 @@ Tool.
   </profiles>
     :
 </settings>
-}}}
+```
 
-== HTTP Proxy for Maven ==
-Maven downloads via HTTP protocol required dependencies (e.g. the test-ng Java
-libraries). In the case an HTTP proxy must be defined, the settings for
-Maven must be changed.
+### HTTP Proxy for Maven
+Maven downloads via HTTP protocol required dependencies (e.g. the test-ng Java libraries). In the case an HTTP proxy must be defined, the settings for Maven must be changed.
 
 Following snippet must be added to the setting file:
-{{{
+```XML
 <settings>
     :
   <proxies>
@@ -77,6 +65,5 @@ Following snippet must be added to the setting file:
   </proxies>
     :
 </settings>
-}}}
-For more information see also the
-[http://maven.apache.org/guides/mini/guide-proxies.html proxy guide] from Maven.
+```
+For more information see also the [proxy guide](http://maven.apache.org/guides/mini/guide-proxies.html) from Maven.
