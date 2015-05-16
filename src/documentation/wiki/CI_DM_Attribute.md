@@ -1,17 +1,15 @@
-#summary Describes the special handling of Attributes as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Attributes as configuration item.
 
 ----
 
-= Introduction =
+## Introduction
 Attributes are used to handle values for business objects and connections. They
-are assigned to [CI_DM_Type types], [CI_DM_Relationship relationships] and 
-[CI_DM_Interface interfaces].
+are assigned to [types](CI_DM_Type), [relationships](CI_DM_Relationship) and 
+[interfaces](CI_DM_Interface).
 
 ----
 
-= Handled Properties =
+## Handled Properties
 This format properties could be handled from !MxUpdate:
  * description
  * hidden flag
@@ -26,9 +24,9 @@ This format properties could be handled from !MxUpdate:
 
 ----
 
-= Steps of the Update Flow =
+## Steps of the Update Flow
 
-== Cleanup ==
+### Cleanup 
 Following steps are done before the CI update file is executed:
  * set to not hidden
  * reset description and default value
@@ -38,20 +36,28 @@ Following steps are done before the CI update file is executed:
  * multiple line flag is disabled for string attributes
  * maximum length is set to 0 for string attributes
 
-== Update ==
+### Update
 The CI update file is executed. 
 
 ----
 
-= Parameter Definitions =
-|| *Name:* {{{DMAttrSupportsFlagResetOnClone}}}    <p>*Value:* {{{true}}} if the MQL command "{{{help attribute}}}" includes the string "{{{resetonclone}}}".</p>   <p>If the flag is set to true attributes supports the "resetonclone" flag.</p> ||
-|| *Name:* {{{DMAttrSupportsFlagResetOnRevision}}} <p>*Value:* {{{true}}} if the MQL command "{{{help attribute}}}" includes the string "{{{resetonrevision}}}".</p><p>If the flag is set to true attributes supports the "resetonrevision" flag.</p> ||
-|| *Name:* {{{DMAttrSupportsPropMaxLength}}}       <p>*Value:* {{{true}}} if the MQL command "{{{help attribute}}}" includes the string "{{{maxlength}}}".</p>      <p>If the flag is set to true string attributes supports the "maxlength" property.</p> ||
+## Parameter Definitions
+*   **Name:** ```DMAttrSupportsFlagResetOnClone```
+    **Value:** ```true``` if the MQL command "```help attribute```" includes the string "```resetonclone```".
+    If the flag is set to true attributes supports the "resetonclone" flag.
+*   **Name:** ```DMAttrSupportsFlagResetOnRevision```
+    **Value:** ```true``` if the MQL command "```help attribute```" includes the string "```resetonrevision```".
+    If the flag is set to true attributes supports the "resetonrevision" flag.
+*   **Name:** ```DMAttrSupportsPropMaxLength```
+    **Value:** ```true``` if the MQL command "```help attribute```" includes the string "```maxlength```".
+    If the flag is set to true string attributes supports the "maxlength" property.
+
+
 
 ----
 
-= Example =
-{{{
+## Example
+```tcl
 ################################################################################
 # ATTRIBUTE:
 # ~~~~~~~~~~
@@ -78,4 +84,4 @@ mql escape mod attribute "${NAME}" \
     multiline \
     maxlength "100" \
     default ""
-}}}
+```
