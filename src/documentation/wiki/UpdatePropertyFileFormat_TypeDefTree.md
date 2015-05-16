@@ -1,30 +1,23 @@
-#summary Description of the Key "TypeDefTree" within MxUpdate property file.
-
-<wiki:toc max_depth="3"/>
+#Description of the Key "TypeDefTree" within MxUpdate property file.
 
 ----
-
-= Introduction =
-
-Properties with key "!TypeDefTree" defines the type definition tree for the
-Eclipse plug-in. The type definition tree "{{{All}}}" must exists and defines
-the which type definition trees are shown within the Eclipse plug-in.
+##Introduction
+Properties with key "TypeDefTree" defines the type definition tree for the Eclipse plug-in. The type definition tree "`All`" must exists and defines which type definition trees are shown within the Eclipse plug-in.
 
 ----
+##Sub Keys of "TypeDefTree"
+The sub keys are defined after the "TypeDefTree" Key. Following sub keys are
+interpreted by MxUpdate:
 
-= Sub Keys of "!TypeDefTree" =
-The sub keys are defined after the "!TypeDefTree" Key. Following sub keys are
-interpreted by !MxUpdate:
-
-|| *Type*              || *Description* ||
-|| Label               || Label used from the the Eclipse plug-in.||
-|| !SubTypeDefTreeList || Comma separated list of child type definition tree names. ||
-|| !TypeDefList        || Comma separated list of "[UpdatePropertyFileFormat_TypeDef TypeDef]" names. ||
+Type               | Description*
+-------------------|--------------
+Label              | Label used from the the Eclipse plug-in.
+SubTypeDefTreeList | Comma separated list of child type definition tree names.
+TypeDefList        | Comma separated list of "[TypeDef](UpdatePropertyFileFormat_TypeDef.md)" names.
 
 ----
-
-= Example =
-{{{
+##Example
+```
 TypeDefTree.All.Label                   =
 TypeDefTree.All.SubTypeDefTreeList      = DataModel,Integration,Program,User,UserInterface
 TypeDefTree.All.TypeDefList             =
@@ -37,4 +30,4 @@ TypeDefTree.Person.Label                = Person
 TypeDefTree.Person.SubTypeDefTreeList   =
 TypeDefTree.Person.TypeDefList          = Person
     :
-}}}
+```
