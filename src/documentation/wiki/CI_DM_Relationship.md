@@ -1,17 +1,13 @@
-#summary Describes the special handling of Relationships as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Relationships as configuration item.
 
 ----
-
-= Introduction =
+##Introduction
 Relationships are used to define the behavior for attributes, triggers etc. of
 connections between business objects. For a deep instruction see the "MQL Guide"
 or "Business Modeler Guide" of the "ENOVIA Studio Modeling Platform".
 
 ----
-
-= Handled Properties =
+##Handled Properties
 This relationship properties could be handled from !MxUpdate:
  * description
  * hidden flag
@@ -27,10 +23,9 @@ This relationship properties could be handled from !MxUpdate:
     * types and relationships
 
 ----
+##Steps of the Update Flow
 
-= Steps of the Update Flow =
-
-== Cleanup ==
+###Cleanup
 Following steps are done before the CI update file is executed:
  * set to not hidden
  * reset description
@@ -45,66 +40,75 @@ Following steps are done before the CI update file is executed:
     * set clone action none
     * remove all types and relationships
 
-== Update ==
+###Update
 The CI update file is executed. If the TCL procedure "testAttributes" is
 defined, the attributes of the relationship are updated.
 
 ----
 
-= TCL Procecure "testAttributes" =
+##TCL Procedure "testAttributes"
 The TCL procedure "testAttributes" is used to test if all attributes are
 assigned to the relationship. If some attributes are missed, these attributes
 are assigned to the relationship.
 
-== Parameters ==
-|| *Parameter*                      || *Description* ||
-|| {{{‑attributes [ATTR_LIST]}}}    || TCL list of attributes which must be defined on the relationship ||
-|| {{{‑ignoreattr [NAME]}}}         || name of the attribute which is ignored (the attribute could be defined or not on the relationship); the global parameter {{{DMWithAttrIgnoreRelAttr}}} also exists ||
-|| {{{‑relationship [NAME]}}}       || name of the relationship which is tested ||
-|| {{{‑removeattr [NAME]}}}         || name of the attribute which is removed if currently assigned to the relationship; the global parameter {{{DMWithAttrRemoveRelAttr}}} also exists ||
+###Parameters
+*   **Parameter:** `‑attributes [ATTR_LIST]`
+    TCL list of attributes which must be defined on the relationship
+*   **Parameter:** `‑ignoreattr [NAME]`
+    name of the attribute which is ignored (the attribute could be defined or not on the relationship); the global parameter `DMWithAttrIgnoreRelAttr` also exists
+*   **Parameter:** `‑relationship [NAME]`
+    name of the relationship which is tested
+*   **Parameter:** `‑removeattr [NAME]`
+    name of the attribute which is removed if currently assigned to the relationship; the global parameter `DMWithAttrRemoveRelAttr` also exists
 
-== Example with Two Attributes ==
+###Example with Two Attributes
 The two attributes "Attribute 1" and "Attribute 2" must be defined on a
 relationship. Within an update the name of the relationship is defined in the
 TCL variable {{{NAME}}}.
-{{{
+```TCL
 testAttributes -relationship "${NAME}" -attributes [list \
     "Attribute 1" \
     "Attribute 2" \
 ]
-}}}
+```
 
-== Example with One Attribute to Remove ==
+###Example with One Attribute to Remove
 The two attributes "Attribute 1" and "Attribute 2" must be defined on a
 relationship. If attribute "Remove Attr" exists on the relationship, this
 attribute will be automatically removed. Within an update the name of the
 relationship is defined in the TCL variable {{{NAME}}}.
-{{{
+```TCL
 testAttributes -relationship "${NAME}" -removeattr "Remove Attr" -attributes [list \
     "Attribute 1" \
     "Attribute 2" \
 ]
-}}}
+```
+
+----
+##Parameter Definitions
+*   **Name:** `DMRelationSupportRelCons`
+    **Default Value:** `true`
+    Are from current MX version connections between relationships supported? This is a V6 feature and so as default set to true. If an older MX version is used which does not support connections between relationships the value must be set to false.
+*   **Name:** `DMWithAttrIgnoreRelAttr`
+    **Parameter:** `‑‑ignorerelationshipattributes [ATTRIBUTE_MATCH]` 
+    Pattern defining the match of attributes which are ignored if not defined anymore within the test attributes of relationships.
+*   **Name:** `DMWithAttrRemoveRelAttr`
+    **Parameter:** `‑‑removerelationshipattributes [ATTRIBUTE_MATCH]` 
+    Pattern defining the match of attributes which are removed if not defined anymore within the test attributes of relationships.
+
+----
+##Explanation of Update Error Codes
+
+Error Code | Description
+-----------|------------
+12101      | The given attribute is not defined anymore from TCL procedure `testAttributes` but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
+12102      | A wrong parameter was given the called TCL procedure `testAttributes` which defines the assigned attributes for a relationship.
+12103      | The name of the relationship is not the same then defined through the name of the CI file from the called TCL procedure `testAttributes`.
 
 ----
 
-= Parameter Definitions =
-|| *Name:* {{{DMRelationSupportRelCons}}}         <p>*Default Value:* {{{true}}}                                         </p><p>Are from current MX version connections between relationships supported?</p><p>This is a V6 feature and so as default set to true. If an older MX version is used which does not support connections between relationships the value must be set to false.</p> ||
-|| *Name:* {{{DMWithAttrIgnoreRelAttr}}}          <p>*Parameter:* {{{‑‑ignorerelationshipattributes [ATTRIBUTE_MATCH]}}} </p><p>Pattern defining the match of attributes which are ignored if not defined anymore within the test attributes of relationships.</p> ||
-|| *Name:* {{{DMWithAttrRemoveRelAttr}}}          <p>*Parameter:* {{{‑‑removerelationshipattributes [ATTRIBUTE_MATCH]}}} </p><p>Pattern defining the match of attributes which are removed if not defined anymore within the test attributes of relationships.</p> ||
-
-----
-
-= Explanation of Update Error Codes =
-|| *Error Code* || *Description* ||
-|| 12101        || The given attribute is not defined anymore from TCL procedure {{{testAttributes}}} but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost. ||
-|| 12102        || A wrong parameter was given the called TCL procedure {{{testAttributes}}} which defines the assigned attributes for a relationship. ||
-|| 12103        || The name of the relationship is not the same then defined through the name of the CI file from the called TCL procedure {{{testAttributes}}}. ||
-
-----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # RELATIONSHIP:
 # ~~~~~~~~~~~~~
@@ -149,4 +153,4 @@ testAttributes -relationship "${NAME}" -attributes [list \
     "MxUpdateTestAttribute1" \
     "MxUpdateTestAttribute2" \
 ]
-}}}
+```
