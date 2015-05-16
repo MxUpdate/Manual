@@ -1,20 +1,13 @@
-#summary Describes the special handling of IEF Global Registry Objects as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of IEF Global Registry Objects as configuration item.
 
 ----
+##Introduction
 
-= Introduction =
-
-In the IEF Global Registry Objects each installed integrations is registered.
-The integration source itself is done with XML tags. Maximum one object exists
-(if at minimum one integration is used). The object is identified with name
-"IEF-GlobalRegistry" and revision "-".
+In the IEF Global Registry Objects each installed integrations is registered. The integration source itself is done with XML tags. Maximum one object exists (if at minimum one integration is used). The object is identified with name "IEF-GlobalRegistry" and revision "-".
 
 ----
-
-= Example (Snippet) =
-{{{
+##Example (Snippet)
+```TCL
 ################################################################################
 # IEFGLOBALREGISTRY:
 # ~~~~~~~~~~~~~~~~~~
@@ -33,4 +26,4 @@ The integration source itself is done with XML tags. Maximum one object exists
 mql escape mod bus "${OBJECTID}" \
     description "IEF Global Registry Object" \
     "IEF-RegistryData" "<?xml version='1.0'?><integrationregistry>....</integrationregistry>"
-}}}
+```
