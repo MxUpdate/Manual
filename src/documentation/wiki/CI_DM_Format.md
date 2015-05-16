@@ -1,17 +1,13 @@
-#summary Describes the special handling of Formats as configuration item.
-
-<wiki:toc max_depth="3"/>
+#Describes the special handling of Formats as configuration item.
 
 ----
-
-= Introduction =
-Formats are used for files check-in on business objects. They are defined on
+##Introduction
+Formats are used for files check-in on business objects. They are used from
 policies. For a deep instruction see the "MQL Guide" or "Business Modeler Guide"
 of the "ENOVIAvStudio Modeling Platform".
 
 ----
-
-= Handled Properties =
+##Handled Properties
 This format properties could be handled from !MxUpdate:
  * description
  * hidden flag
@@ -25,28 +21,25 @@ This format properties could be handled from !MxUpdate:
  * properties
 
 ----
+##Steps of the Update Flow
 
-= Steps of the Update Flow =
-
-== Cleanup ==
+###Cleanup
 Following steps are done before the TCL update file is executed:
  * set to not hidden
  * reset description, version, suffix, mime type, file type
  * remove view / edit / print program
  * remove all assigned properties
 
-== Update ==
+###Update
 The TCL update file is executed.
 
 ----
-
-= Parameter Definitions =
+##Parameter Definitions
 No further parameters are defined.
 
 ----
-
-= Example =
-{{{
+##Example
+```TCL
 ################################################################################
 # FORMAT:
 # ~~~~~~~
@@ -76,3 +69,4 @@ mql escape mod format "${NAME}" \
     edit "Edit Program" \
     print "Print Program"
 }}}
+```
