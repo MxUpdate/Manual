@@ -30,30 +30,36 @@ Platform".
 This menu properties could be handled from !MxUpdate:
   * description
   * hidden flag
+  * flag to indicate that the menu is a type tree menu
   * "alt" and label text
   * hyperlink reference (HRef)
   * settings
-  * sub commands and menus
+  * assigned sub commands and menus
   * properties
 
 ----
 ##Steps of the Update Flow
-###Cleanup
-Following steps are done before the TCL update file is executed:
-  * The description is set to an empty string.
-  * The menu is set to not hidden.
-  * The "alt" and label text is set to an empty string, too.
-  * The hyperlink reference is removed.
-  * All settings are removed.
-  * All properties are removed.
-  * All sub commands and menus are removed.
-
-###Update
-The TCL update file is executed.
+The menu CI file is defined with the so called *update format*. So an update of an menu is done by calculating the delta between the target and the current existing definition.
+This calculating delta means also that the history of a menu contains only the changes between the different milestone of a menu definition.
 
 ----
 ##Parameter Definitions
 No further parameters are defined.
+
+----
+## Syntax
+    mxUpdate menu NAME {
+        description DESCRIPTION_STRING
+        [!]hidden
+        [!]treemenu
+        label LABEL_STRING
+        href HREF_STRING
+        alt ALT_STRING
+        setting SETTING_NAME SETTING_VALUE
+        command COMMAND
+        menu MENU
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
 
 ----
 ##Example
@@ -76,11 +82,12 @@ No further parameters are defined.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod menu "${NAME}" \
-    description "Menu for test purposes." \
-    label "emxFramework.Common.Actions" \
-    href "" \
-    alt "" \
-    add setting "Registered Suite" "Framework" \
-    add command "MxUpdate_Test"
+mxUpdate menu "${NAME}" {
+    description "Menu for test purposes."
+    label "emxFramework.Common.Actions"
+    href ""
+    alt ""
+    setting "Registered Suite" "Framework"
+    command "MxUpdate_Test"
+}
 ```
