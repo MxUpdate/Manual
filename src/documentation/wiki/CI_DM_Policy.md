@@ -83,7 +83,7 @@ mxUpdate policy "${NAME}" {
 }
 ```
 
-### All State Access Definition ==
+### All State Access Definition
 The "all state access" definition is defined within `allstate`.
 
 *Snippet of an example:*
@@ -143,64 +143,69 @@ mxUpdate policy "${NAME}" {
 ----
 ## Syntax
 ```
-mxUpdate policy NAME {
-    description DESCRIPTION_STRING
-    [!]hidden
-    type {TYPENAME ...}
-    format {FORMATNAME ...}
-    defaultformat FORMAT_NAME
-    [!]enforce
-    sequence REVISION_SEQUENCE
-    delimiter DELIMITER
-    minorsequence REVISION_SEQUENCE
-    majorsequence REVISION_SEQUENCE
-    store STORENAME
-    allstate  {
-        ACCESS_ITEM
-    }
-    state STATE_NAME {
-        registeredName REGISTERED_NAME_STRING
-        [!]enforcereserveaccess
-        [!]majorrevision
-        [!]minorrevision
-        [!]version
-        [!]promote
-        [!]checkouthistory
-        [!]published
-        ACCESS_ITEM
-        action PROGRAM_NAME [input ARG_STRING]
-        check PROGRAM_NAME [input ARG_STRING]
-        trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
-                           | check    |
-                           | override |
-        signature SIGNATURE_NAME {
-            branch STATENAME
-            approve {USER ...}
-            ignore {USER ...}
-            reject {USER ...}
-            filter FILTER_EXPRESSION
-        }
-        property NAME [to TYPE NAME] [value VALUE_STRING]
-    }
-    property NAME [to TYPE NAME] [value VALUE_STRING]
-}
+mxUpdate policy "${NAME}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | type {TYPENAME ...}
+    | format {FORMATNAME ...}
+    | defaultformat FORMAT_NAME
+    | [!]enforce
+    | sequence REVISION_SEQUENCE
+    | delimiter DELIMITER
+    | minorsequence REVISION_SEQUENCE
+    | majorsequence REVISION_SEQUENCE
+    | store STORENAME
+    | allstate  { ACCESS_ITEM }
+    | state STATE_NAME { [STATE_ITEM] }
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
+where **`STATE_ITEM`** is:
+```
+    | registeredName REGISTERED_NAME_STRING
+    | [!]enforcereserveaccess
+    | [!]majorrevision
+    | [!]minorrevision
+    | [!]version
+    | [!]promote
+    | [!]checkouthistory
+    | [!]published
+    | ACCESS_ITEM
+    | action PROGRAM_NAME input ARG_STRING
+    | check PROGRAM_NAME input ARG_STRING
+    | trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+    |                    | check    |
+    |                    | override |
+    | signature SIGNATURE_NAME { [SIGNATURE_ITEM] }
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+
+```
+where **`SIGNATURE_ITEM `** is:
+```
+    | branch STATENAME
+    | approve {USER ...}
+    | ignore {USER ...}
+    | reject {USER ...}
+    | filter FILTER_EXPRESSION
 ```
 where **`ACCESS_ITEM`** is:
 ```
-    [revoke] [login] | public    | [key KEY_STRING] {ACCESS_ITEM...} [USER_ITEM]
-                     | owner     | 
-                     | user NAME | 
+    | [revoke] [login] | public    | [key KEY_STRING] {ACCESS...} [USER_ITEM]
+    |                  | owner     | 
+    |                  | user NAME | 
 
 ```
 where **`USER_ITEM `** is:
 ```
-    [any|single|ancestor|descendant] organization
-    [any|single|ancestor|descendant] project
-    [any|context] owner
-    [any|no|context|inclusive] reserve
-    [any|no|public|protected|private|notprivate|ppp] maturity
-    [any|oem|goldpartner|partner|supplier|customer|contractor] category
-    [filter|localfilter] EXPRESSION
+    | [any|single|ancestor|descendant] organization
+    | [any|single|ancestor|descendant] project
+    | [any|context] owner
+    | [any|no|context|inclusive] reserve
+    | [any|no|public|protected|private|notprivate|ppp] maturity
+    | [any|oem|goldpartner|partner|supplier|customer|contractor] category
+    | [filter|localfilter] EXPRESSION
 ```
 
 ----
@@ -227,7 +232,7 @@ version | "false" |
         | "true"  |
 promote | "false" |
         | "true"  |
-checkout history | "false" |
+checkouthistory | "false" |
                 | "true"  |
 published | "false" |
           | "true"  |
@@ -274,8 +279,6 @@ mxUpdate policy "${NAME}" {
     checkouthistory
     owner {read modify checkout checkin}
     public {}
-    action "" input ""
-    check "" input ""
     signature "Reject" {
       branch "Rejected"
       approve {Employee}
@@ -299,8 +302,6 @@ mxUpdate policy "${NAME}" {
     checkouthistory
     owner {read modify checkout}
     public {}
-    action "" input ""
-    check "" input ""
   }
   state "Approved"  {
     registeredName "state_Approved"
@@ -310,8 +311,6 @@ mxUpdate policy "${NAME}" {
     checkouthistory
     owner {read modify checkout checkin}
     public {}
-    action "" input ""
-    check "" input ""
     signature "creator" {
       branch ""
       approve {creator}
@@ -327,8 +326,6 @@ mxUpdate policy "${NAME}" {
     checkouthistory
     owner {read modify show}
     public {}
-    action "" input ""
-    check "" input ""
   }
 }
 ```
