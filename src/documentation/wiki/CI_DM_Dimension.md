@@ -67,3 +67,59 @@ Error Code | Description
 10602      | The offset of a unit of a dimension is tried to update which means that potentially some data could be loosed.
 10603      | The default unit of a dimension is tried to update which means that potentially some data could be loosed. FYI: MX itself also tries to prevent this if a default unit is already defined, but it could be that this case does only happens e.g. in non development systems....
 10604      | An unit of a dimension is tried to remove which means that potentially some data could be loosed. FYI: MX itself also tries to prevent this if a unit is used, but it could be that this case does only happens e.g. in non development systems....
+
+----
+## Syntax
+
+    mxUpdate dimension "${NAME}" {
+        description DESCRIPTION_STRING
+        [!]hidden
+        unit UNIT_NAME {
+            default | true
+                    | false
+            description UNIT_DESCRIPTION
+            label UNIT_LABEL
+            multiplier MULTIPLIER
+            offset OFFSET
+        }
+    }
+
+----
+##Example
+```TCL
+################################################################################
+# DIMENSION:
+# ~~~~~~~~~~
+# MxUpdateTestDimension
+#
+# SYMBOLIC NAME:
+# ~~~~~~~~~~~~~~
+# dimension_ MxUpdateTestDimension
+#
+# DESCRIPTION:
+# ~~~~~~~~~~~~
+# MxUpdate Test Dimension.
+#
+# AUTHOR:
+# ~~~~~~~
+# The MxUpdate Team
+################################################################################
+
+mxUpdate dimension "${NAME}" {
+    description "MxUpdate Test Dimension."
+    !hidden
+    unit "Kilo-Volt" {
+        description ""
+        label "kV"
+        multiplier 1000.0
+        offset 0.0
+    }
+    unit "Volt" {
+        default true
+        description ""
+        label "V"
+        multiplier 1.0
+        offset 0.0
+    }
+}
+```
