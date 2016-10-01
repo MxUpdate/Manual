@@ -75,8 +75,7 @@ Error Code | Description
         description DESCRIPTION_STRING
         [!]hidden
         unit UNIT_NAME {
-            default | true
-                    | false
+            [!]default
             description UNIT_DESCRIPTION
             label UNIT_LABEL
             multiplier MULTIPLIER
@@ -115,7 +114,7 @@ mxUpdate dimension "${NAME}" {
         offset 0.0
     }
     unit "Volt" {
-        default true
+        default
         description ""
         label "V"
         multiplier 1.0
