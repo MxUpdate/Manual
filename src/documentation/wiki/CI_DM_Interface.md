@@ -57,8 +57,9 @@ properties       | if defined    | empty list    | list of values and referenced
 
 Error Code | Description
 -----------|------------
-10901      | The given attribute is not defined anymore in the update, but already assigned to the interface. The attribute is not automatically removed because otherwise potentially data could be lost.
+10901      | The given global attribute is not defined anymore in the update, but already assigned to the interface. The global attribute is not automatically removed because otherwise potentially data could be lost.
 10902      | An interface is already derived from another interface, but within the update this derived interface must be removed. This could end in potentially losing data and so this action is not allowed.
+10903      | The given local attribute is not defined anymore in the update, but already assigned to the interface. The local attribute is not automatically removed because otherwise potentially data could be lost.
 
 ----
 ## Syntax

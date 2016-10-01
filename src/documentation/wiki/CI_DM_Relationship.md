@@ -99,7 +99,8 @@ Prerequisites for compositional relationships are:
 
 Error Code | Description
 -----------|------------
-10901      | The given attribute is not defined anymore in the update, but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
+10901      | The given global attribute is not defined anymore in the update, but already assigned to the relationship. The global attribute is not automatically removed because otherwise potentially data could be lost.
+10902      | The given local attribute is not defined anymore in the update, but already assigned to the relationship. The local attribute is not automatically removed because otherwise potentially data could be lost.
 11402      | Kind of a relationship can not be changed if the current kind is not ***basic****.
 11403      | Derived of a relationship can not be changed because potentially some data can be lost.
 

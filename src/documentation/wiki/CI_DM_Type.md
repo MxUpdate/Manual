@@ -56,9 +56,10 @@ properties       | if defined         | empty list    | list of values and refer
 
 Error Code | Description
 -----------|------------
-11801      | The given attribute is not defined anymore in the update, but already assigned to the type. The attribute is not automatically removed because otherwise potentially data could be lost.
+11801      | The given global attribute is not defined anymore in the update, but already assigned to the type. The global attribute is not automatically removed because otherwise potentially data could be lost.
 11802      | Kind of a type can not be changed if the current kind is not ***basic***.
 11803      | Derived of a type can not be changed because potentially some data can be lost.
+11804      | The given local attribute is not defined anymore in the update, but already assigned to the type. The local attribute is not automatically removed because otherwise potentially data could be lost.
 
 ----
 ## Syntax
