@@ -64,7 +64,7 @@ Integer, real or date attributes can be defined to contain range values (e.g. 20
 A Dimension can be defined for real and integer attributes. With change of the dimension existing data can be lost. So only a new definition of the Dimension is allowed and a change of a Dimension is rejected. For more information how to update a new dimension including automatically conversion see the Enovia MQL manual.
 
 ### File Names
-The file name of an attribute CI file contains prefixed attribute type, the escaped attribute name and as extension ".tcl".
+The file name of an attribute CI file uses prefix `ATTRIBUTE_`.
 
 File Name Prefix | Attribute Type
 -----------------|----------------------
@@ -158,7 +158,7 @@ where **`RANGE_ITEM`** is:
 ## Example
 ```tcl
 ################################################################################
-# STRING_MxUpdateTestAttribute.mxu
+# ATTRIBUTE_MxUpdateTestAttribute.mxu
 #
 #            This file describes the target of a Configuration Item.
 ################################################################################
