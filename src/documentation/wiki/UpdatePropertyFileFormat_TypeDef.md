@@ -40,7 +40,6 @@ BusRelsTo               | Comma separated list of to relationships for business 
 BusType                 | Type for business administration objects.
 BusTypeDerived          | If set to `true` business objects are using types which are derived from the defined business type. The default value is `false`.
 BusVault                | Vault for business administration objects. Business objects are created in this vault.
-FileMatchLast           | Defines that a match must be done at last (after a file does not match any other "TypeDef" definition); value must set to `true`.<br/>E.g. if no file prefix and file suffix is defined, a match must be done as last. Otherwise a file matches always.
 FilePath                | File path used to export.
 FilePrefix              | Prefix used for file names.
 FileSuffix              | Suffix used for file names.

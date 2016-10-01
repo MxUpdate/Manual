@@ -36,19 +36,6 @@ to get all parameters with arguments and short description.
 To export configuration items parameter `‑‑export` (short `‑e`) must be defined. The export path must be defined with `‑‑path`. At minimum one path must be defined. Because the export must know where to export the configuration items, only one path at maximum could be defined.
 With the other parameters the configuration item types with matching names are defined.
 
-###Further Export Configurations
-The content of the header of update files could be configured depending on parameters. 
-*   **Parameter:** `‑‑exportapplication`
-    Exports the name of the application and writes this name in the header of the TCL update file (below the author). For JPOs and programs the parameter is not supported.
-*   **Parameter:** `‑‑exportinstaller`
-    Exports the name of the installer and writes this name in the header of the TCL update file (below the author). For JPOs and programs the parameter is not supported.
-*   **Parameter:** `‑‑exportnoauthor`
-    The author of the administration object is NOT written in the header of the TCL update file.
-*   **Parameter:** `‑‑exportoriginalname`
-    Exports the name of the original name and writes this name in the header of the TCL update file (below the symbolic name). For JPOs and programs and all business objects like triggers the parameter is not supported.
-*   **Parameter:**  `‑‑exportversion`
-    Exports the version and writes this version in the header of the TCL update file (below the application and author). For JPOs and programs the parameter is not supported.
-
 This default configuration could defined project specific (see [Configuration of the Parameter Definitions](UpdatePropertyFileFormat_ParameterDef.md))
 
 ###Examples
@@ -77,7 +64,7 @@ To export configuration items parameter `‑‑update` (short `-u`) must be defi
 An update of an existing object must not be done always. The default configuration is, that an update is done always.
 *   **Name:** `UpdateCheckFileDate`
     **Parameter:** `‑‑checkfiledate`
-    Check if an update is required by comparing the defined version against the value of the version property.
+    Check if an update is required by comparing the last modified date of the file against the value of the file date property.
 
 ###Further Configurations
 *   **Name:** `DefaultApplication`
