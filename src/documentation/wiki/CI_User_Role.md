@@ -26,13 +26,14 @@ Roles are used to define for persons specific access depending on there role. Th
 ##Handled Properties
 This role properties could be handled from MxUpdate:
 
-Property                       | Written            | Default Value | Kind
--------------------------------|--------------------|---------------|----
-description                    | always             | empty string  | string
-kind                           | if not ***role***  | ***role***    | enumeration of ***organization***, ***project*** and ***role***
-hidden                         | always             | ***false***   | flag
-parent                         | is defined         | empty list    | list of parent role
-properties                     | if defined         | empty list    | list of values and referenced admin objects
+Property      | Written           | Default Value | Kind
+--------------|-------------------|---------------|----
+symbolic name | if defined        | empty list    | list of symbolic name strings
+description   | always            | empty string  | multi-line-string
+kind          | if not ***role*** | ***role***    | enumeration of ***organization***, ***project*** and ***role***
+hidden        | always            | ***false***   | flag
+parent        | is defined        | empty list    | list of parent role
+properties    | if defined        | empty list    | list of values and referenced admin objects
 
 ----
 ##Special Handling of Role Types
@@ -66,10 +67,11 @@ mxUpdate role "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
-    | description DESCRIPTION_STRING
     | kind | organization |
     |      | project      |
     |      | role         |
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
     | [!]hidden
     | side SIDE_NAME
     | parent GROUP_NAME
@@ -78,29 +80,22 @@ where `OPTION` is:
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# ROLE:
-# ~~~~~
-# MxUpdate_Role
+# ROLE_MxUpdate_Role
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# role_MxUpdate_Role
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Role for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate mod role "${NAME}" {
-    description "Role for test purposes."
     kind role 
+    symbolicname "role_MxUpdate_Role"
+    description "Role for test purposes."
     !hidden
     parent "Employee"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdate_Role"
+    ################################################## Info End
 }
 ```
