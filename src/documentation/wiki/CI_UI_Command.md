@@ -47,6 +47,7 @@ This command properties could be handled from !MxUpdate:
         user USER_NAME
         setting SETTING_NAME SETTING_VALUE
         property NAME [to TYPE NAME] [value VALUE_STRING]
+        code CODE
     }
 
 ----
@@ -78,5 +79,10 @@ mxUpdate command "${NAME}" {
     alt ""
     user "Employee"
     setting "Target Location" "content"
+    code "
+function test()  {
+    console.log(\"test\");
+}
+"
 }
 ```
