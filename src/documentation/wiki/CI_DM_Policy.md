@@ -129,6 +129,7 @@ mxUpdate policy "${NAME}" {
 ```
 mxUpdate policy NAME {
     description DESCRIPTION_STRING
+    [!]hidden
     type {TYPENAME ...}
     format {FORMATNAME ...}
     defaultformat FORMAT_NAME
@@ -138,26 +139,18 @@ mxUpdate policy NAME {
     minorsequence REVISION_SEQUENCE
     majorsequence REVISION_SEQUENCE
     store STORENAME
-    hidden | "false" |
-           | "true"  |
     allstate  {
         ACCESS_ITEM
     }
     state STATE_NAME {
         registeredName REGISTERED_NAME_STRING
         [!]enforcereserveaccess
-        majorrevision | "false" |
-                      | "true"  |
-        minorrevision | "false" |
-                      | "true"  |
-        version | "false" |
-                | "true"  |
-        promote | "false" |
-                | "true"  |
-        checkouthistory | "false" |
-                        | "true"  |
-        published | "false" |
-                  | "true"  |
+        [!]majorrevision
+        [!]minorrevision
+        [!]version
+        [!]promote
+        [!]checkouthistory
+        [!]published
         ACCESS_ITEM
         action PROGRAM_NAME [input ARG_STRING]
         check PROGRAM_NAME [input ARG_STRING]
@@ -195,6 +188,36 @@ where **`USER_ITEM `** is:
 ```
 
 ----
+## Compatibility to Previous Version
+For compatibility to previous version, flags can be also set via values after the flag key.
+
+### Policy Flags
+```
+hidden | "false" |
+       | "true"  |        
+enforce | "false" |
+        | "true"  |        
+```
+
+### Policy State Flags
+```
+enforcereserveaccess | "false" |
+                     | "true"  |        
+majorrevision | "false" |
+              | "true"  |
+minorrevision | "false" |
+              | "true"  |
+version | "false" |
+        | "true"  |
+promote | "false" |
+        | "true"  |
+checkout history | "false" |
+                | "true"  |
+published | "false" |
+          | "true"  |
+```
+
+----
 ## Example
 ```TCL
 ################################################################################
@@ -217,22 +240,22 @@ where **`USER_ITEM `** is:
 
 mxUpdate policy "${NAME}" {
   description "Policy for test purposes."
+  !hidden
   type {all}
   format {generic}
   defaultformat "generic"
   sequence "1,2,3,..."
   store ""
-  hidden "false"
   allstate  {
     owner {}
     public {read show}
   }
   state "Submitted"  {
     registeredName "state_Submitted"
-    revision "true"
-    version "true"
-    promote "true"
-    checkouthistory "true"
+    revision
+    version
+    promote
+    checkouthistory
     owner {read modify checkout checkin}
     public {}
     action "" input ""
@@ -254,10 +277,10 @@ mxUpdate policy "${NAME}" {
   }
   state "Review"  {
     registeredName "state_Review"
-    revision "true"
-    version "true"
-    promote "true"
-    checkouthistory "true"
+    revision
+    version
+    promote
+    checkouthistory
     owner {read modify checkout}
     public {}
     action "" input ""
@@ -265,10 +288,10 @@ mxUpdate policy "${NAME}" {
   }
   state "Approved"  {
     registeredName "state_Approved"
-    revision "true"
-    version "true"
-    promote "true"
-    checkouthistory "true"
+    revision
+    version
+    promote
+    checkouthistory
     owner {read modify checkout checkin}
     public {}
     action "" input ""
@@ -282,10 +305,10 @@ mxUpdate policy "${NAME}" {
     }
   }
   state "Rejected"  {
-    revision "true"
-    version "true"
-    promote "true"
-    checkouthistory "true"
+    revision
+    version
+    promote
+    checkouthistory
     owner {read modify show}
     public {}
     action "" input ""
