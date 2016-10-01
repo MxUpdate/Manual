@@ -113,7 +113,7 @@ Error Code | Description
 
 ## Syntax
 ```
-updateAttribute NAME {
+mxUpdate attribute NAME {
     description DESCRIPTION_STRING
     [!]hidden
     [!]multivalue
@@ -166,7 +166,7 @@ where **RANGE_ITEM** is:
 # The MxUpdate Team
 ################################################################################
 
-updateAttribute "${NAME}" {
+mxUpdate attribute "${NAME}" {
     description "MxUpdate Test String Attribute."
     !hidden
     !multivalue
