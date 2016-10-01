@@ -80,7 +80,59 @@ The parameters are used to control the behavior related to symbolic names. Symbo
     Defines the regular expression for special characters which are not allowed for symbolic names. This special characters are replaced "nothing", means by zero length string.
 *   **Name:** `RegisterSymbolicNames`
     **Default Value:** `eServiceSchemaVariableMapping.tcl`
-    Defines the name of the program where all administration objects are registered with symbolic names.
+    Defines the name of the program where all administration objects are registered with symbolic names (except that the `Installer` property is set).
+
+###Properties for Admin Objects
+For admin object following specific properties exists:
+
+* `MxUpdate File Date` stores the date of the CI file. It is used to check if the file is changed since last call. It helps to improve the performance (see also the MxUpdate usage).
+* `MxUpdate Sub Path` stores the path between the 'root' CI path and the CI file. The property is from the import always updated and used from the export to write the file in the correct sub directory.
+* `installer` is defined at the first installation of the CI object. The value is not changed afterwards anymore.
+* `installed date` is defined at the first installation of the CI object. The value is not changed afterwards anymore.
+
+To handle the installer, the following properties are defined:
+
+*   **Name:** `DefaultInstaller`
+    **Parameter:** `--defaultinstaller INSTALLERNAME`
+    **Type:** String
+    **Default Value:** `The MxUpdate Team`
+    Defines the default name of installer which is defined as property / attribute on administration objects. The value is only used for the installer on the administration objects if no installer is in the update script or as parameter defined.
+*   **Name:** `Installer`
+    **Parameter:** `--installer INSTALLERNAME`
+    **Type:** String
+    Defines the installer for administration objects. The default installer name and existing installer names in update scripts are overwritten.
+
+
+####Info Properties
+Some properties for admin object are more for information similar e.g. to the @author header property for Java. This properties can be written together inside a specific area in front of all other properties. They are surrounded with comments.
+
+To use this feature, the info properties are configured with parameters.
+
+*   **Name:** `ExportInfoPropsList`
+    **Type:** List
+    **Default Value:** `author,original name,application,version`
+    Defines the name of properties which are used for information. They are written between two comment lines in front of all other properties.
+*   **Name:** `ExportInfoPropsTextEnd`
+    **Type:** String
+    **Default Value:** `################################################## Info Start`
+    Comment of the start line after which all information properties are listed.
+*   **Name:** `ExportInfoPropsTextStart`
+    **Type:** String
+    **Default Value:** `################################################## Info End`
+    Comment of the end line after the last information property is listed.
+    
+####Example
+```tcl
+mxUpdate type "${NAME}" {
+    description ""
+    !hidden
+    ################################################## Info Start
+    property "original name" value "MXUPDATE_Test_ype"
+    property "version" value "R15"
+    ################################################## Info End
+    property "Write Acess" value "FALSE"
+}
+```
 
 ----
 ##Explanation of Common Update Error Codes
