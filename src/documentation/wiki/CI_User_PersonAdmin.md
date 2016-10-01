@@ -30,11 +30,11 @@ Property      | Written    | Default Value | Kind
 --------------|------------|---------------|----
 symbolic name | if defined | empty list    | list of symbolic name strings
 comment       | always     | empty string  | multi-line-string
-active        | always     | ***false***   | flag
+active        | always     | ***true***    | flag
 trusted       | always     | ***false***   | flag
 hidden        | always     | ***false***   | flag
-access        | always     | empty list    | ***all***, or list of access items  
-admin         | always     | empty list    | ***all***, or list of admin access items   
+access        | always     | ***all***     | ***all***, or list of access items  
+admin         | always     | ***all*** if type contains ***business*** or ***system***, otherwise ***none*** | ***all***, or list of admin access items   
 email         | always     | ***false***   | flag
 icon mail     | always     | ***true***    | flag
 address       | always     | empty string  | string
@@ -43,7 +43,7 @@ fax           | always     | empty string  | string
 full name     | always     | empty string  | string
 phone         | always     | empty string  | string
 products      | always     | empty list    | list of products
-type          | if defined | empty list    | type item
+type          | if defined | ***application*** and ***full*** | type item
 vault         | if defined | empty string  | string of vault name
 application   | if defined | empty string  | string of application name
 site          | if defined | empty string  | string of site name
