@@ -60,7 +60,6 @@ mxUpdate person "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
-    | kind admin
     | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | comment DESCRIPTION_STRING
@@ -133,7 +132,6 @@ The password expired flag is used e.g. if the user must change his password whil
 ################################################################################
 
 mxUpdate person "${NAME}" {
-    kind admin
     symbolicname "person_MxUpdate_Person"
     description "Administration person for test purposes." 
     !hidden 
