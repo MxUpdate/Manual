@@ -26,15 +26,16 @@ An inquiry is used to produce a list of objects which e.g. could be used to sele
 ##Handled Inquiry Properties
 This inquiry properties could be handled from MxUpdate:
 
-Property    | Written            | Default Value | Kind
-------------|--------------------|---------------|----
-description | always             | empty string  | multi-line-string
-hidden      | always             | ***false***   | flag
-pattern     | always             | empty string  | string
-format      | always             | empty string  | string
-code        | always             | empty string  | multi-line-string
-arguments   | if defined         | empty list    | list of key / value pairs
-properties  | if defined         | empty list    | list of values and referenced admin objects
+Property      | Written     | Default Value | Kind
+--------------|-------------|---------------|----
+symbolic name | if defined  | empty list    | list of symbolic name strings
+description   | always      | empty string  | multi-line-string
+hidden        | always      | ***false***   | flag
+pattern       | always      | empty string  | string
+format        | always      | empty string  | string
+code          | always      | empty string  | multi-line-string
+arguments     | if defined  | empty list    | list of key / value pairs
+properties    | if defined  | empty list    | list of values and referenced admin objects
 
 
 ----
@@ -44,6 +45,7 @@ mxUpdate inquiry "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | pattern PATTERN_STRING
@@ -60,28 +62,21 @@ For better reading, the code **`CODE_STRING `** itself is automatically exported
 
 ```tcl
 ################################################################################
-# INQUIRY:
-# ~~~~~~~~
-# MxUpdate_Test
+# INQUIRY_TestInquiry
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# inquiry_MxUpdate_Test
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Inquiry for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUdpate inquiry "${NAME}" {
+    symbolicname "inquiry_TestInquiry"
     description "Inquiry for test purposes."
     pattern "${OID}"
     format "${OID}"
     argument "ID" "objectId"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestInquiry"
+    ################################################## Info End
     code "
 print bus ${ID} select id dump \"
 \"
