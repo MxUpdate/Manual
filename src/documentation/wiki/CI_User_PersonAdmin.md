@@ -28,6 +28,7 @@ This Administration Persons properties could be handled from MxUpdate:
 
 Property      | Written    | Default Value | Kind
 --------------|------------|---------------|----
+symbolic name | if defined | empty list    | list of symbolic name strings
 comment       | always     | empty string  | multi-line-string
 active        | always     | ***false***   | flag
 trusted       | always     | ***false***   | flag
@@ -59,6 +60,7 @@ mxUpdate person "${NAME}" { [OPTION] }
 where **`OPTION`** is:
 ```
     | kind admin
+    | symbolicname SYMBOLICNAME_STRING
     | comment DESCRIPTION_STRING
     | [!]active
     | [!]trusted
@@ -123,24 +125,14 @@ The password expired flag is used e.g. if the user must change his password whil
 ##Example
 ```tcl
 ################################################################################
-# PERSONADMIN:
-# ~~~~~~~~~~~~
-# MxUpdate_Person
+# PERSONADMIN_MxUpdate_Person
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# person_MxUpdate_Person
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Administration person for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mmxUpdate person "${NAME}" {
+mxUpdate person "${NAME}" {
+    kind admin
+    symbolicname "person_MxUpdate_Person"
     description "Administration person for test purposes." 
     !hidden 
     !neverexpires 
@@ -156,5 +148,9 @@ mmxUpdate person "${NAME}" {
     vault ""
     type {application full}
     product {CPF}
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdate_Person"
+    ################################################## Info End
 }
 ```
