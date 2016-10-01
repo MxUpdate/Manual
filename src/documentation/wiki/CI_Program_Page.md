@@ -41,6 +41,7 @@ mxUpdate page "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | mime MIME_STRING
