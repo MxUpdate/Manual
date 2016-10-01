@@ -29,57 +29,56 @@ portals which are defined as user's workspace item.
 
 ----
 ##Handled Properties
-This portal properties could be handled from !MxUpdate:
-  * description
-  * hidden flag
-  * "alt" and label text
-  * href
-  * settings
-  * assigned channels
+This portal properties could be handled from MxUpdate:
+
+Property      | Written       | Default Value | Kind
+--------------|---------------|---------------|----
+symbolic name | if defined    | empty list    | list of symbolic name strings
+description   | always        | empty string  | multi-line-string
+hidden        | always        | ***false***   | flag
+label         | always        | empty string  | string
+href          | always        | empty string  | string
+alt           | always        | empty string  | string
+settings      | if defined    | empty list    | list of settings
+channels      | if defined    | empty list    | list of child channels
+properties    | if defined    | empty list    | list of values and referenced admin objects
 
 ----
-##Steps of the Update Flow
-
-###Cleanup
-Following steps are done before the TCL update file is executed:
-  * The description is set to an empty string.
-  * The portal is set to not hidden.
-  * The label, href and alt are set to an empty string.
-  * All settings are removed.
-  * All properties are removed.
-  * All assigned channels are removed.
-
-##Update
-The TCL update file is executed.
-
-----
-##Parameter Definitions
-No further parameters are defined.
+## Syntax
+```
+mxUpdate portal "${NAME}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | label LABEL_STRING
+    | href HREF_STRING
+    | alt ALT_STRING
+    | setting SETTING_NAME SETTING_VALUE
+    | channel COMMAND_NAME
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# PORTAL:
-# ~~~~~~~
-# TestPortal
+# PORTAL_TestPortal
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# portal_TestPortal
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Portal for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod portal "${NAME}" \
-    description "Portal for test purposes." \
-    label "" \
-    add setting "Registered Suite" "MxUpdateCentral" \
-    place "TestChannel" after ""
+mxUpdate portal "${NAME}" {
+    symbolicname "portal_TestPortal"
+    description "Portal for test purposes."
+    label ""
+    setting "Registered Suite" "MxUpdateCentral"
+    channel "TestChannel"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestPortal"
+    ################################################## Info End
+}
 ```
