@@ -26,32 +26,50 @@ instruction see the "MQL Guide" or "Business Modeler Guide" of the
 
 ----
 ##Handled Form Properties
-This form properties could be handled from !MxUpdate:
-  * description
-  * hidden flag
-  * fields
+This form properties could be handled from MxUpdate:
+
+Property              | Written            | Default Value | Kind
+----------------------|--------------------|---------------|----
+description           | always             | empty string  | string
+hidden                | if ***true***      | ***false***   | flag
+properties            | if defined         | empty list    | list of values and referenced admin objects
+field/name            | always             | empty string  | string
+field/label           | always             | empty string  | string
+field/select          | if defined         | empty string  | string
+field/businessobject  | if defined         | empty string  | string
+field/relationship    | if defined         | empty string  | string
+field/range           | if defined         | empty string  | string
+field/href            | if defined         | empty string  | string
+field/alt             | if defined         | empty string  | string
+field/setting         | if defined         | empty list    | list of key/value pair
+
 
 ----
-##Steps of the Update Flow
-###Cleanup
-Following steps are done before the TCL update file is executed:
-  * The description is set to an empty string.
-  * The form is set to not hidden.
-  * All fields of the web form are removed.
+## Syntax
+```
+mxUpdate form "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | field { [FIELD_OPTION] }
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+```
+where `FIELD_OPTION` is:
+```
+    | name NAME_STRING
+    | label LABEL_STRING
+    | select SELECT_STRING
+    | businessobject SELECT_STRING
+    | relationship SELECT_STRING
+    | range RANGE_HREF_STRING
+    | href HREF_STRING
+    | alt ALT_STRING
+    | setting KEY_STRING VALUE_STRING 
+```
 
-###Update
-The description is updated and all fields are new created and appended.
-
-###Correct Order of Fiels
-Because there is an issue in MX of correct order for new created and appended
-fields (after all fields was removed), !MxUpdate specific TCL procedure
-{{{orderFields}}} must be called. This TCL procedure orders all fields
-correctly (by reordering them via MQL statements).
-
-----
-##Parameter Definitions
-No further parameters are defined.
-
+	
 ----
 ##Example
 
@@ -74,50 +92,41 @@ No further parameters are defined.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod form "${NAME}" \
-    description "Form for test purposes." \
-    field \
-        name "type" \
-        label "emxFramework.Basic.Type" \
-        businessobject "\$<type>" \
-        range "" \
-        href "" \
-        alt "" \
-        setting "Admin Type" "Type" \
-        setting "Editable" "false" \
-        setting "Field Type" "basic" \
-        setting "Registered Suite" "Framework" \
-        setting "Show Type Icon" "true" \
-    field \
-        name "name" \
-        label "emxFramework.Basic.Name" \
-        businessobject "\$<name>" \
-        range "" \
-        href "" \
-        alt "" \
-        setting "Admin Type" "Name" \
-        setting "Editable" "true" \
-        setting "Field Type" "basic" \
-        setting "Input Type" "textbox" \
-        setting "Registered Suite" "Framework" \
-        setting "Required" "true" \
-    field \
-        name "revision" \
-        label "emxFramework.Basic.Revision" \
-        businessobject "\$<revision>" \
-        range "" \
-        href "" \
-        alt "" \
-        setting "Admin Type" "Revision" \
-        setting "Editable" "true" \
-        setting "Field Type" "basic" \
-        setting "Input Type" "textbox" \
-        setting "Registered Suite" "Framework" \
-        setting "Required" "true"
-
-orderFields "${NAME}" [list \
-    "type" \
-    "name" \
-    "revision" \
-]
+mxUpdate form "${NAME}" {
+    description "Form for test purposes." 
+    field {
+        name "type" 
+        label "emxFramework.Basic.Type" 
+        businessobject "$<type>" 
+        range "${SUITE_DIR}/range.jsp" 
+        href "${SUITE_DIR}/execute.jsp" 
+        setting "Admin Type" "Type" 
+        setting "Editable" "false" 
+        setting "Field Type" "basic" 
+        setting "Registered Suite" "Framework" 
+        setting "Show Type Icon" "true"
+    }
+    field {
+        name "name" 
+        label "emxFramework.Basic.Name" 
+        businessobject "$<name>" 
+        setting "Admin Type" "Name" 
+        setting "Editable" "true" 
+        setting "Field Type" "basic" 
+        setting "Input Type" "textbox" 
+        setting "Registered Suite" "Framework" 
+        setting "Required" "true" 
+    }
+    field {
+        name "revision" 
+        label "emxFramework.Basic.Revision" 
+        businessobject "$<revision>" 
+        setting "Admin Type" "Revision" 
+        setting "Editable" "true" 
+        setting "Field Type" "basic" 
+        setting "Input Type" "textbox" 
+        setting "Registered Suite" "Framework" 
+        setting "Required" "true" 
+    }
+}
 ```
