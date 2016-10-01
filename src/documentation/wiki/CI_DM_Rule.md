@@ -42,6 +42,10 @@ The governed objects are not handled in the rule configuration item file. They m
 
 ----
 ##Parameter Definitions
+*   **Name:** `DMRuleAllowExportAccessSorting`
+    **Default Value:** `true`
+    **Opposite Parameter (to deactivate):** `--deactivateRuleExportAccessSort`
+    The exported access of rules are sorted if parameter is `true`.
 *   **Name:** `DMRuleSupportsEnforceReserveAccess`
     **Value:** `true` if the MX version supports the 'enforce reserve access' flag (tested by calling MQL command `help rule` and testing the result for `enforcereserveaccess`).
 
