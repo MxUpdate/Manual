@@ -28,6 +28,7 @@ This role properties could be handled from MxUpdate:
 
 Property      | Written           | Default Value | Kind
 --------------|-------------------|---------------|----
+uuid          | if defined        | empty         | string
 symbolic name | if defined        | empty list    | list of symbolic name strings
 description   | always            | empty string  | multi-line-string
 kind          | if not ***role*** | ***role***    | enumeration of ***organization***, ***project*** and ***role***
@@ -70,6 +71,7 @@ where `OPTION` is:
     | kind | organization |
     |      | project      |
     |      | role         |
+    | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden

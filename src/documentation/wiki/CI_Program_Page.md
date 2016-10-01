@@ -28,6 +28,7 @@ This page properties could be handled from MxUpdate:
 
 Property    | Written            | Default Value | Kind
 ------------|--------------------|---------------|----
+uuid        | if defined         | empty         | string
 description | always             | empty string  | multi-line-string
 hidden      | if ***true***      | ***false***   | flag
 mime type   | always             | empty string  | string
@@ -41,6 +42,7 @@ mxUpdate page "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden

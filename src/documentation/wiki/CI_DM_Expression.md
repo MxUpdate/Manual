@@ -30,6 +30,7 @@ This expression properties could be handled from MxUpdate:
 
 Property      | Written            | Default Value | Kind
 --------------|--------------------|---------------|----
+uuid          | if defined         | empty         | string
 symbolic name | if defined         | empty list    | list of symbolic name strings
 description   | always             | empty string  | multi-line-string
 hidden        | always             | ***false***   | flag
@@ -48,6 +49,7 @@ mxUpdate expression "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden

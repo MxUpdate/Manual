@@ -10,6 +10,7 @@ This package properties could be handled from MxUpdate:
 
 Property      | Written            | Default Value | Kind
 --------------|--------------------|---------------|-----------------------
+uuid          | if defined         | empty         | string
 description   | always             | empty string  | string
 hidden flag   | always             | ***false***   | flag
 custom        | always             | ***false***   | flag
@@ -24,6 +25,7 @@ mxUpdate package "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | uuid UUID_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | [!]custom

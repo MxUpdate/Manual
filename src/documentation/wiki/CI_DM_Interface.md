@@ -26,6 +26,7 @@ Interfaces are used to handle multiple classification of business objects and co
 ##Handled Properties
 Property         | Written       | Default Value | Kind
 -----------------|---------------|---------------|-----------------------
+uuid             | if defined    | empty         | string
 symbolic name    | if defined    | empty list    | list of symbolic name strings
 description      | always        | empty string  | string
 hidden flag      | always        | ***false***   | flag
@@ -69,6 +70,7 @@ mxUpdate interface "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]abstract

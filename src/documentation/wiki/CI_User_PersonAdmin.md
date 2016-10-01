@@ -28,6 +28,7 @@ This Administration Persons properties could be handled from MxUpdate:
 
 Property      | Written    | Default Value | Kind
 --------------|------------|---------------|----
+uuid          | if defined | empty         | string
 symbolic name | if defined | empty list    | list of symbolic name strings
 comment       | always     | empty string  | multi-line-string
 active        | always     | ***true***    | flag
@@ -60,6 +61,7 @@ mxUpdate person "${NAME}" { [OPTION] }
 where **`OPTION`** is:
 ```
     | kind admin
+    | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | comment DESCRIPTION_STRING
     | [!]active

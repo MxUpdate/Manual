@@ -30,6 +30,7 @@ This type properties could be handled from MxUpdate:
 
 Property         | Written            | Default Value | Kind
 -----------------|--------------------|---------------|----
+uuid             | if defined         | empty         | string
 symbolic name    | if defined         | empty list    | list of symbolic name strings
 description      | always             | empty string  | string
 kind             | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***composed***
@@ -70,6 +71,7 @@ mxUpdate type "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | kind | basic    |
