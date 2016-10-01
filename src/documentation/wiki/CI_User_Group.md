@@ -22,12 +22,13 @@
 ##Handled Properties
 This group properties could be handled from MxUpdate:
 
-Property                       | Written            | Default Value | Kind
--------------------------------|--------------------|---------------|----
-description                    | always             | empty string  | string
-hidden                         | always             | ***false***   | flag
-parent                         | is defined         | empty list    | list of parent groups
-properties                     | if defined         | empty list    | list of values and referenced admin objects
+Property      | Written    | Default Value | Kind
+--------------|------------|---------------|----
+symbolic name | if defined | empty list    | list of symbolic name strings
+description   | always     | empty string  | multi-line-string
+hidden        | always     | ***false***   | flag
+parent        | is defined | empty list    | list of parent groups
+properties    | if defined | empty list    | list of values and referenced admin objects
 
 
 ----
@@ -44,6 +45,7 @@ mxUpdate group "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | side SIDE_NAME
@@ -53,28 +55,21 @@ where `OPTION` is:
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# GROUP:
-# ~~~~~~
-# MxUpdate_Group
+# GROUP_MxUpdate_Group
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# group_MxUpdate_Group
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Group for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate group "${NAME}" {
+    symbolicname "group_MxUpdate_Group"
     description "Group for test purposes."
     !hidden
     parent "Company"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdate_Group"
+    ################################################## Info End
 }
 ```
