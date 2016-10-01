@@ -25,26 +25,49 @@ information. For a deep instruction see the "MQL Guide" or "Business Modeler
 Guide" of the "ENOVIAvStudio Modeling Platform".
 
 ----
+----
 ##Handled Table Properties
-This table properties could be handled from !MxUpdate:
-  * description
-  * hidden flag
-  * fields
+This form properties could be handled from MxUpdate:
+
+Property              | Written            | Default Value | Kind
+----------------------|--------------------|---------------|----
+description           | always             | empty string  | string
+hidden                | if ***true***      | ***false***   | flag
+properties            | if defined         | empty list    | list of values and referenced admin objects
+column/name           | always             | empty string  | string
+column/label          | always             | empty string  | string
+column/select         | if defined         | empty string  | string
+column/businessobject | if defined         | empty string  | string
+column/relationship   | if defined         | empty string  | string
+column/range          | if defined         | empty string  | string
+column/href           | if defined         | empty string  | string
+column/alt            | if defined         | empty string  | string
+column/setting        | if defined         | empty list    | list of key/value pair
 
 ----
-##Steps of the Update Flow
-###Cleanup
-Following steps are done before the TCL update file is executed:
-  * The description is set to an empty string.
-  * The table is set to not hidden.
-  * All columns of the web table are removed.
-
-###Update
-The TCL update file is executed.
-
-----
-##Parameter Definitions =
-No further parameters are defined.
+## Syntax
+```
+mxUpdate table "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | column { [COLUMN_OPTION] }
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+```
+where `COLUMN_OPTION` is:
+```
+    | name NAME_STRING
+    | label LABEL_STRING
+    | select SELECT_STRING
+    | businessobject SELECT_STRING
+    | relationship SELECT_STRING
+    | range RANGE_HREF_STRING
+    | href HREF_STRING
+    | alt ALT_STRING
+    | setting KEY_STRING VALUE_STRING 
+```
 
 ----
 ##Example
@@ -67,40 +90,45 @@ No further parameters are defined.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod table "${NAME}" system \
-    description "Table for test purposes." \
-    column \
-        name "type" \
-        label "emxFramework.Basic.Type" \
-        businessobject "\$<type>" \
-        range "" \
-        href "" \
-        alt "" \
-        setting "Registered Suite" "Framework" \
-        setting "Show Type Icon" "true" \
-    column \
-        name "name" \
-        label "emxFramework.Basic.Name" \
-        businessobject "\$<name>" \
-        range "" \
-        href "\$\{COMMON_DIR\}/emxTree.jsp?mode=insert" \
-        alt "" \
-        setting "Registered Suite" "Framework" \
-        setting "Target Location" "content" \
-    column \
-        name "revision" \
-        label "emxFramework.Basic.Revision" \
-        businessobject "\$<revision>" \
-        range "" \
-        href "" \
-        alt "" \
-        setting "Registered Suite" "Framework" \
-    column \
-        name "description" \
-        label "emxFramework.Basic.Description" \
-        businessobject "\$<description>" \
-        range "" \
-        href "" \
-        alt "" \
+mxUpdate table "${NAME}" {
+    description "Table for test purposes." 
+    column {
+        name "type" 
+        label "emxFramework.Basic.Type" 
+        businessobject "$<type>" 
+        range "" 
+        href "" 
+        alt "" 
+        setting "Registered Suite" "Framework" 
+        setting "Show Type Icon" "true" 
+    }
+    column {
+        name "name" 
+        label "emxFramework.Basic.Name" 
+        businessobject "$<name>" 
+        range "" 
+        href "${COMMON_DIR}/emxTree.jsp?mode=insert" 
+        alt "" 
+        setting "Registered Suite" "Framework" 
+        setting "Target Location" "content"
+    } 
+    column {
+        name "revision" 
+        label "emxFramework.Basic.Revision" 
+        businessobject "$<revision>" 
+        range "" 
+        href "" 
+        alt "" 
         setting "Registered Suite" "Framework"
+    } 
+    column {
+        name "description" 
+        label "emxFramework.Basic.Description" 
+        businessobject "$<description>" 
+        range "" 
+        href "" 
+        alt "" 
+        setting "Registered Suite" "Framework"
+    }
+}
 ```
