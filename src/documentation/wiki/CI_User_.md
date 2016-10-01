@@ -24,7 +24,7 @@ Currently following user objects are supported from MxUpdate:
 * [association](CI_User_Association.md)
 * [group](CI_User_Group.md)
 * [role](CI_User_Role.md)
-* [administration person](CI_User_PersonAdmin.md) (without related business object)
+* [person](CI_User_Person.md) (without related business object)
 
 Generally for all user also the workspace objects are always handled (exported and updated).
 

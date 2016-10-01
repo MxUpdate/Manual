@@ -77,7 +77,7 @@ If the used MX version within the project does not support the configuration ite
                                                           Expression,Format,Interface,Policy,Relationship,Rule,Type,\
                                                           Notification,Trigger,\
                                                           NumberGenerator,ObjectGenerator,\
-                                                          Association,Group,PersonAdmin,Role,\
+                                                          Association,Group,UserPerson,Role,\
                                                           Channel,Command,Form,Inquiry,Menu,Portal,Table
 
     TypeDefGroup.DataModel.TypeDefList                  = AttributeBoolean,AttributeDate,AttributeString,\
@@ -127,7 +127,7 @@ If the used MX version does not uses products on person, the property "UserPerso
 ```Properties
 ParameterDef.UserPersonIgnoreProducts.Default               = *
 ```
-The default value is nothing. So now the products are not handled for all persons (including the administration persons). For for information see also the configuration item [administration person](CI_User_PersonAdmin.md).
+The default value is nothing. So now the products are not handled for all persons (without depending business objects). For for information see also the configuration item [person](CI_User_Person.md).
 
 #### How to import "full" Persons?
 In previous MxUpdate versions, "full" persons was supported ("full" persons are technical the admin persons and the depending business object instance of the person). Now MxUpdate does not support anymore "full" persons, because the OOTB delivered VPLM-Pos-Import can be easily used with complete PnO support.
