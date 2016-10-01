@@ -28,17 +28,18 @@ of the "ENOVIA Studio Modeling Platform".
 ##Handled Properties
 This type properties could be handled from MxUpdate:
 
-Property    | Written            | Default Value | Kind
-------------|--------------------|---------------|----
-description | always             | empty string  | string
-kind        | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***composed***
-abstract    | if ***true***      | ***false***   | flag
-derived     | if set / not empty | empty string  | is derived from another type
-hidden      | always             | ***false***   | flag
-triggers    | if defined         | empty list    |
-methods     | if defined         | empty list    | list of assigned methods
-attributes  | if defined         | empty list    | list of assigned attributes
-properties  | if defined         | empty list    | list of values and referenced admin objects
+Property      | Written            | Default Value | Kind
+--------------|--------------------|---------------|----
+symbolic name | if defined         | empty list    | list of symbolic name strings
+description   | always             | empty string  | string
+kind          | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***composed***
+abstract      | if ***true***      | ***false***   | flag
+derived       | if set / not empty | empty string  | is derived from another type
+hidden        | always             | ***false***   | flag
+triggers      | if defined         | empty list    |
+methods       | if defined         | empty list    | list of assigned methods
+attributes    | if defined         | empty list    | list of assigned attributes
+properties    | if defined         | empty list    | list of values and referenced admin objects
 
 ----
 ##Parameter Definitions
@@ -65,6 +66,7 @@ mxUpdate type "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | kind | basic    |
     |      | composed |
@@ -81,29 +83,22 @@ where `OPTION` is:
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# TYPE:
-# ~~~~~
-# MxUpdateTestType
+# TYPE_MxUpdateTestType.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# type_MxUpdateTestType
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# MxUpdate Test Type with two attributes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate type "${NAME}" {
+    symbolicname "type_MxUpdateTestType"
     description "MxUpdate Test Type with two attributes."
     !hidden
     attribute "MxUpdateTestAttribute1"
     attribute "MxUpdateTestAttribute2"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdateTestType"
+    ################################################## Info End
 }
 ```
