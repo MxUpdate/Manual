@@ -19,15 +19,31 @@
 #Describes the special handling of Policies as configuration item.
 
 ----
-
 ## Introduction
-The MxUpdate update steps for configuration items is typically done by
-removing all values and add them again. For policies this is not possible,
-because otherwise there is potentially some data lost. So for policies a
-"special" format is defined.
+Policies are used to define lifecycle's for policies. For more information see the MX documentation.
 
 ----
+##Handled Properties
+This policy properties could be handled from MxUpdate:
 
+Property       | Written              | Default Value   | Kind
+---------------|----------------------|-----------------|----
+description    | always               | empty string    | multi-line-string
+hidden         | always               | ***false***     | flag
+types          | if defined           | empty list      | list of types (or ***all***)
+formats        | if defined           | empty list      | list of types (or ***all***)
+default format | always               | empty string    | string
+enforce        | if ***true***        | ***false***     | flag
+delimiter      | if major / major     | empty character | character
+minor sequence | if major / major     | empty string    | string
+major sequence | if major / major     | empty string    | string
+sequence       | if not major / minor | empty string    | string
+store          | always               | empty string    | string
+allstate       | if defined           | empty list      | list of access statements
+states         | if defined           | empty           | list of state properties and state access statements
+properties     | if defined           | empty list      | list of values and referenced admin objects
+
+----
 ## Policy File Format
 The policy (excluding the properties of a policy) is defined with the TCL
 procedure `mxUpdate`.
@@ -35,50 +51,6 @@ procedure `mxUpdate`.
 *Snippet of an Example:*
 ```TCL
 mxUpdate policy "${NAME}" {
-  :
-}
-```
-
-### Types
-After the tag `type` the list of types in curly braces are defined. If
-all types are defined, the tag `all` could be used instead of defining a
-list.
-
-*Snippet of an Examples with One Type:*
-```TCL
-mxUpdate policy "${NAME}" {
-  :
-  type {"Test Type"}
-  :
-}
-```
-*Snippet of an Examples with All Types:*
-```TCL
-mxUpdate policy "${NAME}" {
-  :
-  type all
-  :
-}
-```
-
-### Formats
-After the tag `format` the list of formats in curly braces are defined. If
-all formats are defined, the tag `all` could be used instead of defining a
-list.
-
-*Snippet of an example with One Format:*
-```TCL
-mxUpdate policy "${NAME}" {
-  :
-  format {generic}
-  :
-}
-```
-*Snippet of an example with All Formats:*
-```TCL
-mxUpdate policy "${NAME}" {
-  :
-  format all
   :
 }
 ```
@@ -149,14 +121,16 @@ where **`OPTION`** is:
 ```
     | description DESCRIPTION_STRING
     | [!]hidden
-    | type {TYPENAME ...}
-    | format {FORMATNAME ...}
+    | type | all       |
+    |      | TYPE_NAME |
+    | format | all         |
+    |        | FORMAT_NAME |
     | defaultformat FORMAT_NAME
     | [!]enforce
-    | sequence REVISION_SEQUENCE
     | delimiter DELIMITER
     | minorsequence REVISION_SEQUENCE
     | majorsequence REVISION_SEQUENCE
+    | sequence REVISION_SEQUENCE
     | store STORENAME
     | allstate  { ACCESS_ITEM }
     | state STATE_NAME { [STATE_ITEM] }
@@ -212,6 +186,28 @@ where **`USER_ITEM `** is:
 ## Compatibility to Previous Version
 For compatibility to previous version, flags can be also set via values after the flag key.
 
+### Types
+After the tag `type` the list of types in curly braces are defined. 
+*Snippet of an Examples with One Type:*
+```
+mxUpdate policy "${NAME}" {
+  :
+  type {"Test Type"}
+  :
+}
+```
+
+### Formats
+After the tag `format` the list of formats in curly braces are defined. 
+*Snippet of an example with One Format:*
+```
+mxUpdate policy "${NAME}" {
+  :
+  format {generic}
+  :
+}
+```
+
 ### Policy Flags
 ```
 hidden | "false" |
@@ -262,8 +258,8 @@ published | "false" |
 mxUpdate policy "${NAME}" {
   description "Policy for test purposes."
   !hidden
-  type {all}
-  format {generic}
+  type all
+  format "generic"
   defaultformat "generic"
   sequence "1,2,3,..."
   store ""
