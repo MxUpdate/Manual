@@ -64,15 +64,15 @@ Prerequisites for compositional relationships are:
 
 ----
 ##Parameter Definitions
+*   **Name:** `DMRelationAttrIgnore`
+    **Parameter:** `‑‑ignoreRelationshipAttributes [ATTRIBUTE_MATCH]` 
+    Pattern defining the match of attributes which are ignored if not defined anymore within the delta calculation for attributes of relationships.
+*   **Name:** `DMRelationAttrRemove`
+    **Parameter:** `‑‑removeRelationshipAttributes [ATTRIBUTE_MATCH]` 
+    Pattern defining the match of attributes which are removed if not defined anymore within the delta calculation for attributes of interfaces.
 *   **Name:** `DMRelationSupportRelCons`
     **Default Value:** `true`
     Are from current MX version connections between relationships supported? This is a V6 feature and so as default set to true. If an older MX version is used which does not support connections between relationships the value must be set to false.
-*   **Name:** `DMRelationAttrIgnore`
-    **Parameter:** `‑‑ignorerelationshipattributes [ATTRIBUTE_MATCH]` 
-    Pattern defining the match of attributes which are ignored if not defined anymore within the test attributes of relationships.
-*   **Name:** `DMRelationAttrRemove`
-    **Parameter:** `‑‑removerelationshipattributes [ATTRIBUTE_MATCH]` 
-    Pattern defining the match of attributes which are removed if not defined anymore within the test attributes of relationships.
 
 ----
 ##Explanation of Update Error Codes

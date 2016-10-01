@@ -37,10 +37,10 @@ relationships | if defined    | empty list    | defined for relationships
 ##Parameter Definitions
 *   **Name:** `DMInterfaceAttrIgnore`
     **Parameter:** `‑‑ignoreInterfaceAttributes [ATTRIBUTE_MATCH]`
-    Pattern defining the match of attributes which are ignored within the delta calculation of attributes for interfaces.
+    Pattern defining the match of attributes which are ignored if not defined anymore within the delta calculation for attributes of interfaces.
 *   **Name:** `DMInterfaceAttrRemove`
     **Parameter:** `‑‑removeInterfaceAttributes [ATTRIBUTE_MATCH]`
-    Pattern defining the match of attributes which are removed within the delta calculation of attributes for interfaces.
+    Pattern defining the match of attributes which are removed if not defined anymore within the delta calculation for attributes of interfaces.
 *   **Name:** `DMInterfaceParentIgnore`
     **Parameter:** `‑‑ignoreInterfacParents [INTERFACE_MATCH]`
     Pattern defining the match of interfaces which are ignored within the delta calculation of parent interfaces for interfaces.
