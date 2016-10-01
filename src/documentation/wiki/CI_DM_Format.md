@@ -33,27 +33,34 @@ This format properties could be handled from !MxUpdate:
  * file suffix
  * file type
  * mime type
- * view program
- * edit program
- * print program
+ * view program (legacy, in new MX version not supported anymore)
+ * edit program (legacy, in new MX version not supported anymore)
+ * print program (legacy, in new MX version not supported anymore)
  * properties
 
 ----
-##Steps of the Update Flow
-
-###Cleanup
-Following steps are done before the TCL update file is executed:
- * set to not hidden
- * reset description, version, suffix, mime type, file type
- * remove view / edit / print program
- * remove all assigned properties
-
-###Update
-The TCL update file is executed.
+##Parameter Definitions
+*   **Name:** ```DMFormatSupportsPrograms ```
+    **Value:** ```true```if the MQL command ```help format```includes the string ```view```
+    If the flag is true, format supports view, edit and print programs. The flag is only needed for legacy MX versions.
 
 ----
-##Parameter Definitions
-No further parameters are defined.
+##Syntax
+
+    mxUpdate format NAME {
+        description DESCRIPTION_STRING
+        [!]hidden
+        version VERSION_STRING
+        suffix VERSION_STRING
+        type TYPE_STRING
+        mime MIME_STRING
+        (view PROGRAM)
+        (edit PROGRAM)
+        (print PROGRAM)
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
+    
+**Hint:** Programs for ```view```, ```edit``` and ```print``` are legacy. Newer MX versions does not support anymore this feature.
 
 ----
 ##Example
@@ -76,15 +83,12 @@ No further parameters are defined.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod format "${NAME}" \
-    description "Format for test purposes." \
-    !hidden \
-    version "1" \
-    suffix "txt" \
-    type "text" \
-    mime "text/plain" \
-    view "View Program" \
-    edit "Edit Program" \
-    print "Print Program"
-}}}
+mxUpdate format "${NAME}" {
+    description "Format for test purposes."
+    !hidden
+    version "1"
+    suffix "txt"
+    type "text"
+    mime "text/plain"
+}
 ```
