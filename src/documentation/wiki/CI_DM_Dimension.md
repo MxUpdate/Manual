@@ -23,6 +23,23 @@
 The MxUpdate update steps for configuration items is typically done by removing all values and add them again. For dimensions this is not possible, because otherwise there is potentially some data lost. So for dimensions a "special" format is defined.
 
 ----
+## Handled Properties
+This dimension properties could be handled from MxUpdate:
+
+Property           | Written                              | Default Value | Kind
+-------------------|--------------------------------------|---------------|----
+symbolic name      | if defined                           | empty list    | list of symbolic name strings
+description        | always                               | empty string  | multi-line-string
+hidden             | always                               | ***false***   | flag
+unit / default     | if ***true***                        | ***false***   | flag
+unit / description | always                               | empty string  | string
+unit / label       | always                               | empty string  | string
+unit / multiplier  | always                               | ***0.0***     | real number
+unit / offset      | always                               | ***0.0***     | real number
+properties         | if defined                           | empty list    | list of values and referenced admin objects
+
+
+----
 ##Updates where Data could be lost
 
 ###Update of the Default Unit
@@ -70,41 +87,35 @@ Error Code | Description
 
 ----
 ## Syntax
-
-    mxUpdate dimension "${NAME}" {
-        description DESCRIPTION_STRING
-        [!]hidden
-        unit UNIT_NAME {
-            [!]default
-            description UNIT_DESCRIPTION
-            label UNIT_LABEL
-            multiplier MULTIPLIER
-            offset OFFSET
-        }
-    }
+```
+mxUpdate dimension "${NAME}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | unit UNIT_NAME { UNIT_OPTION }
+```
+where **`UNIT_OPTION`** is:
+```
+    | [!]default
+    | description UNIT_DESCRIPTION
+    | label UNIT_LABEL
+    | multiplier MULTIPLIER
+    | offset OFFSET
+```
 
 ----
 ##Example
 ```TCL
 ################################################################################
-# DIMENSION:
-# ~~~~~~~~~~
-# MxUpdateTestDimension
+# DIMENSION_MxUpdateTestDimension.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# dimension_ MxUpdateTestDimension
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# MxUpdate Test Dimension.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate dimension "${NAME}" {
+    symbolicname "dimension_MxUpdateTestDimension"
     description "MxUpdate Test Dimension."
     !hidden
     unit "Kilo-Volt" {
@@ -120,5 +131,9 @@ mxUpdate dimension "${NAME}" {
         multiplier 1.0
         offset 0.0
     }
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdateTestDimension"
+    ################################################## Info End
 }
 ```
