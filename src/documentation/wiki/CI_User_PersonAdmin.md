@@ -23,8 +23,73 @@
 Administration Persons are persons in MX for which no related business object exists (unlike ["standard" persons](CI_User_Person)). Good examples for such persons are the already standard installed "guest" and "creator" account. If the related person business object does not exists an user could not login into the web application. This means that such persons typically used only for administration.
 
 ----
-##Comments of Persons
-Internally comments of persons are handled in the same way as descriptions of other administration objects. Further the MQL keyword `description` works also for person. To be near to other administration objects MxUpdate uses for persons also `description` instead of `comment`.
+##Handled Administration Persons Properties
+This Administration Persons properties could be handled from MxUpdate:
+
+Property      | Written    | Default Value | Kind
+--------------|------------|---------------|----
+comment       | always     | empty string  | multi-line-string
+active        | always     | ***false***   | flag
+trusted       | always     | ***false***   | flag
+hidden        | always     | ***false***   | flag
+access        | always     | empty list    | ***all***, or list of access items  
+admin         | always     | empty list    | ***all***, or list of admin access items   
+email         | always     | ***false***   | flag
+icon mail     | always     | ***true***    | flag
+address       | always     | empty string  | string
+email address | always     | empty string  | string
+fax           | always     | empty string  | string
+full name     | always     | empty string  | string
+phone         | always     | empty string  | string
+products      | always     | empty list    | list of products
+type          | if defined | empty list    | type item
+vault         | if defined | empty string  | string of vault name
+application   | if defined | empty string  | string of application name
+site          | if defined | empty string  | string of site name
+groups        | if defined | empty list    | list of groups
+roles         | if defined | empty list    | list of roles
+properties    | if defined | empty list    | list of values and referenced admin objects
+
+
+----
+## Syntax
+```
+mxUpdate person "${NAME}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | kind admin
+    | comment DESCRIPTION_STRING
+    | [!]active
+    | [!]trusted
+    | [!]hidden
+    | access | all              |
+    |        | {ACCESS_ITEM...} |
+    | admin | all                    |
+    |       | {ADMIN_ACCESS_ITEM...} |
+    | [!]email
+    | [!]iconmail
+    | address ADDRESS_STRING
+    | emailaddress EMAIL_STRING
+    | fax FAX_STRING
+    | fullname FULLNAME_STRING
+    | phone PHONE_STRING
+    | vault VAULT_NAME
+    | application APPLICATION_NAME
+    | site SITE_NAME
+    | type  | {TYPE_ITEM...}
+    | group GROUP_NAME
+    | role ROLE_NAME
+    | product {PRODUCT_ITEM...}
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+```
+where **`TYPE_ITEM`** is:
+```
+    | application
+    | full
+    | business
+    | system
+```
 
 ----
 ##NOT Handled Person Properties
@@ -36,22 +101,7 @@ The password could not be read from the MX database. They are hashed and only th
 Also from security point of view the password should not be added in the CI file, because the CI file is handled typically from a repository (and who knows all the persons which could read the repository?).
 
 ###Password Expired Flag
-The password expired flag is used e.g. if the user must change his password while login. Because this is used only temporary, the flag itself is not supported from MxUpdate (and is ignored).
-
-----
-##Steps of the Update Flow
-Following steps are done before the TCL update file is executed:
-* all access on business objects are removed
-* all access on business administration objects are removed
-* comment / description, fax number, phone number, email address, address and full name is reset (to a zero length string)
-* all assigned roles / groups are removed
-* person is set to not hidden
-* assigned default application is removed
-* assigned site is removed
-* person specific workspace objects are deleted (depends on the parameters `UserIgnoreWSO4Persons` and `UserIgnoreWS4Users`)
-* password of the person expires (depends on the parameter `UserPersonIgnorePswdNeverExpires`)
-* disables that the person wants email (depends on the parameter `UserPersonIgnoreWantsEmail`)
-* enables that the person wants icon mail (depends on the parameter `UserPersonIgnoreWantsIconMail`)
+The password expired flag is used e.g. if the user must change his password while login. Because this is used only temporary, the flag itself is not supported from MxUpdate.
 
 ----
 ##Parameter Definitions
@@ -61,20 +111,17 @@ Following steps are done before the TCL update file is executed:
     Attention! A workspace object defined in the TCL update file are not ignored and will be created!
 *   **Name:** `UserPersonIgnoreProducts`
     **Parameter:** `‑‑ignorePersonProducts [PERSON_MATCH]`
-    Defines the match of persons for whom the manage of products is ignored. This means that the products for given matching person not managed anymore from the !MxUpdate Update tool and must (could be) managed e.g. in separate MQL update scripts.
-*   **Name:** `UserPersonIgnorePswdNeverExpires`
-    **Parameter:** `‑‑ignorePersonPasswordNeverExpires [PERSON_MATCH]`
-    Defines the match of persons for whom the 'password never expires' - flag is not handled from the MxUpdate Update tool. They could be managed then e.g. in separate MQL update scripts.
+    Defines the match of persons for whom the manage of products is ignored. This means that the products for given matching person not managed anymore from the MxUpdate Update tool and must (could be) managed e.g. in separate MQL update scripts.
 *   **Name:** `UserPersonIgnoreWantsEmail`
     **Parameter:** `‑‑ignorePersonWantsEmail [PERSON_MATCH]`
-    Defines the match of persons for whom the 'wants email' - flag is not handled from the !MxUpdate Update tool. They could be managed then e.g. in separate MQL update scripts.
+    Defines the match of persons for whom the 'wants email' - flag is not handled from the MxUpdate Update tool. They could be managed then e.g. in separate MQL update scripts.
 *   **Name:** `UserPersonIgnoreWantsIconMail`
     **Parameter:** `‑‑ignorePersonWantsIconMail [PERSON_MATCH]`
-    Defines the match of persons for whom the 'wants icon mail' - flag is not handled from the !MxUpdate Update tool. They could be managed then e.g. in separate MQL update scripts.
+    Defines the match of persons for whom the 'wants icon mail' - flag is not handled from the MxUpdate Update tool. They could be managed then e.g. in separate MQL update scripts.
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
 # PERSONADMIN:
 # ~~~~~~~~~~~~
@@ -93,20 +140,21 @@ Following steps are done before the TCL update file is executed:
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod person "${NAME}" \
-    description "Administration person for test purposes." \
-    !hidden \
-    !neverexpires \
-    access "all" \
-    admin "none" \
-    disable email \
-    enable iconmail \
-    address "" \
-    email "" \
-    fax "" \
-    fullname "" \
-    phone "" \
+mmxUpdate person "${NAME}" {
+    description "Administration person for test purposes." 
+    !hidden 
+    !neverexpires 
+    access all 
+    admin {} 
+    disable email 
+    enable iconmail 
+    address "" 
+    email "" 
+    fax "" 
+    fullname "" 
+    phone "" 
     vault ""
-mql mod person "${NAME}" type application,full,notbusiness,notinactive,nottrusted,notsystem
-setProducts "CPF"
+    type {application full}
+    product {CPF}
+}
 ```
