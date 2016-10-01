@@ -29,6 +29,7 @@ This attribute properties could be handled from MxUpdate:
 
 Property          | Written                              | Default Value | Kind
 ------------------|--------------------------------------|---------------|----
+package           | if defined                           | empty         | string
 kind              | always                               | empty         | enumeration of attribute type
 uuid              | if defined                           | empty         | string
 symbolic name     | if defined                           | empty list    | list of symbolic name strings
@@ -116,6 +117,7 @@ mxUpdate attribute "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | package PACKAGE_NAME
     | kind | binary  |
     |      | boolean |
     |      | date    |

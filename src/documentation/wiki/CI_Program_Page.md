@@ -28,6 +28,7 @@ This page properties could be handled from MxUpdate:
 
 Property    | Written            | Default Value | Kind
 ------------|--------------------|---------------|----
+package     | if defined         | empty         | string
 uuid        | if defined         | empty         | string
 description | always             | empty string  | multi-line-string
 hidden      | if ***true***      | ***false***   | flag
@@ -42,6 +43,7 @@ mxUpdate page "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | package PACKAGE_NAME
     | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING

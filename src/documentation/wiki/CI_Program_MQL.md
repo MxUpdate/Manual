@@ -28,6 +28,7 @@ This page properties could be handled from MxUpdate:
 
 Property      | Written           | Default Value   | Kind
 --------------|-------------------|-----------------|----
+package       | if defined        | empty           | string
 kind          | always            | ***mql***       | is always ***mql***
 symbolic name | if defined        | empty list      | list of symbolic name strings
 description   | always            | empty string    | multi-line-string
@@ -44,6 +45,7 @@ mxUpdate program "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | package PACKAGE_NAME
     | symbolicname SYMBOLICNAME_STRING
     | kind mql 
     | description DESCRIPTION_STRING

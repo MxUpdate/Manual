@@ -10,6 +10,7 @@ This package properties could be handled from MxUpdate:
 
 Property      | Written            | Default Value | Kind
 --------------|--------------------|---------------|-----------------------
+package       | if defined         | empty         | string
 uuid          | if defined         | empty         | string
 symbolic name | if defined         | empty list    | list of symbolic name strings
 description   | always             | empty string  | string
@@ -44,6 +45,7 @@ mxUpdate uniquekey "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | package PACKAGE_NAME
     | uuid UUID_STRING
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
