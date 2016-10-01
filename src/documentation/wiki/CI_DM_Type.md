@@ -40,6 +40,7 @@ triggers         | if defined         | empty list    |
 methods          | if defined         | empty list    | list of assigned methods
 attributes       | if defined         | empty list    | list of assigned global attributes
 local attributes | if defined         | empty list    | list of assigned local attributes
+local path types | if defined         | empty list    | list of assigned local path types
 properties       | if defined         | empty list    | list of values and referenced admin objects
 
 ----
@@ -60,6 +61,7 @@ Error Code | Description
 11802      | Kind of a type can not be changed if the current kind is not ***basic***.
 11803      | Derived of a type can not be changed because potentially some data can be lost.
 11804      | The given local attribute is not defined anymore in the update, but already assigned to the type. The local attribute is not automatically removed because otherwise potentially data could be lost.
+11805      | The given local path type is not defined anymore in the update, but already assigned to the type. The local path type is not automatically removed because otherwise potentially data could be lost.
 
 ----
 ## Syntax
@@ -81,6 +83,7 @@ where **`OPTION`** is:
     | method PROGRAM_NAME
     | attribute ATTRIBUTE_NAME
     | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
+    | local pathtype PATH_TYPE_NAME { [LOCAL_PATH_TYPE] }
     | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
 ```
 where **`LOCAL_ATTRIBUTE`** is:
@@ -119,6 +122,33 @@ where **`RANGE_ITEM`** is:
     | between VALUE | inclusive | VALUE | inclusive |
     |               | exclusive |       | exclusive |
     | program PROGRAM_NAME [input ARG_STRING]
+```
+where **`LOCAL_PATH_TYPE`** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | from { [FROM] }
+    | to { [TO] }
+    | attribute ATTRIBUTE_NAME
+    | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+```
+where **`FROM`** is:
+```
+    | cardinality | many |
+    |             | one  |
+    | type | TYPE_NAME |
+    |      | all       |
+    | relationship | RELATIONSHIP_NAME |
+    |              | all               |
+```
+where **`TO`** is:
+```
+    | type | TYPE_NAME |
+    |      | all       |
+    | relationship | RELATIONSHIP_NAME |
+    |              | all               |
 ```
 
 ----
