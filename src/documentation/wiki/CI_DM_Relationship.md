@@ -45,7 +45,7 @@ from / to meaning              | always             | empty string  | string
 from / to cardinality          | always             | ***many***    | enumeration of ***one*** and ***many***
 from / to revision action      | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
 from / to clone action         | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
-from / to propagate connection | always             | ***false***   | flag
+from / to propagate connection | always             | ***true***    | flag
 from / to propagate modify     | always             | ***false***   | flag
 from / to types                | if defined         | empty list    |
 from / to relationships        | if defined         | empty list    |
