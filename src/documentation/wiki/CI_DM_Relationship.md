@@ -30,8 +30,9 @@ This relationship properties could be handled from MxUpdate:
 
 Property                       | Written            | Default Value
 -------------------------------|--------------------|--------------
-kind                           | if not ***basic*** | ***basic***
 description                    | always             | empty string
+kind                           | if not ***basic*** | ***basic***
+abstract flag                  | if ***true***      | ***false***
 hidden flag                    | always             | ***false***
 prevent duplicate flag         | always             | ***false***
 rule                           | if set             | empty string
@@ -79,6 +80,7 @@ Error Code | Description
 -----------|------------
 12101      | The given attribute is not defined anymore in the update, but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
 11401      | Kind of a relationship can not be changed if the current kind is not ***basic****.
+11402      | Derived of a relationship can not be changed because potentially some data can be lost.
 
 ----
 ## Syntax
@@ -87,6 +89,8 @@ Error Code | Description
         description DESCRIPTION_STRING
         kind | basic         |
              | compositional |
+        [!]abstract
+        derived RELATIONSHIP_NAME
         [!]hidden
         [!]preventduplicates
         rule RULE_NAME
