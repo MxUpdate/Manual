@@ -20,73 +20,45 @@
 
 ----
 ##Introduction
-An inquiry is used to produce a list of objects which e.g. could be used to
-select objects which are shown in a web table. For a deep instruction see the
-"MQL Guide" or "Business Modeler Guide" of the "ENOVIAvStudio Modeling
-Platform".
-
-Configuration item update files for inquiries are separated into two different
-pieces. The first piece handles the update itself of an inquiry, the second
-piece is the inquiry code.
+An inquiry is used to produce a list of objects which e.g. could be used to select objects which are shown in a web table. For a deep instruction see the "MQL Guide" or "Business Modeler Guide" of the "ENOVIAvStudio Modeling Platform".
 
 ----
 ##Handled Inquiry Properties
-This inquiry properties could be handled from !MxUpdate:
-  * description
-  * hidden flag
-  * format and pattern
-  * inquiry code
-  * arguments
+This inquiry properties could be handled from MxUpdate:
+
+Property    | Written            | Default Value | Kind
+------------|--------------------|---------------|----
+description | always             | empty string  | multi-line-string
+hidden      | always             | ***false***   | flag
+pattern     | always             | empty string  | string
+format      | always             | empty string  | string
+code        | always             | empty string  | multi-line-string
+arguments   | if defined         | empty list    | list of key / value pairs
+properties  | if defined         | empty list    | list of values and referenced admin objects
+
 
 ----
-##Separator between TCL Update Code and Inquiry Code
-The inquiry code and the TCL update code are defined in the same configuration
-item file. Before the separator a comment is defined as information:
+## Syntax
 ```
-# do not change the next three lines, they are needed as separator information:
+mxUpdate inquiry "${NAME}" { [OPTION] }
 ```
-As separator following text is used:
+where **`OPTION`** is:
 ```
-################################################################################
-# INQUIRY CODE                                                                 #
-################################################################################
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | pattern PATTERN_STRING
+    | format FORMAT_STRING
+    | argument KEY_STRING VALUE_STRING
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+    | code CODE_STRING
 ```
-Below the separator the original code from the inquiry must be defined in the
-same syntax as described in the MX manuals.
 
-----
-##Steps of the Update Flow
-
-###Cleanup
-Following steps are done before the TCL update file is executed:
-  * The description is set to zero length string.
-  * The inquiry is set to not hidden.
-  * The pattern and format is reset.
-  * The inquiry code is removed.
-  * All arguments are removed.
-
-###Update
-The inquiry code defined in the configuration item file is extracted and
-written in a temporary file. The path of the file is defined as TCL variable
-```FILE```. When the TCL update code is executed the inquiry code is updated to
-the value defined in the file.
-
-----
-##Parameter Definitions
-*   **Name:** ```UIInquirySeparatorComment```
-    **Default Value:** _see the inquiry code separator_ 
-    Defines the used comment in front of the separator between the inquiry TCL update code and the inquiry code itself.
-*   **Name:** ```UIInquirySeparatorText```
-    **Default Value:** _see the inquiry code separator_
-    Defines the used text for the separator between the inquiry TCL update code and the inquiry code itself.
-
-The parameters could be changed depending on project needs. For further
-information see the [Parameter Definition Format](UpdatePropertyFileFormat_ParameterDef.md).
+For better reading, the code **`CODE_STRING `** itself is automatically exported with new line, code content and new line. The import trims all trailing new lines and spaces.
 
 ----
 ##Example
 
-```TCL
+```tcl
 ################################################################################
 # INQUIRY:
 # ~~~~~~~~
@@ -105,18 +77,14 @@ information see the [Parameter Definition Format](UpdatePropertyFileFormat_Param
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod inquiry "${NAME}" \
-    description "Inquiry for test purposes." \
-    pattern "\$\{OID\}" \
-    format "\$\{OID\}" \
-    file [file join "${FILE}"] \
-    add argument "ID" "objectId"
-
-# do not change the next three lines, they are needed as separator information:
-################################################################################
-# INQUIRY CODE                                                                 #
-################################################################################
-
-print bus ${ID} select id dump "
+mxUdpate inquiry "${NAME}" {
+    description "Inquiry for test purposes."
+    pattern "${OID}"
+    format "${OID}"
+    argument "ID" "objectId"
+    code "
+print bus ${ID} select id dump \"
+\"
 "
+}
 ```
