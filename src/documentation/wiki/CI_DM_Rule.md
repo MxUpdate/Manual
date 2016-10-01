@@ -31,6 +31,7 @@ This rule properties could be handled from MxUpdate:
 
 Property               | Written            | Default Value | Kind
 -----------------------|--------------------|---------------|----
+symbolic name          | if defined         | empty list    | list of symbolic name strings
 description            | always             | empty string  | string
 hidden                 | always             | ***false***   | flag
 enforce reserve access | always             | ***false***   | flag
@@ -53,8 +54,9 @@ The governed objects are not handled in the rule configuration item file. They m
 ```
 mxUpdate rule "${NAME}" { [OPTION] }
 ```
-where `OPTION` is:
+where **`OPTION`** is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | [!]enforcereserveaccess
@@ -76,31 +78,24 @@ where **`USER_ITEM `** is:
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# RULE:
-# ~~~~~
-# TestRule
+# RULE_TestRule.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# rule_TestRule
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Rule for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate rule "${NAME}" {
+    symbolicname "rule_TestRule"
     description "Rule for test purposes."
     !hidden
     owner {modify read show}
     revoke owner {modify} filter "type==Part"
     public {none}
     user "Employee" {show} filter ""
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestRule"
+    ################################################## Info End
 }
 ```
