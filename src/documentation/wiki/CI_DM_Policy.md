@@ -30,7 +30,7 @@ because otherwise there is potentially some data lost. So for policies a
 
 ## Policy File Format
 The policy (excluding the properties of a policy) is defined with the TCL
-procedure `updatePolicy`.
+procedure `mxUpdate`.
 
 *Snippet of an Example:*
 ```TCL
@@ -123,6 +123,22 @@ mxUpdate policy "${NAME}" {
   :
 }
 ```
+
+----
+## Parameter Definitions
+*   **Name:** `DMPolicyAllowExportAccessSorting`
+    **Default Value:** `true`
+    **Opposite Parameter (to deactivate):** `--deactivatePolicyExportAccessSort`
+    The exported access of policies and policy states are sorted if parameter is `true`.
+*   **Name:** `DMPolicySupportsMajorMinor`
+    **Value:** `true` (if the MQL command "`help policy`" contains "`majorrevision`")
+    Policies supports major / minor definitions if parameter is `true`.
+*   **Name:** `DMPolicyStateSupportsEnforceReserveAccess`
+    **Value:** `true` (if the MQL command "`help policy`" contains "`enforcereserveaccess`")
+    Policy states supports the 'enforce reserve access' flag if parameter  is `true`.
+*   **Name:** `DMPolicyStateSupportsPublished`
+    **Value:** `true` (if the MQL command "`help policy`" contains "`published`")
+    Policy states supports the published flag if parameter is `true`.
 
 ----
 ## Syntax
