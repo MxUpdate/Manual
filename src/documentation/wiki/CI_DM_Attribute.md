@@ -29,8 +29,9 @@ This attribute properties could be handled from MxUpdate:
 
 Property          | Written                              | Default Value | Kind
 ------------------|--------------------------------------|---------------|----
+kind              | always                               | empty         | enumeration of attribute type
 symbolic name     | if defined                           | empty list    | list of symbolic name strings
-description       | always                               | empty string  | string
+description       | always                               | empty string  | multi-line-string
 hidden            | always                               | ***false***   | flag
 multi-value       | always                               | ***false***   | flag
 reset on clone    | always                               | ***false***   | flag
@@ -40,7 +41,7 @@ maximum length    | always for string attributes         | ***0***       | numbe
 range value       | always for real / integer attributes | ***false***   | flag
 dimension     | if defined for real / integer attributes | empty string  | string
 rule              | if defined                           | empty string  | string
-default           | always                               | empty string  | string
+default           | always                               | empty string  | multi-line-string
 triggers          | if defined                           | empty list    | list
 ranges            | if defined                           | empty list    | list
 properties        | if defined                           | empty list    | list of values and referenced admin objects
@@ -114,6 +115,12 @@ mxUpdate attribute "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | kind | binary  |
+    |      | boolean |
+    |      | date    |
+    |      | integer |
+    |      | real    |
+    |      | string  |
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
