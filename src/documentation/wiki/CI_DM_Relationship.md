@@ -28,25 +28,26 @@ or "Business Modeler Guide" of the "ENOVIA Studio Modeling Platform".
 ##Handled Properties
 This relationship properties could be handled from MxUpdate:
 
-Property                       | Written            | Default Value
--------------------------------|--------------------|--------------
-description                    | always             | empty string
-kind                           | if not ***basic*** | ***basic***
-abstract flag                  | if ***true***      | ***false***
-hidden flag                    | always             | ***false***
-prevent duplicate flag         | always             | ***false***
-rule                           | if set             | empty string
-triggers                       | if defined         | empty list
-attributes                     | if defined         | empty list
-properties                     | if defined         | empty list
-from / to meaning              | always             | empty string
-from / to propagate connection | always             | ***false***
-from / to propagate modify     | always             | ***false***
-from / to cardinality          | always             | ***many***
-from / to revision action      | always             | ***one***
-from / to clone action         | always             | ***one***
-from / to types                | if defined         | empty list
-from / to relationships        | if defined         | empty list
+Property                       | Written            | Default Value | Kind
+-------------------------------|--------------------|---------------|----
+description                    | always             | empty string  | string
+kind                           | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***compositional***
+abstract                       | if ***true***      | ***false***   | flag
+derived                        | if set / not empty | empty string  | is derived from another relationship
+hidden                         | always             | ***false***   | flag
+prevent duplicate              | always             | ***false***   | flag
+rule                           | if set / not empty | empty string  | one referenced rule name
+triggers                       | if defined         | empty list    |
+attributes                     | if defined         | empty list    | list of assigned attributes
+properties                     | if defined         | empty list    | list of values and referenced admin objects
+from / to meaning              | always             | empty string  | string
+from / to cardinality          | always             | ***many***    | enumeration of ***one*** and ***many***
+from / to revision action      | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
+from / to clone action         | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
+from / to propagate connection | always             | ***false***   | flag
+from / to propagate modify     | always             | ***false***   | flag
+from / to types                | if defined         | empty list    |
+from / to relationships        | if defined         | empty list    |
 
 ###'Compositional' Relationships
 If a relationship is new created, the relationship has typically the kind ***basic***. The kind of such relationship can by changed once to ***compositional***, but the change is irreversible. Another change to any other kind is not possible anymore.
@@ -78,57 +79,55 @@ Prerequisites for compositional relationships are:
 
 Error Code | Description
 -----------|------------
-12101      | The given attribute is not defined anymore in the update, but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
-11401      | Kind of a relationship can not be changed if the current kind is not ***basic****.
-11402      | Derived of a relationship can not be changed because potentially some data can be lost.
+10901      | The given attribute is not defined anymore in the update, but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
+11402      | Kind of a relationship can not be changed if the current kind is not ***basic****.
+11403      | Derived of a relationship can not be changed because potentially some data can be lost.
 
 ----
 ## Syntax
-
-    mxUpdate relationship "${NAME}" {
-        description DESCRIPTION_STRING
-        kind | basic         |
-             | compositional |
-        [!]abstract
-        derived RELATIONSHIP_NAME
-        [!]hidden
-        [!]preventduplicates
-        rule RULE_NAME
-        trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
-                           | check    |
-                           | override |
-        from {
-            SIDE_INFO
-        }
-        to {
-            SIDE_INFO
-        }
-        attribute ATTRIBUTENAME
-        property NAME [to TYPE NAME] [value VALUE_STRING]
-    }
-
+```
+mxUpdate relationship "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | description DESCRIPTION_STRING
+    | kind | basic         |
+    |      | compositional |
+    | [!]abstract
+    | derived RELATIONSHIP_NAME
+    | [!]hidden
+    | [!]preventduplicates
+    | rule RULE_NAME
+    | trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+    |                    | check    |
+    |                    | override |
+    | from { [SIDE_INFO] }
+    | to { [SIDE_INFO] }
+    | attribute ATTRIBUTENAME
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
 where `SIDE_INFO` is
-
-    meaning DESCRIPTION_STRING
-    cardinality | many |
-                | one  |
-    revision | none      |
-             | float     |
-             | replicate |
-    clone | none      |
-          | float     |
-          | replicate |
-    [!]propagatemodify
-    [!]propagateconnection
-    type | TYPE_NAME |
-         | all       |
-    relationship | RELATIONSHIP_NAME |
-                 | all               |
-
+```
+    | meaning DESCRIPTION_STRING
+    | cardinality | many |
+    |             | one  |
+    | revision | none      |
+    |          | float     |
+    |          | replicate |
+    | clone | none      |
+    |       | float     |
+    |       | replicate |
+    | [!]propagatemodify
+    | [!]propagateconnection
+    | type | TYPE_NAME |
+    |      | all       |
+    | relationship | RELATIONSHIP_NAME |
+    |              | all               |
+```
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
 # RELATIONSHIP:
 # ~~~~~~~~~~~~~
