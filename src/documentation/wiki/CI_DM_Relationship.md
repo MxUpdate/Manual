@@ -41,15 +41,32 @@ rule                           | if set / not empty | empty string  | one refer
 triggers                       | if defined         | empty list    |
 attributes                     | if defined         | empty list    | list of assigned attributes
 properties                     | if defined         | empty list    | list of values and referenced admin objects
-from / to meaning              | always             | empty string  | string
-from / to cardinality          | always             | ***many***    | enumeration of ***one*** and ***many***
-from / to revision action      | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
-from / to clone action         | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
-from / to propagate connection | always             | ***true***    | flag
-from / to propagate modify     | always             | ***false***   | flag
-from / to types                | if defined         | empty list    |
-from / to relationships        | if defined         | empty list    |
+from+to/meaning                | always             | empty string  | string
+from+to/cardinality            | always             | ***many***    | enumeration of ***one*** and ***many***
+from+to/revision action        | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
+from+to/clone action           | always             | ***none***    | enumeration of ***none***, ***float*** and ***replicate***
+from+to/propagate connection   | always             | ***true***    | flag
+from+to/propagate modify       | always             | ***false***   | flag
+from+to/types                  | if defined         | empty list    | list of types
+from+to/relationships          | if defined         | empty list    | list of relationships
 
+<!-- ************************************************************************ -->
+###Derived Relationships
+If a relationship is derived from another relationship, only limited amount of relationship properties can be changed (as currently known from MX V62015x). These properties are handled only in the parent relationship.
+Therefore for a derived relationship, the following properties are not written nor handled in the delta calculation:
+* from+to/meaning
+* from+to/cardinality
+* from+to/revision action
+* from+to/clone action
+* from+to/propagate connection
+* from+to/propagate modify
+
+For some properties, limited updates are allowed for the derived relationship. If some definitions are changed, the delta calculation tries to update the relationship. In the case that it failed, an exception is thrown. The properties with limited modifications are:
+* from+to/types
+* from+to/relationships
+
+
+<!-- ************************************************************************ -->
 ###'Compositional' Relationships
 If a relationship is new created, the relationship has typically the kind ***basic***. The kind of such relationship can by changed once to ***compositional***, but the change is irreversible. Another change to any other kind is not possible anymore.
 
@@ -61,6 +78,7 @@ Prerequisites for compositional relationships are:
 * to revision must be replicate
 * to propagate connection must be false
 
+<!-- ************************************************************************ -->
 ###'Dynamical' Relationships
 
 ----
