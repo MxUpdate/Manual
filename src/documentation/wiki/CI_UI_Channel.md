@@ -20,67 +20,65 @@
 
 ----
 ## Introduction
-A channels is a collection of commands. Multiple channels are used to define the
-content of MX portals. For a deep instruction see the "MQL Guide" or "Business
-Modeler Guide" of the "ENOVIAvStudio Modeling Platform".
+A channels is a collection of commands. Multiple channels are used to define the content of MX portals. For a deep instruction see the "MQL Guide" or "Business Modeler Guide" of the "ENOVIAvStudio Modeling Platform".
 
-**Hint!** The configuration item 'channel' of the !MxUpdate Update tool does not handle channels which are defined as user's workspace item.
+**Hint!** The configuration item 'channel' of the MxUpdate Update tool does not handle channels which are defined as user's workspace item.
 
 ----
 ##Handled Properties
-This channel properties could be handled from MxUpdate:
-  * description
-  * hidden flag
-  * height
-  * "alt" and label text
-  * href
-  * assigned commands
+This command properties could be handled from MxUpdate:
 
-----
-##Parameter Definitions
-No further parameters are defined.
+Property      | Written    | Default Value | Kind
+--------------|------------|---------------|----
+symbolic name | if defined | empty list    | list of symbolic name strings
+description   | always     | empty string  | multi-line-string
+hidden        | always     | ***false***   | flag
+label         | always     | empty string  | string
+href          | always     | empty string  | string
+alt           | always     | empty string  | string
+height        | always     | ***0***       | integer
+settings      | if defined | empty list    | list of settings
+commands      | is defined | empty list    | list of assigned commands
+properties    | if defined | empty list    | list of values and referenced admin objects
 
 ----
 ## Syntax
-
-    mxUpdate channel NAME {
-        description DESCRIPTION_STRING
-        [!]hidden
-        label LABEL_STRING
-        href HREF_STRING
-        alt ALT_STRING
-        setting SETTING_NAME SETTING_VALUE
-        command COMMAND
-        property NAME [to TYPE NAME] [value VALUE_STRING]
-    }
+```
+mxUpdate channel "${NAME}" { [OPTION] }
+```
+where ***`OPTION`*** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | label LABEL_STRING
+    | href HREF_STRING
+    | alt ALT_STRING
+    | setting SETTING_NAME SETTING_VALUE
+    | command COMMAND_STRING
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# CHANNEL:
-# ~~~~~~~~
-# TestChannel
+# CHANNEL_TestChannel
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# channel_TestChannel
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Channel for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate channel "${NAME}" {
+    symbolicname "channel_TestChannel"
     description "Channel for test purposes."
     label "Test Label"
-    height "100"
+    height 100
     setting "Registered Suite" "MxUpdateCentral"
     command "First Test Command"
     command "Second Test Command"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestChannel"
+    ################################################## Info End
 }
 ```
