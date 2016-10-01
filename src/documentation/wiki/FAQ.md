@@ -129,6 +129,9 @@ ParameterDef.UserPersonIgnoreProducts.Default               = *
 ```
 The default value is nothing. So now the products are not handled for all persons (including the administration persons). For for information see also the configuration item [administration person](CI_User_PersonAdmin.md).
 
+#### How to import "full" Persons?
+In previous MxUpdate versions, "full" persons was supported ("full" persons are technical the admin persons and the depending business object instance of the person). Now MxUpdate does not support anymore "full" persons, because the OOTB delivered VPLM-Pos-Import can be easily used with complete PnO support.
+
 ###How could I use MxUpdate Update together with emxGerLibUpdate?
 "MxUpdate Update" and "emxGerLibUpdate" could be used together within one installation. The recommendation is to use only one tool.
 
