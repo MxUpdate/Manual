@@ -30,6 +30,7 @@ This relationship properties could be handled from MxUpdate:
 
 Property                       | Written            | Default Value | Kind
 -------------------------------|--------------------|---------------|----
+symbolic name                  | if defined         | empty list    | list of symbolic name strings
 description                    | always             | empty string  | string
 kind                           | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***compositional***
 abstract                       | if ***true***      | ***false***   | flag
@@ -88,8 +89,9 @@ Error Code | Description
 ```
 mxUpdate relationship "${NAME}" { [OPTION] }
 ```
-where `OPTION` is:
+where **`OPTION`** is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | kind | basic         |
     |      | compositional |
@@ -106,7 +108,7 @@ where `OPTION` is:
     | attribute ATTRIBUTENAME
     | property NAME [to TYPE NAME] [value VALUE_STRING]
 ```
-where `SIDE_INFO` is
+where **`SIDE_INFO`** is
 ```
     | meaning DESCRIPTION_STRING
     | cardinality | many |
@@ -129,25 +131,13 @@ where `SIDE_INFO` is
 ##Example
 ```tcl
 ################################################################################
-# RELATIONSHIP:
-# ~~~~~~~~~~~~~
-# MxUpdateTestRelationship
+# RELATIONSHIP_MxUpdateTestRelationship.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# relationship_MxUpdateTestRelationship
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# MxUpdate Test Relationship with two attributes and to / from types and
-# relationships.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate relationship "${NAME}" {
+    symbolicname "relationship_MxUpdateTestRelationship"
     description "MxUpdate Test Relationship with two attributes and to / from types and relationships." \
     !hidden \
     !preventduplicates \
@@ -172,5 +162,9 @@ mxUpdate relationship "${NAME}" {
     }
     attribute "MxUpdateTestAttribute1"
     attribute "MxUpdateTestAttribute2"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdateTestRelationship"
+    ################################################## Info End
 }
 ```
