@@ -296,7 +296,16 @@ updatePolicy "${NAME}" {
 
 ----
 ## Limitations
-With Enovia !V6R2010 it is not possible to extract filter informations for owner / public / revoke owner / revoke public access with a XML export or with a MQL print select statement. There exists some incidents for this behavior. This means that a !MxUpdate export does not include this filter informations. In this case the filters must be added manually to the configuration item file. So this also means e.g. that the standard MQL compare command does not work correctly (because the filter informations are not exported...).
 
+### Filter
+With Enovia !V6R2010 it is not possible to extract filter informations for owner / public / revoke owner / revoke public access with a XML export or with a MQL print select statement. There exists some incidents for this behavior. This means that a !MxUpdate export does not include this filter informations. In this case the filters must be added manually to the configuration item file. So this also means e.g. that the standard MQL compare command does not work correctly (because the filter informations are not exported...).
 Starting with Enovia V6R2010x the extract filter information works as expected.
+
+### Signatures and new Access Items
+MX creates for signatures automatically depending access items. The key of an access item are the name of the signature.
+ * Signature filters are defined as public access with access item 'none'.
+ * Approve, reject and ignore definitions for user are defined as access for given users with access item 'approve', 'reject' or 'ignore'.
+
+
+
 
