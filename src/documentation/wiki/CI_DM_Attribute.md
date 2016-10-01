@@ -111,6 +111,41 @@ Error Code | Description
 
 ----
 
+## Syntax
+```
+updateAttribute NAME {
+    description DESCRIPTION_STRING
+    [!]hidden
+    [!]multivalue
+    [!]rangevalue
+    [!]multiline
+    [!]resetonclone
+    [!]resetonrevision
+    maxlength MAXLENGTH
+    dimension DIMENSION_NAME
+    default DEFAULT_STRING
+    range RANGE_ITEM
+    trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+                       | check    |
+                       | override |
+    property NAME [to TYPE NAME] [value VALUE_STRING]
+}
+```
+where **RANGE_ITEM** is:
+```
+    | =  | VALUE
+    | != |
+    | <  |
+    | >  |
+    | <= |
+    | >= | 
+    between VALUE | inclusive | VALUE | inclusive |
+                  | exclusive |       | exclusive |
+    program PROGRAM_NAME [input ARG_STRING]
+```
+
+----
+
 ## Example
 ```tcl
 ################################################################################
