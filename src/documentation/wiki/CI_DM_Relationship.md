@@ -40,7 +40,8 @@ prevent duplicate              | always             | ***false***   | flag
 rule                           | if set / not empty | empty string  | one referenced rule name
 triggers                       | if defined         | empty list    |
 attributes                     | if defined         | empty list    | list of assigned global attributes
-local attributes | if defined  | empty list         | list of assigned local attributes
+local attributes               | if defined  | empty list         | list of assigned local attributes
+local path types               | if defined         | empty list    | list of assigned local path types
 properties                     | if defined         | empty list    | list of values and referenced admin objects
 from+to/meaning                | always             | empty string  | string
 from+to/cardinality            | always             | ***many***    | enumeration of ***one*** and ***many***
@@ -99,10 +100,11 @@ Prerequisites for compositional relationships are:
 
 Error Code | Description
 -----------|------------
-10901      | The given global attribute is not defined anymore in the update, but already assigned to the relationship. The global attribute is not automatically removed because otherwise potentially data could be lost.
-10902      | The given local attribute is not defined anymore in the update, but already assigned to the relationship. The local attribute is not automatically removed because otherwise potentially data could be lost.
+11401      | The given global attribute is not defined anymore in the update, but already assigned to the relationship. The global attribute is not automatically removed because otherwise potentially data could be lost.
 11402      | Kind of a relationship can not be changed if the current kind is not ***basic****.
 11403      | Derived of a relationship can not be changed because potentially some data can be lost.
+11404      | The given local attribute is not defined anymore in the update, but already assigned to the relationship. The local attribute is not automatically removed because otherwise potentially data could be lost.
+11405      | The given local path type is not defined anymore in the update, but already assigned to the relationship. The local path type is not automatically removed because otherwise potentially data could be lost.
 
 ----
 ## Syntax
@@ -127,6 +129,7 @@ where **`OPTION`** is:
     | to { [SIDE_INFO] }
     | attribute ATTRIBUTENAME
     | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
+    | local pathtype PATH_TYPE_NAME { [LOCAL_PATH_TYPE] }
     | property NAME [to TYPE NAME] [value VALUE_STRING]
 ```
 where **`SIDE_INFO`** is
@@ -183,6 +186,33 @@ where **`RANGE_ITEM`** is:
     | between VALUE | inclusive | VALUE | inclusive |
     |               | exclusive |       | exclusive |
     | program PROGRAM_NAME [input ARG_STRING]
+```
+where **`LOCAL_PATH_TYPE`** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | from { [PATH_TYPE_FROM] }
+    | to { [PATH_TYPE_TO] }
+    | attribute ATTRIBUTE_NAME
+    | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+```
+where **`PATH_TYPE_FROM`** is:
+```
+    | cardinality | many |
+    |             | one  |
+    | type | TYPE_NAME |
+    |      | all       |
+    | relationship | RELATIONSHIP_NAME |
+    |              | all               |
+```
+where **`PATH_TYPE_TO`** is:
+```
+    | type | TYPE_NAME |
+    |      | all       |
+    | relationship | RELATIONSHIP_NAME |
+    |              | all               |
 ```
 
 ----
