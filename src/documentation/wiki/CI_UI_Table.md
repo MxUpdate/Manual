@@ -31,6 +31,7 @@ This form properties could be handled from MxUpdate:
 
 Property              | Written            | Default Value | Kind
 ----------------------|--------------------|---------------|----
+symbolic name         | if defined         | empty list    | list of symbolic name strings
 description           | always             | empty string  | string
 hidden                | if ***true***      | ***false***   | flag
 properties            | if defined         | empty list    | list of values and referenced admin objects
@@ -51,6 +52,7 @@ mxUpdate table "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | column { [COLUMN_OPTION] }
@@ -71,26 +73,15 @@ where `COLUMN_OPTION` is:
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# TABLE:
-# ~~~~~~
-# type_MxUpdate_Product
+# TABLE_type_MxUpdate_Product
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# table_type_MxUpdate_Product
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Table for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate table "${NAME}" {
+    symbolicname "table_type_MxUpdate_Product"
     description "Table for test purposes." 
     column {
         name "type" 
@@ -130,5 +121,9 @@ mxUpdate table "${NAME}" {
         alt "" 
         setting "Registered Suite" "Framework"
     }
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "type_MxUpdate_Product"
+    ################################################## Info End
 }
 ```
