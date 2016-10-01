@@ -26,91 +26,36 @@ or "Business Modeler Guide" of the "ENOVIA Studio Modeling Platform".
 
 ----
 ##Handled Properties
-This relationship properties could be handled from !MxUpdate:
- * description
- * hidden flag
- * triggers
- * attributes
- * properties
- * prevent duplicate flag
- * from / to side information:
-    * meaning description
-    * propagate connection / modify
-    * cardinality
-    * revision and clone action
-    * types and relationships
+This relationship properties could be handled from MxUpdate:
 
-----
-##Steps of the Update Flow
+Property                       | Written    | Default Value
+-------------------------------|------------|--------------
+description                    | always     | empty string
+hidden flag                    | always     | *false*
+prevent duplicate flag         | always     | *false*
+rule                           | if defined | empty string
+triggers                       | if defined | empty list
+attributes                     | if defined | empty list
+properties                     | if defined | empty list
+from / to meaning              | always     | empty string
+from / to propagate connection | always     | *false*
+from / to propagate modify     | always     | *false*
+from / to cardinality          | always     | string "many"
+from / to revision action      | always     | string "none"
+from / to clone action         | always     | string "none"
+from / to types                | if defined | empty list
+from / to relationships        | if defined | empty list
 
-###Cleanup
-Following steps are done before the CI update file is executed:
- * set to not hidden
- * reset description
- * remove all defined triggers
- * set to not prevent duplicate
- * remove all assigned rules
- * from / to side information:
-    * reset meaning description
-    * set not propagate connection and modify
-    * set cardinality to one
-    * set revision action to none
-    * set clone action none
-    * remove all types and relationships
-
-###Update
-The CI update file is executed. If the TCL procedure "testAttributes" is
-defined, the attributes of the relationship are updated.
-
-----
-
-##TCL Procedure "testAttributes"
-The TCL procedure "testAttributes" is used to test if all attributes are
-assigned to the relationship. If some attributes are missed, these attributes
-are assigned to the relationship.
-
-###Parameters
-*   **Parameter:** `‑attributes [ATTR_LIST]`
-    TCL list of attributes which must be defined on the relationship
-*   **Parameter:** `‑ignoreattr [NAME]`
-    name of the attribute which is ignored (the attribute could be defined or not on the relationship); the global parameter `DMWithAttrIgnoreRelAttr` also exists
-*   **Parameter:** `‑relationship [NAME]`
-    name of the relationship which is tested
-*   **Parameter:** `‑removeattr [NAME]`
-    name of the attribute which is removed if currently assigned to the relationship; the global parameter `DMWithAttrRemoveRelAttr` also exists
-
-###Example with Two Attributes
-The two attributes "Attribute 1" and "Attribute 2" must be defined on a
-relationship. Within an update the name of the relationship is defined in the
-TCL variable {{{NAME}}}.
-```TCL
-testAttributes -relationship "${NAME}" -attributes [list \
-    "Attribute 1" \
-    "Attribute 2" \
-]
-```
-
-###Example with One Attribute to Remove
-The two attributes "Attribute 1" and "Attribute 2" must be defined on a
-relationship. If attribute "Remove Attr" exists on the relationship, this
-attribute will be automatically removed. Within an update the name of the
-relationship is defined in the TCL variable {{{NAME}}}.
-```TCL
-testAttributes -relationship "${NAME}" -removeattr "Remove Attr" -attributes [list \
-    "Attribute 1" \
-    "Attribute 2" \
-]
-```
 
 ----
 ##Parameter Definitions
 *   **Name:** `DMRelationSupportRelCons`
     **Default Value:** `true`
     Are from current MX version connections between relationships supported? This is a V6 feature and so as default set to true. If an older MX version is used which does not support connections between relationships the value must be set to false.
-*   **Name:** `DMWithAttrIgnoreRelAttr`
+*   **Name:** `DMRelationAttrIgnore`
     **Parameter:** `‑‑ignorerelationshipattributes [ATTRIBUTE_MATCH]` 
     Pattern defining the match of attributes which are ignored if not defined anymore within the test attributes of relationships.
-*   **Name:** `DMWithAttrRemoveRelAttr`
+*   **Name:** `DMRelationAttrRemove`
     **Parameter:** `‑‑removerelationshipattributes [ATTRIBUTE_MATCH]` 
     Pattern defining the match of attributes which are removed if not defined anymore within the test attributes of relationships.
 
@@ -119,12 +64,49 @@ testAttributes -relationship "${NAME}" -removeattr "Remove Attr" -attributes [li
 
 Error Code | Description
 -----------|------------
-12101      | The given attribute is not defined anymore from TCL procedure `testAttributes` but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
-12102      | A wrong parameter was given the called TCL procedure `testAttributes` which defines the assigned attributes for a relationship.
-12103      | The name of the relationship is not the same then defined through the name of the CI file from the called TCL procedure `testAttributes`.
+12101      | The given attribute is not defined anymore in the update, but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
 
 ----
+## Syntax
 
+    mxUpdate relationship "${NAME}" {
+        description DESCRIPTION_STRING
+        [!]hidden
+        [!]preventduplicates
+        rule RULE_NAME
+        trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+                           | check    |
+                           | override |
+        from {
+            SIDE_INFO
+        }
+        to {
+            SIDE_INFO
+        }
+        attribute ATTRIBUTENAME
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
+
+where `SIDE_INFO` is
+
+    meaning DESCRIPTION_STRING
+    cardinality | many |
+                | one  |
+    revision | none      |
+             | float     |
+             | replicate |
+    clone | none      |
+          | float     |
+          | replicate |
+    [!]propagatemodify
+    [!]propagateconnection
+    type | TYPE_NAME |
+         | all       |
+    relationship | RELATIONSHIP_NAME |
+                 | all               |
+
+
+----
 ##Example
 ```TCL
 ################################################################################
@@ -146,29 +128,30 @@ Error Code | Description
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod relationship "${NAME}" \
+mxUpdate relationship "${NAME}" {
     description "MxUpdate Test Relationship with two attributes and to / from types and relationships." \
     !hidden \
     !preventduplicates \
-    from \
+    from {
+        meaning "From Type"
+        cardinality many
+        revision none
+        clone none
+        !propagatemodify
+        !propagateconnection
+        type "MxUpdateTestFromType1"
+        type "MxUpdateTestFromType2"
+    }
+    to {
+        meaning "To Relationship"
+        cardinality many
+        revision none
+        clone none
         !propagatemodify \
         !propagateconnection \
-        meaning "From Type" \
-        cardinality "N" \
-        revision "none" \
-        clone "none" \
-        add type "MxUpdateTestFromType" \
-    to \
-        !propagatemodify \
-        !propagateconnection \
-        meaning "To Relationship" \
-        cardinality "N" \
-        revision "none" \
-        clone "none" \
-        add relationship "MxUpdateTestToRelationship"
-
-testAttributes -relationship "${NAME}" -attributes [list \
-    "MxUpdateTestAttribute1" \
-    "MxUpdateTestAttribute2" \
-]
+        relationship "MxUpdateTestToRelationship"
+    }
+    attribute "MxUpdateTestAttribute1"
+    attribute "MxUpdateTestAttribute2"
+}
 ```
