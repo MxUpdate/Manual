@@ -125,6 +125,76 @@ updatePolicy "${NAME}" {
 ```
 
 ----
+## Syntax
+```
+updatePolicy NAME {
+    description DESCRIPTION_STRING
+    type {TYPENAME ...}
+    format {FORMATNAME ...}
+    defaultformat FORMAT_NAME
+    [!]enforce
+    sequence REVISION_SEQUENCE
+    delimiter DELIMITER
+    minorsequence REVISION_SEQUENCE
+    majorsequence REVISION_SEQUENCE
+    store STORENAME
+    hidden | "false" |
+           | "true"  |
+    allstate  {
+        ACCESS_ITEM
+    }
+    state STATE_NAME {
+        registeredName REGISTERED_NAME_STRING
+        [!]enforcereserveaccess
+        majorrevision | "false" |
+                      | "true"  |
+        minorrevision | "false" |
+                      | "true"  |
+        version | "false" |
+                | "true"  |
+        promote | "false" |
+                | "true"  |
+        checkouthistory | "false" |
+                        | "true"  |
+        published | "false" |
+                  | "true"  |
+        ACCESS_ITEM
+        action PROGRAM_NAME [input ARG_STRING]
+        check PROGRAM_NAME [input ARG_STRING]
+        trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+                           | check    |
+                           | override |
+        signature SIGNATURE_NAME {
+            branch STATENAME
+            approve {USER ...}
+            ignore {USER ...}
+            reject {USER ...}
+            filter FILTER_EXPRESSION
+        }
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
+    property NAME [to TYPE NAME] [value VALUE_STRING]
+}
+```
+where **`ACCESS_ITEM`** is:
+```
+    [revoke] [login] | public    | [key KEY_STRING] {ACCESS_ITEM...} [USER_ITEM]
+                     | owner     | 
+                     | user NAME | 
+
+```
+where **`USER_ITEM `** is:
+```
+    [any|single|ancestor|descendant] organization
+    [any|single|ancestor|descendant] project
+    [any|context] owner
+    [any|no|context|inclusive] reserve
+    [any|no|public|protected|private|notprivate|ppp] maturity
+    [any|oem|goldpartner|partner|supplier|customer|contractor] category
+    [filter|localfilter] EXPRESSION
+```
+
+----
 ## Example
 ```
 ################################################################################
