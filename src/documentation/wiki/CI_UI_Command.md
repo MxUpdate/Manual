@@ -36,22 +36,18 @@ This command properties could be handled from !MxUpdate:
 * properties
 
 ----
-## Steps of the Update Flow
-###Cleanup
-Following steps are done before the TCL update file is executed:
-* The description is set to an empty string.
-* The command is set to not hidden.
-* The "alt" and label text is set to an empty string, too.
-* The hyperlink reference is removed.
-* All assigned users are removed.
-* All settings are removed.
+## Syntax
 
-###Update
-The TCL update file is executed.
-
-----
-## Parameter Definitions
-No further parameters are defined.
+    mxUpdate command NAME {
+        description DESCRIPTION_STRING
+        [!]hidden
+        label LABEL_STRING
+        href HREF_STRING
+        alt ALT_STRING
+        user USER_NAME
+        setting SETTING_NAME SETTING_VALUE
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
 
 ----
 ## Example
@@ -75,10 +71,12 @@ No further parameters are defined.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod command "${NAME}" \
-    description "Command for test purposes." \
-    label "Test Label" \
-    href "\$\{COMMON_DIR\}/emxTable.jsp?table=TestTable&inquiry=TestInquiry" \
-    alt "" \
-    add setting "Target Location" "content"
+mxUpdate command "${NAME}" {
+    description "Command for test purposes."
+    label "Test Label"
+    href "\$\{COMMON_DIR\}/emxTable.jsp?table=TestTable&inquiry=TestInquiry"
+    alt ""
+    user "Employee"
+    setting "Target Location" "content"
+}
 ```
