@@ -27,67 +27,60 @@ Platform".
 
 ----
 ##Handled Menu Properties
-This menu properties could be handled from !MxUpdate:
-  * description
-  * hidden flag
-  * flag to indicate that the menu is a type tree menu
-  * "alt" and label text
-  * hyperlink reference (HRef)
-  * settings
-  * assigned sub commands and menus
-  * properties
+This menu properties could be handled from MxUpdate:
 
-----
-##Steps of the Update Flow
-The menu CI file is defined with the so called *update format*. So an update of an menu is done by calculating the delta between the target and the current existing definition.
-This calculating delta means also that the history of a menu contains only the changes between the different milestone of a menu definition.
-
-----
-##Parameter Definitions
-No further parameters are defined.
+Property           | Written       | Default Value | Kind
+-------------------|---------------|---------------|----
+symbolic name      | if defined    | empty list    | list of symbolic name strings
+description        | always        | empty string  | multi-line-string
+hidden             | always        | ***false***   | flag
+type tree          | if ***true*** | ***false***   | flag
+label              | always        | empty string  | string
+href               | always        | empty string  | string
+settings           | if defined    | empty list    | list of settings
+commands and menus | if defined    | empty list    | list of child commands / menus
+properties         | if defined    | empty list    | list of values and referenced admin objects
 
 ----
 ## Syntax
-    mxUpdate menu NAME {
-        description DESCRIPTION_STRING
-        [!]hidden
-        [!]treemenu
-        label LABEL_STRING
-        href HREF_STRING
-        alt ALT_STRING
-        setting SETTING_NAME SETTING_VALUE
-        command COMMAND
-        menu MENU
-        property NAME [to TYPE NAME] [value VALUE_STRING]
-    }
+```
+mxUpdate menu "${NAME}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | [!]treemenu
+    | label LABEL_STRING
+    | href HREF_STRING
+    | alt ALT_STRING
+    | setting SETTING_NAME SETTING_VALUE
+    | command COMMAND_NAME
+    | menu MENU_NAME
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
-# MENU:
-# ~~~~~
-# MxUpdateToolbarMenu
+# MENU_TestToolbarMenu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# menu_MxUpdateToolbarMenu
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Menu for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate menu "${NAME}" {
+    symbolicname "menu_MxUpdateToolbarMenu"
     description "Menu for test purposes."
     label "emxFramework.Common.Actions"
     href ""
     alt ""
     setting "Registered Suite" "Framework"
     command "MxUpdate_Test"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdateToolbarMenu"
+    ################################################## Info End
 }
 ```
