@@ -75,15 +75,15 @@ If the used MX version within the project does not support the configuration ite
                                                           AttributeBoolean,AttributeDate,AttributeString,\
                                                           AttributeInteger,AttributeReal,\
                                                           Expression,Format,Interface,Policy,Relationship,Rule,Type,\
-                                                          Notification,Trigger,TriggerGroup,\
+                                                          Notification,Trigger,\
                                                           NumberGenerator,ObjectGenerator,\
-                                                          Association,Group,Person,PersonAdmin,Role,\
+                                                          Association,Group,PersonAdmin,Role,\
                                                           Channel,Command,Form,Inquiry,Menu,Portal,Table
 
     TypeDefGroup.DataModel.TypeDefList                  = AttributeBoolean,AttributeDate,AttributeString,\
                                                           AttributeInteger,AttributeReal,\
                                                           Expression,Format,Interface,Policy,Relationship,Rule,Type,\
-                                                          Notification,Trigger,TriggerGroup,\
+                                                          Notification,Trigger,\
                                                           NumberGenerator,ObjectGenerator
 
     ParameterDef.DMDimAllowRemoveUnit.ParameterList     =
@@ -135,24 +135,13 @@ In previous MxUpdate versions, "full" persons was supported ("full" persons are 
 ###How could I use MxUpdate Update together with emxGerLibUpdate?
 "MxUpdate Update" and "emxGerLibUpdate" could be used together within one installation. The recommendation is to use only one tool.
 
-The Tool "emxGerLibUpdate" uses and installs other attribute and type names to handle administration objects which are business objects. For attributes this belongs to the author, installed date and version. For types it is the process type (which is called in MxUpdate [trigger group](CI_DM_TriggerGroup.md)). So following lines must be defined to use MxUpdate Update and emxGerLibUpdate together in one environment:
+The Tool "emxGerLibUpdate" uses and installs other attribute and type names to handle administration objects which are business objects. For attributes this belongs to the author, installed date and version. So following lines must be defined to use MxUpdate Update and emxGerLibUpdate together in one environment:
 
 ```Properties
 # use attribute names from emxGerLibUpdate
 PropertyDef.Author.AttributeName        = emxGerLibUpdateAuthor
 PropertyDef.InstalledDate.AttributeName = emxGerLibUpdateInstalledDate
 PropertyDef.Version.AttributeName       = emxGerLibUpdateVersion
-
-# emxGerLibUpdate calls trigger group "Process"
-TypeDef.TriggerGroup.BusPolicy          = emxGerLibUpdateProcess
-TypeDef.TriggerGroup.BusRelsBoth        = emxGerLibUpdateSubProcess
-TypeDef.TriggerGroup.BusType            = emxGerLibUpdateProcess
-TypeDef.TriggerGroup.FilePath           = datamodel/process
-TypeDef.TriggerGroup.FilePrefix         = PROCESS_
-TypeDef.TriggerGroup.TextLogging        = process
-TypeDef.TriggerGroup.TextTitle          = PROCESS
-TypeDef.TriggerGroup.ParameterDesc      = Export / Import of processes.
-TypeDef.TriggerGroup.ParameterList      = process
 ```
 For a deeper explanation see key "[TypeDef](UpdatePropertyFileFormat_TypeDef.md)" and key "[PropertyDef](UpdatePropertyFileFormat_PropertyDef.md)" of the property file format.
 

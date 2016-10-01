@@ -37,4 +37,3 @@ The MxUpdate tool defines following objects as data model:
 * [Rules](CI_DM_Rule.md)
 * [Types](CI_DM_Type.md)
 * [Triggers](CI_DM_Trigger.md)
-* [Trigger Groups](CI_DM_TriggerGroup.md)

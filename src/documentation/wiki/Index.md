@@ -44,7 +44,6 @@
         * [Rules](CI_DM_Rule.md)
         * [Types](CI_DM_Type.md)
         * [Triggers](CI_DM_Trigger.md)
-        * [Trigger Groups](CI_DM_TriggerGroup.md)
     * [IEF Integrations](CI_IEF_.md)
         * [EBOM Sync Configurations](CI_IEF_EBOMSyncConfig.md)
         * [Global Configurations](CI_IEF_GlobalConfig.md)
