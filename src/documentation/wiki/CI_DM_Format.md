@@ -26,17 +26,23 @@ of the "ENOVIAvStudio Modeling Platform".
 
 ----
 ##Handled Properties
-This format properties could be handled from !MxUpdate:
- * description
- * hidden flag
- * version
- * file suffix
- * file type
- * mime type
- * view program (legacy, in new MX version not supported anymore)
- * edit program (legacy, in new MX version not supported anymore)
- * print program (legacy, in new MX version not supported anymore)
- * properties
+This format properties could be handled from MxUpdate:
+
+Property          | Written           | Default Value | Kind
+------------------|-------------------|---------------|----
+symbolic name     | if defined        | empty list    | list of symbolic name strings
+description       | always            | empty string  | multi-line-string
+hidden            | always            | ***false***   | flag
+version           | always            | empty string  | string
+file suffix       | always            | empty string  | string
+file type         | always            | empty string  | string
+mime type         | always            | empty string  | string
+view program      | if supported      | empty string  | string
+edit program      | if supported      | empty string  | string
+print program     | if supported      | empty string  | string
+properties        | if defined        | empty list    | list of values and referenced admin objects
+
+The view, edit and print program are legacy properties and not supported anymore from current MX versions.
 
 ----
 ##Parameter Definitions
@@ -46,19 +52,23 @@ This format properties could be handled from !MxUpdate:
 
 ----
 ##Syntax
-
-    mxUpdate format NAME {
-        description DESCRIPTION_STRING
-        [!]hidden
-        version VERSION_STRING
-        suffix VERSION_STRING
-        type TYPE_STRING
-        mime MIME_STRING
-        (view PROGRAM)
-        (edit PROGRAM)
-        (print PROGRAM)
-        property NAME [to TYPE NAME] [value VALUE_STRING]
-    }
+```
+mxUpdate format "${NAME}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | version VERSION_STRING
+    | suffix VERSION_STRING
+    | type TYPE_STRING
+    | mime MIME_STRING
+    | (view PROGRAM)
+    | (edit PROGRAM)
+    | (print PROGRAM)
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
     
 **Hint:** Programs for ```view```, ```edit``` and ```print``` are legacy. Newer MX versions does not support anymore this feature.
 
@@ -66,29 +76,22 @@ This format properties could be handled from !MxUpdate:
 ##Example
 ```TCL
 ################################################################################
-# FORMAT:
-# ~~~~~~~
-# TestFormat
+# FORMAT_TestFormat.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# format_TestFormat
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Format for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate format "${NAME}" {
+    symbolicname "format_TestFormat"
     description "Format for test purposes."
     !hidden
     version "1"
     suffix "txt"
     type "text"
     mime "text/plain"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestFormat"
+    ################################################## Info End
 }
 ```
