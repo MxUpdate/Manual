@@ -28,31 +28,37 @@ The file name is a concatenation of the EBOM Sync Configuration type, the name a
 
 
 ----
+## Syntax
+```
+mxUpdate ebomsyncconfig "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
+----
 ##Example (Snippet)
 ```TCL
 ################################################################################
-# IEFEBOMSYNC:
-# ~~~~~~~~~~~~
-# ECAD-EBOMSyncConfig________________MxUpdateEBOMSyncTest________-
+# IEFEBOMSYNC_ECAD-EBOMSyncConfig________________MxUpdateEBOMSyncTest________-.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# -
-# The EBOM sync configuration object for MxUpdate integration test.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod bus "${OBJECTID}" \
-    description "The EBOM sync configuration object for MxUpdate integration test." \
+mxUpdate ebomsyncconfig "${NAME}" "${REVISION}" {
+    type "ECAD-EBOMSyncConfig"
+    description "The EBOM sync configuration object for MxUpdate integration test."
+    current "Exists"
           :
-    "IEF-EBOMSync-AssignPartToMajor" "FALSE" \
-    "IEF-EBOMSync-DrawingRelationInfo" "" \
-    "IEF-EBOMSync-FailOnNotFindingMatchingPart" "TRUE" \
-    "IEF-EBOMSync-GenerateCollapsedEBOM" "TRUE" \
-    "IEF-EBOMSync-NewPartRevision" "1" \
-    "IEF-EBOMSync-ObjectAttrMapping" "" \
+    attribute "IEF-EBOMSync-AssignPartToMajor" "FALSE"
+    attribute "IEF-EBOMSync-DrawingRelationInfo" ""
+    attribute "IEF-EBOMSync-FailOnNotFindingMatchingPart" "TRUE"
+    attribute "IEF-EBOMSync-GenerateCollapsedEBOM" "TRUE"
+    attribute "IEF-EBOMSync-NewPartRevision" "1"
+    attribute "IEF-EBOMSync-ObjectAttrMapping" ""
           :
+}
 ```

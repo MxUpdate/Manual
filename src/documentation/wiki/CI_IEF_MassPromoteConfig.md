@@ -24,26 +24,32 @@
 The Mass Promote Configuration Objects are used from the IEF integrations.
 
 ----
+## Syntax
+```
+mxUpdate masspromoteconfig "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
+----
 ##Example (Snippet)
 ```TCL
 ################################################################################
-# IEFMASSPROMOTECONFIG:
-# ~~~~~~~~~~~~~~~~~~~~~
-# IEF-MassPromoteConfig________________MxUpdateTest________-
+# IEFMASSPROMOTECONFIG_IEF-MassPromoteConfig________________MxUpdateTest________-.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# -
-# MxUpdate Test IEF mass promote configuration.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod bus "${OBJECTID}" \
-    description "MxUpdate Test IEF mass promote configuration." \
-    "IEF-MassPromoteValidationRuleJPO" "" \
-    "IEF-ValidateObjectPromotion" "TRUE" \
-    "IEF-ValidateObjectSelection" "TRUE"
+mxUpdate masspromoteconfig "${NAME}" "${REVISION}" {
+    type "IEF-MassPromoteConfig"
+    description "MxUpdate Test IEF mass promote configuration."
+    current "Exists"
+    attribute "IEF-MassPromoteValidationRuleJPO" ""
+    attribute "IEF-ValidateObjectPromotion" "TRUE"
+    attribute "IEF-ValidateObjectSelection" "TRUE"
+}
 ```

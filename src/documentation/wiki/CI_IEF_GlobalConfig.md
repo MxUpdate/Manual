@@ -29,32 +29,39 @@ The file name is a concatenation of the global configuration type, the name and 
 
 If no global configuration type is defined in the file name (e.g. if an upgrade from `emxGerLibUpdate` is done), the default global configuration type `MCADInteg-GlobalConfig` is used.
 
+
+----
+## Syntax
+```
+mxUpdate globalconfig "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
 ----
 ##Example (Snippet)
 ```TCL
 ################################################################################
-# IEFGLOBALCONFIG:
-# ~~~~~~~~~~~~~~~~
-# ECADInteg-GlobalConfig________________MxUpdateIntegrationTest________1
+# IEFGLOBALCONFIG_ECADInteg-GlobalConfig________________MxUpdateIntegrationTest________1.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# 1
-# The global configuration object for MxUpdate integration test.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod bus "${OBJECTID}" \
-    description "The global configuration object for MxUpdate integration test." \
+mxUpdate globalconfig "${NAME}" "${REVISION}" {
+    type "ECADInteg-GlobalConfig"
+    description "The global configuration object for MxUpdate integration test."
+    current "Exists"
           :
-    "IEF-CSELaunchBinaryDetails" "" \
-    "IEF-CheckObsoleteAcrossRevisions" "false" \
-    "IEF-CheckUUIDConflict" "FALSE" \
-    "IEF-CreateVersionObjects" "TRUE" \
-    "IEF-DerivedOutputParameterObjTypeMapping" "" \
-    "IEF-DerivedOutputTypeDefaultParameterObjectMapping" "" \
+    attribute "IEF-CSELaunchBinaryDetails" ""
+    attribute "IEF-CheckObsoleteAcrossRevisions" "false"
+    attribute "IEF-CheckUUIDConflict" "FALSE"
+    attribute "IEF-CreateVersionObjects" "TRUE"
+    attribute "IEF-DerivedOutputParameterObjTypeMapping" ""
+    attribute "IEF-DerivedOutputTypeDefaultParameterObjectMapping" ""
           :
+}
 ```

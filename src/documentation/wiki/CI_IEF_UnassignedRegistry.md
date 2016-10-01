@@ -24,25 +24,31 @@
 The Unassigned Registry Objects are used from the IEF integrations.
 
 ----
+## Syntax
+```
+mxUpdate unassignedregistry "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
+----
 ##Example (Snippet)
 ```TCL
 ################################################################################
-# IEFUNASSIGNEDREGISTRY:
-# ~~~~~~~~~~~~~~~~~~~~~~
-# IEF-UnassignedIntegRegistry________________MxUpdateTest________-
+# IEFUNASSIGNEDREGISTRY_IEF-UnassignedIntegRegistry________________MxUpdateTest________-.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# -
-# MxUpdate Test IEF unassigned registry.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod bus "${OBJECTID}" \
-    description "MxUpdate Test IEF unassigned registry." \
-    "DSCAllowedFeatures" "WhereUsed,Lifecycle" \
-    "IEF-IntegrationToGCOMapping" ""
+mxUpdate unassignedregistry "${NAME}" "${REVISION}" {
+    type "IEF-UnassignedIntegRegistry"
+    description "MxUpdate Test IEF unassigned registry."
+    current "Exists"
+    attribute "DSCAllowedFeatures" "WhereUsed,Lifecycle"
+    attribute "IEF-IntegrationToGCOMapping" ""
+}
 ```

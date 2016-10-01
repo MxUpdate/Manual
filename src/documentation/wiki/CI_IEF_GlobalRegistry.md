@@ -24,24 +24,29 @@
 In the IEF Global Registry Objects each installed integrations is registered. The integration source itself is done with XML tags. Maximum one object exists (if at minimum one integration is used). The object is identified with name "IEF-GlobalRegistry" and revision "-".
 
 ----
+## Syntax
+```
+mxUpdate globalregistry "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
+----
 ##Example (Snippet)
 ```TCL
 ################################################################################
-# IEFGLOBALREGISTRY:
-# ~~~~~~~~~~~~~~~~~~
-# IEF-GlobalRegistry________-
+# IEFGLOBALREGISTRY_IEF-GlobalRegistry________-.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# -
-# IEF Global Registry Object
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod bus "${OBJECTID}" \
-    description "IEF Global Registry Object" \
-    "IEF-RegistryData" "<?xml version='1.0'?><integrationregistry>....</integrationregistry>"
+mxUpdate globalregistry "${NAME}" "${REVISION}" {
+    description "IEF Global Registry Object"
+    current "Exists"
+    attribute "IEF-RegistryData" "<?xml version='1.0'?><integrationregistry>....</integrationregistry>"
+}
 ```
