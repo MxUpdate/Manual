@@ -20,7 +20,7 @@
 
 ----
 ##Installation
-[Download](http://code.google.com/p/mxupdate/downloads/list) and uncompress the MxUpdate Update deployment tool. E.g. the tool is unpacked into directory `C:\project\MxUpdate\`.
+[Download](https://github.com/MxUpdate/Update/releases) and uncompress the MxUpdate Update deployment tool. E.g. the tool is unpacked into directory `C:\project\MxUpdate\`.
 
 Start MQL.
 
