@@ -23,32 +23,37 @@
 An object generator is used to create new business object instances depending on a number generator.
 
 ----
+## Syntax
+```
+mxUpdate objectgenerator "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+    | connection "eService Number Generator" to "eService Number Generator" NUMBER_NAME NUMBER_REVISION
+```
+
+----
 ##Example
 ```TCL
 ################################################################################
-# OBJECTGENERATOR:
-# ~~~~~~~~~~~~~~~~
-# type_MxUpdateTestType
+# OBJECTGENERATOR_ type_MxUpdateTestType.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Object Generator for MxUpdate Test Type Objects to define the prefix.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql mod bus "${OBJECTID}" \
-    description "Object Generator for MxUpdate Test Type Objects to define the prefix." \
-    "eService Name Prefix" "TEST-" \
-    "eService Name Suffix" "" \
-    "eService Processing Time Limit" "60" \
-    "eService Retry Count" "5" \
-    "eService Retry Delay" "60" \
-    "eService Safety Policy" "policy_MxUpdateTestPolicy" \
-    "eService Safety Vault" "vault_eServiceProduction"
-mql connect bus  "${OBJECTID}" \
-    relationship "eService Number Generator" \
-    to "eService Number Generator" "type_MxUpdateTestType" ""
+mxUpdate objectgenerator "${NAME}" "${REVISION}" {
+    description "Object Generator for MxUpdate Test Type Objects to define the prefix."
+    current "Exists"
+    attribute "eService Name Prefix" "TEST-"
+    attribute "eService Name Suffix" ""
+    attribute "eService Processing Time Limit" "60"
+    attribute "eService Retry Count" "5"
+    attribute "eService Retry Delay" "60"
+    attribute "eService Safety Policy" "policy_MxUpdateTestPolicy"
+    attribute "eService Safety Vault" "vault_eServiceProduction"
+    connection "eService Number Generator" to "eService Number Generator" "type_MxUpdateTestType" ""
+}
 ```
