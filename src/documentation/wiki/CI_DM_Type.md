@@ -28,18 +28,19 @@ of the "ENOVIA Studio Modeling Platform".
 ##Handled Properties
 This type properties could be handled from MxUpdate:
 
-Property      | Written            | Default Value | Kind
---------------|--------------------|---------------|----
-symbolic name | if defined         | empty list    | list of symbolic name strings
-description   | always             | empty string  | string
-kind          | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***composed***
-abstract      | if ***true***      | ***false***   | flag
-derived       | if set / not empty | empty string  | is derived from another type
-hidden        | always             | ***false***   | flag
-triggers      | if defined         | empty list    |
-methods       | if defined         | empty list    | list of assigned methods
-attributes    | if defined         | empty list    | list of assigned attributes
-properties    | if defined         | empty list    | list of values and referenced admin objects
+Property         | Written            | Default Value | Kind
+-----------------|--------------------|---------------|----
+symbolic name    | if defined         | empty list    | list of symbolic name strings
+description      | always             | empty string  | string
+kind             | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***composed***
+abstract         | if ***true***      | ***false***   | flag
+derived          | if set / not empty | empty string  | is derived from another type
+hidden           | always             | ***false***   | flag
+triggers         | if defined         | empty list    |
+methods          | if defined         | empty list    | list of assigned methods
+attributes       | if defined         | empty list    | list of assigned global attributes
+local attributes | if defined         | empty list    | list of assigned local attributes
+properties       | if defined         | empty list    | list of values and referenced admin objects
 
 ----
 ##Parameter Definitions
@@ -64,7 +65,7 @@ Error Code | Description
 ```
 mxUpdate type "${NAME}" { [OPTION] }
 ```
-where `OPTION` is:
+where **`OPTION`** is:
 ```
     | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
@@ -78,7 +79,45 @@ where `OPTION` is:
     |                    | override |
     | method PROGRAM_NAME
     | attribute ATTRIBUTE_NAME
+    | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
     | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+```
+where **`LOCAL_ATTRIBUTE`** is:
+```
+    | kind | binary  |
+    |      | boolean |
+    |      | date    |
+    |      | integer |
+    |      | real    |
+    |      | string  |
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | [!]multivalue
+    | [!]rangevalue
+    | [!]resetonclone
+    | [!]resetonrevision
+    | [!]multiline
+    | maxlength MAXLENGTH
+    | dimension DIMENSION_NAME
+    | default DEFAULT_STRING
+    | range RANGE_ITEM
+    | trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+    |                    | check    |
+    |                    | override |
+    | property NAME [to ADMIN_TYPE NAME] [value VALUE_STRING]
+```
+where **`RANGE_ITEM`** is:
+```
+    | =  | VALUE
+    | != |
+    | <  |
+    | >  |
+    | <= |
+    | >= | 
+    | between VALUE | inclusive | VALUE | inclusive |
+    |               | exclusive |       | exclusive |
+    | program PROGRAM_NAME [input ARG_STRING]
 ```
 
 ----
@@ -96,6 +135,19 @@ mxUpdate type "${NAME}" {
     !hidden
     attribute "MxUpdateTestAttribute1"
     attribute "MxUpdateTestAttribute2"
+    local attribute "MxUpdate Local Attribute"  {
+        kind string
+        symbolicname "attribute_MxUpdate_Local_Attribute"
+        description "A local MxUpdate Test Attribute"
+        !multivalue
+        !resetonclone
+        !resetonrevision
+        !multiline
+        maxlength 0
+        ################################################## Info Start
+        property "original name" value "MxUpdate Local Attribute"
+        ################################################## Info End
+    }
     ################################################## Info Start
     property "author" value "The MxUpdate Team"
     property "original name" value "MxUpdateTestType"
