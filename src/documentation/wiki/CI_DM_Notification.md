@@ -25,40 +25,45 @@ The notification objects are used from the generic email utility to define the s
 The notification object itself is internally stored in MX as business object from type "Notification" with policy "Business Rule" in vault "eService Administration".
 
 ----
+## Syntax
+```
+mxUpdate notification "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
+----
 ##Example
 ```TCL
 ################################################################################
-# NOTIFICATION:
-# ~~~~~~~~~~~~~
-# TestNotification________TestRevision
+# NOTIFICATION_TestNotification________TestRevision.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# TestRevision
-# Notification object for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql escape mod bus "${OBJECTID}" \
-    description "Notification object for test purposes." \
-    "Attachments" "" \
-    "Body HTML" "" \
-    "Body Text" "Test Body" \
-    "Dynamic Bcc List" "" \
-    "Dynamic Cc List" "" \
-    "Dynamic To List" "" \
-    "Filter" "" \
-    "From Agent" "\$\{USER\}" \
-    "Preprocess JPO" "" \
-    "Registered Suite" "MxUpdate" \
-    "Reply To" "" \
-    "Static Bcc List" "" \
-    "Static Cc List" "" \
-    "Static To List" "" \
-    "Subject Text" "Text Subject" \
-    "URL Suffix" ""
-mql promote bus "${OBJECTID}"
+mxUpdate notification "${NAME}" "${REVISION}" {
+    description "Notification object for test purposes."
+    current "Active"
+    attribute "Attachments" ""
+    attribute "Body HTML" ""
+    attribute "Body Text" "Test Body"
+    attribute "Dynamic Bcc List" ""
+    attribute "Dynamic Cc List" ""
+    attribute "Dynamic To List" ""
+    attribute "Filter" ""
+    attribute "From Agent" "${USER}"
+    attribute "Preprocess JPO" ""
+    attribute "Registered Suite" "MxUpdate"
+    attribute "Reply To" ""
+    attribute "Static Bcc List" ""
+    attribute "Static Cc List" ""
+    attribute "Static To List" ""
+    attribute "Subject Text" "Text Subject"
+    attribute "URL Suffix" ""
+}
 ```
+
