@@ -24,12 +24,11 @@ A channels is a collection of commands. Multiple channels are used to define the
 content of MX portals. For a deep instruction see the "MQL Guide" or "Business
 Modeler Guide" of the "ENOVIAvStudio Modeling Platform".
 
-The configuration item 'channel' of the !MxUpdate Update tool does not handle
-channels which are defined as user's workspace item.
+**Hint!** The configuration item 'channel' of the !MxUpdate Update tool does not handle channels which are defined as user's workspace item.
 
 ----
 ##Handled Properties
-This channel properties could be handled from !MxUpdate:
+This channel properties could be handled from MxUpdate:
   * description
   * hidden flag
   * height
@@ -38,22 +37,22 @@ This channel properties could be handled from !MxUpdate:
   * assigned commands
 
 ----
-##Steps of the Update Flow
-
-###Cleanup
-Following steps are done before the TCL update file is executed:
-  * The description is set to an empty string.
-  * The channel is set to not hidden.
-  * The "alt" and label text is also set to an empty string.
-  * The channel height is set to "0".
-  * All assigned commands are removed.
-
-###Update
-The TCL update file is executed.
-
-----
 ##Parameter Definitions
 No further parameters are defined.
+
+----
+## Syntax
+
+    mxUpdate channel NAME {
+        description DESCRIPTION_STRING
+        [!]hidden
+        label LABEL_STRING
+        href HREF_STRING
+        alt ALT_STRING
+        setting SETTING_NAME SETTING_VALUE
+        command COMMAND
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
 
 ----
 ##Example
@@ -76,11 +75,12 @@ No further parameters are defined.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod channel "${NAME}" \
-    description "Channel for test purposes." \
-    label "Test Label" \
-    height "100" \
-    add setting "Registered Suite" "MxUpdateCentral" \
-    place "First Test Command" after "" \
-    place "Second Test Command" after ""
+mxUpdate channel "${NAME}" {
+    description "Channel for test purposes."
+    label "Test Label"
+    height "100"
+    setting "Registered Suite" "MxUpdateCentral"
+    command "First Test Command"
+    command "Second Test Command"
+}
 ```
