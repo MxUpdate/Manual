@@ -12,11 +12,11 @@ Property      | Written            | Default Value | Kind
 --------------|--------------------|---------------|-----------------------
 package       | if defined         | empty         | string
 uuid          | if defined         | empty         | string
+symbolic name | if defined         | empty list    | list of symbolic name strings
 description   | always             | empty string  | string
 hidden flag   | always             | ***false***   | flag
 custom        | always             | ***false***   | flag
 used packages | if defined         | empty list    | list to packages
-members       | if defined         | empty list    | list of member admin objects
 properties    | if defined         | empty list    | list of values and referenced admin objects
 
 ----
@@ -28,11 +28,11 @@ where `OPTION` is:
 ```
     | package PACKAGE_NAME
     | uuid UUID_STRING
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | [!]custom
     | usepackage PACKAGE_NAME
-    | member ADMIN_TYPE ADMIN_NAME
     | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
 ```
 ----
@@ -49,7 +49,5 @@ mxUpdate package "${NAME}" {
     !hidden
     !custom
     usepackage "MxUdpateAnotherPackage"
-    member relationship "MxUpdateTestRelationship"
-    member type "MxUpdateTestType"
 }
 ```
