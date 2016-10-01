@@ -32,6 +32,7 @@
         * [Notifications](CI_DM_Notification.md)
         * [Number Generators](CI_DM_NumberGenerator.md)
         * [Object Generators](CI_DM_ObjectGenerator.md)
+        * [Path Types](CI_DM_PathType.md)
         * [Policies](CI_DM_Policy.md)
         * [Relationships](CI_DM_Relationship.md)
         * [Rules](CI_DM_Rule.md)
