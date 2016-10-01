@@ -31,6 +31,7 @@ This type properties could be handled from MxUpdate:
 Property    | Written            | Default Value | Kind
 ------------|--------------------|---------------|----
 description | always             | empty string  | string
+kind        | if not ***basic*** | ***basic***   | enumeration of ***basic** and ***composed***
 abstract    | if ***true***      | ***false***   | flag
 derived     | if set / not empty | empty string  | is derived from another type
 hidden      | always             | ***false***   | flag
@@ -54,7 +55,8 @@ properties  | if defined         | empty list    | list of values and referenced
 Error Code | Description
 -----------|------------
 11801      | The given attribute is not defined anymore in the update, but already assigned to the type. The attribute is not automatically removed because otherwise potentially data could be lost.
-11802      | Derived of a type can not be changed because potentially some data can be lost.
+11802      | Kind of a type can not be changed if the current kind is not ***basic***.
+11803      | Derived of a type can not be changed because potentially some data can be lost.
 
 ----
 ## Syntax
@@ -64,6 +66,8 @@ mxUpdate type "${NAME}" { [OPTION] }
 where `OPTION` is:
 ```
     | description DESCRIPTION_STRING
+    | kind | basic    |
+    |      | composed |
     | [!]abstract
     | derived TYPE_NAME
     | [!]hidden
