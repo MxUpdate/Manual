@@ -23,30 +23,25 @@
 Roles are used to define for persons specific access depending on there role. The three different kind of roles for standard roles, organizational roles and project roles exists. For a deep instruction see the "MQL Guide" or "Business Modeler Guide" of the "ENOVIA Studio Modeling Platform".
 
 ----
+##Handled Properties
+This role properties could be handled from MxUpdate:
+
+Property                       | Written            | Default Value | Kind
+-------------------------------|--------------------|---------------|----
+description                    | always             | empty string  | string
+kind                           | if not ***role***  | ***role***    | enumeration of ***organization***, ***project*** and ***role***
+hidden                         | always             | ***false***   | flag
+parent                         | is defined         | empty list    | list of parent role
+properties                     | if defined         | empty list    | list of values and referenced admin objects
+
+----
 ##Special Handling of Role Types
 This three different kind of roles exists:
 * standard roles
 * organizational roles
 * project roles
 
-If the kind of the role is changed it could not be reseted if some child roles are assigned to this role. So the kind of the roles be always defined with correct MQL keywords.
-
-----
-##Handled Properties
-This type properties could be handled from MxUpdate:
-* description
-* hidden flag
-* kind of role (role type)
-* properties
-* parent roles
-
-----
-##Steps of the Update Flow
-Following steps are done before the CI update file is executed:
-* set to not hidden
-* reset description
-* remove all parent roles
-
+If the kind of the role is changed it could not be reseted if some child roles are assigned to this role.
 ----
 ##Parameter Definitions
 *   **Name:** `UserIgnoreWSO4Roles`
@@ -56,6 +51,30 @@ Following steps are done before the CI update file is executed:
 *   **Name:** `UserRoleSupportRoleType`
     **Default Value:** `true`
     Are from current MX version role types supported? This is a V6 feature and so as default set to true. If an older MX version is used which does not support role types the value must be set to `false`.
+
+----
+##Explanation of Update Error Codes
+
+Error Code | Description
+-----------|------------
+31201      | Kind of a role can not be changed if the current kind is not ***role***.
+
+----
+## Syntax
+```
+mxUpdate role "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | description DESCRIPTION_STRING
+    | kind | organization |
+    |      | project      |
+    |      | role         |
+    | [!]hidden
+    | side SIDE_NAME
+    | parent GROUP_NAME
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
 
 ----
 ##Example
@@ -78,9 +97,10 @@ Following steps are done before the CI update file is executed:
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod role "${NAME}" \
-    description "Role for test purposes." \
-    !hidden \
-    asarole
-mql escape mod role "Employee" child "${NAME}"
+mxUpdate mod role "${NAME}" {
+    description "Role for test purposes."
+    kind role 
+    !hidden
+    parent "Employee"
+}
 ```
