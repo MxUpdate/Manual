@@ -30,7 +30,7 @@ Instead of described each versions and a delta (like in the XML update files del
 
 ----
 ##File Names
-Each file name of a configuration item has a prefix and a suffix. The suffix itself is always `.tcl`. The prefix depends on the configuration item type (e.g. for a command the prefix `COMMAND_` is used). As an exception from this rule are the program configuration items [JPO's](CI_Program_JPO.md) and [MQL Program's](CI_Program_MQL.md).
+Each file name of a configuration item has a prefix and a suffix. The suffix itself is always `.mxu`. The prefix depends on the configuration item type (e.g. for a command the prefix `COMMAND_` is used). As an exception from this rule are the program configuration items [JPO's](CI_Program_JPO.md) and [MQL Program's](CI_Program_MQL.md).
 
 ###Encoding Rules
 Within MX a configuration item could use some special characters which are not handled from the file system. Therefore this special characters are encoded.
