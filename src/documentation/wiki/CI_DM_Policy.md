@@ -33,8 +33,8 @@ The policy (excluding the properties of a policy) is defined with the TCL
 procedure `updatePolicy`.
 
 *Snippet of an Example:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
 }
 ```
@@ -45,16 +45,16 @@ all types are defined, the tag `all` could be used instead of defining a
 list.
 
 *Snippet of an Examples with One Type:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
   type {"Test Type"}
   :
 }
 ```
 *Snippet of an Examples with All Types:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
   type all
   :
@@ -67,16 +67,16 @@ all formats are defined, the tag `all` could be used instead of defining a
 list.
 
 *Snippet of an example with One Format:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
   format {generic}
   :
 }
 ```
 *Snippet of an example with All Formats:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
   format all
   :
@@ -87,8 +87,8 @@ updatePolicy "${NAME}" {
 The "all state access" definition is defined within `allstate`.
 
 *Snippet of an example:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
   allstate  {
     :
@@ -110,8 +110,8 @@ The public access uses instead the tag `public`.
 For revoke access, the tag `revoke` must be define in front of the access definitions.
 
 *Snippet of an Example:*
-```
-updatePolicy "${NAME}" {
+```TCL
+mxUpdate policy "${NAME}" {
   :
   state "TestState"  {
     :
@@ -127,7 +127,7 @@ updatePolicy "${NAME}" {
 ----
 ## Syntax
 ```
-updatePolicy NAME {
+mxUpdate policy NAME {
     description DESCRIPTION_STRING
     type {TYPENAME ...}
     format {FORMATNAME ...}
@@ -196,7 +196,7 @@ where **`USER_ITEM `** is:
 
 ----
 ## Example
-```
+```TCL
 ################################################################################
 # POLICY:
 # ~~~~~~~
@@ -215,7 +215,7 @@ where **`USER_ITEM `** is:
 # The MxUpdate Team
 ################################################################################
 
-updatePolicy "${NAME}" {
+mxUpdate policy "${NAME}" {
   description "Policy for test purposes."
   type {all}
   format {generic}
@@ -298,7 +298,7 @@ updatePolicy "${NAME}" {
 ## Limitations
 
 ### Filter
-With Enovia !V6R2010 it is not possible to extract filter informations for owner / public / revoke owner / revoke public access with a XML export or with a MQL print select statement. There exists some incidents for this behavior. This means that a !MxUpdate export does not include this filter informations. In this case the filters must be added manually to the configuration item file. So this also means e.g. that the standard MQL compare command does not work correctly (because the filter informations are not exported...).
+With Enovia V6R2010 it is not possible to extract filter informations for owner / public / revoke owner / revoke public access with a XML export or with a MQL print select statement. There exists some incidents for this behavior. This means that a MxUpdate export does not include this filter informations. In this case the filters must be added manually to the configuration item file. So this also means e.g. that the standard MQL compare command does not work correctly (because the filter informations are not exported...).
 Starting with Enovia V6R2010x the extract filter information works as expected.
 
 ### Signatures and new Access Items
