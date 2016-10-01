@@ -50,5 +50,4 @@ ParameterDescOpposite   | Description of the opposite parameters used in the hel
 ParameterList           | Comma separated list of parameters. The parameters are not case sensitive. If a parameter contains only one single character, one minus '-' is used as prefix. If the parameter name contains more than one character, two minus '--' are used as prefix.<br/><br/>**Example:**<br/>`TypeDef.Policy.ParameterList = p,pol,policy`<br/>So for policies three parameters are defined:<br/>`-p`<br/>`--pol`<br/>`--policy`</p>
 ParameterListOpposite   | Comma separated list of opposite parameters. The parameters are not case sensitive. The list is defined in the same way as the ParameterList sub key.
 TextLogging             | Text used as logging entry.
-TextTitle               | Title entry in the MxUpdate file.
 Wiki                    | Name of the Wiki file used to reference.
