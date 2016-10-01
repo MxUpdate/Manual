@@ -61,7 +61,6 @@
         * [Associations](CI_User_Association.md)
         * [Groups](CI_User_Group.md)
         * [Roles](CI_User_Role.md)
-        * [Persons](CI_User_Person.md)
         * [Administration Persons](CI_User_PersonAdmin.md)
     * [User Interfaces](CI_UI_.md)
         * [Commands](CI_UI_Command.md)

@@ -20,7 +20,7 @@
 
 ----
 ##Introduction
-Administration Persons are persons in MX for which no related business object exists (unlike ["standard" persons](CI_User_Person)). Good examples for such persons are the already standard installed "guest" and "creator" account. If the related person business object does not exists an user could not login into the web application. This means that such persons typically used only for administration.
+Administration Persons are persons in MX for which no related business object exists (unlike "standard" persons). Good examples for such persons are the already standard installed "guest" and "creator" account. If the related person business object does not exists an user could not login into the web application. This means that such persons typically used only for administration.
 
 ----
 ##Handled Administration Persons Properties
