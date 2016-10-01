@@ -28,6 +28,7 @@ This policy properties could be handled from MxUpdate:
 
 Property       | Written              | Default Value   | Kind
 ---------------|----------------------|-----------------|----
+symbolic name  | if defined           | empty list      | list of symbolic name strings
 description    | always               | empty string    | multi-line-string
 hidden         | always               | ***false***     | flag
 types          | if defined           | empty list      | list of types (or ***all***)
@@ -119,6 +120,7 @@ mxUpdate policy "${NAME}" { [OPTION] }
 ```
 where **`OPTION`** is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | type | all       |
@@ -236,93 +238,86 @@ published | "false" |
 
 ----
 ## Example
-```TCL
+```tcl
 ################################################################################
-# POLICY:
-# ~~~~~~~
-# TestPolicy
+# POLICY_TestPolicy.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# policy_TestPolicy
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Policy for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate policy "${NAME}" {
-  description "Policy for test purposes."
-  !hidden
-  type all
-  format "generic"
-  defaultformat "generic"
-  sequence "1,2,3,..."
-  store ""
-  allstate  {
-    owner {}
-    public {read show}
-  }
-  state "Submitted"  {
-    registeredName "state_Submitted"
-    revision
-    version
-    promote
-    checkouthistory
-    owner {read modify checkout checkin}
-    public {}
-    signature "Reject" {
-      branch "Rejected"
-      approve {Employee}
-      ignore {Employee}
-      reject {Employee}
-      filter ""
+    symbolicname "interface_MxUpdateTestInterface"
+    description "Policy for test purposes."
+    !hidden
+    type all
+    format "generic"
+    defaultformat "generic"
+    sequence "1,2,3,..."
+    store ""
+    allstate  {
+        owner {}
+        public {read show}
     }
-    signature "Review" {
-      branch "Review"
-      approve {Employee}
-      ignore {Employee}
-      reject {Employee}
-      filter ""
+    state "Submitted"  {
+        registeredName "state_Submitted"
+        revision
+        version
+        promote
+        checkouthistory
+        owner {read modify checkout checkin}
+        public {}
+        signature "Reject" {
+            branch "Rejected"
+            approve {Employee}
+            ignore {Employee}
+            reject {Employee}
+            filter ""
+        }
+        signature "Review" {
+            branch "Review"
+            approve {Employee}
+            ignore {Employee}
+            reject {Employee}
+            filter ""
+        }
     }
-  }
-  state "Review"  {
-    registeredName "state_Review"
-    revision
-    version
-    promote
-    checkouthistory
-    owner {read modify checkout}
-    public {}
-  }
-  state "Approved"  {
-    registeredName "state_Approved"
-    revision
-    version
-    promote
-    checkouthistory
-    owner {read modify checkout checkin}
-    public {}
-    signature "creator" {
-      branch ""
-      approve {creator}
-      ignore {}
-      reject {}
-      filter ""
+    state "Review"  {
+        registeredName "state_Review"
+        revision
+        version
+        promote
+        checkouthistory
+        owner {read modify checkout}
+        public {}
     }
-  }
-  state "Rejected"  {
-    revision
-    version
-    promote
-    checkouthistory
-    owner {read modify show}
-    public {}
-  }
+    state "Approved"  {
+        registeredName "state_Approved"
+        revision
+        version
+        promote
+        checkouthistory
+        owner {read modify checkout checkin}
+        public {}
+        signature "creator" {
+            branch ""
+            approve {creator}
+            ignore {}
+            reject {}
+            filter ""
+        }
+    }
+    state "Rejected"  {
+        revision
+        version
+        promote
+        checkouthistory
+        owner {read modify show}
+        public {}
+    }
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestPolicy"
+    ################################################## Info End
 }
 ```
 
