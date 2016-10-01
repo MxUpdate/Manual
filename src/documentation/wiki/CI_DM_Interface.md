@@ -26,6 +26,7 @@ Interfaces are used to handle multiple classification of business objects and co
 ##Handled Properties
 Property      | Written       | Default Value | Kind
 --------------|---------------|---------------|-----------------------
+symbolic name | if defined    | empty list    | list of symbolic name strings
 description   | always        | empty string  | string
 hidden flag   | always        | ***false***   | flag
 abstract flag | if ***true*** | ***false***   | flag
@@ -63,6 +64,7 @@ mxUpdate interface "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]abstract
     | derived INTERFACE_NAME
@@ -79,25 +81,13 @@ where `OPTION` is:
 ##Example
 ```tcl
 ################################################################################
-# INTERFACE:
-# ~~~~~~~~~~
-# MxUpdateTestInterface
+# INTERFACE_MxUpdateTestInterface.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# interface_MxUpdateTestInterface
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# MxUpdate Test Interface with two attributes, assignable to one type and two
-# relationships and one parent interface.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate interface "${NAME}" {
+    symbolicname "interface_MxUpdateTestInterface"
     description "MxUpdate Test Interface with two attributes, assignable to one type and two relationships and one parent interface."
     derived "MxUpdateTestParentInterface"
     !hidden
@@ -106,5 +96,9 @@ mxUpdate interface "${NAME}" {
     for relationship "MxUpdateTestRelationship1"
     for relationship "MxUpdateTestRelationship2"
     for type "MxUpdateTestType"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdateTestInterface"
+    ################################################## Info End
 }
 ```
