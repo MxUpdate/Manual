@@ -26,11 +26,15 @@ instruction see the "MQL Guide" or "Business Modeler Guide" of the
 
 ----
 ##Handled Properties
-This expression properties could be handled from !MxUpdate:
- * description
- * hidden flag
- * expression value (expression itself)
- * properties
+This expression properties could be handled from MxUpdate:
+
+Property    | Written            | Default Value | Kind
+------------|--------------------|---------------|----
+description | always             | empty string  | multi-line-string
+hidden      | always             | ***false***   | flag
+value       | if defined         | empty string  | multi-line-string
+properties  | if defined         | empty list    | list of values and referenced admin objects
+
 
 ----
 ## Parameter Definitions
