@@ -21,8 +21,7 @@
 ----
 ##Introduction
 Currently following program objects are supported from !MxUpdate:
-  * [JPO programs](CI_Program_JPO.md)
-  * [MQL programs](CI_Program_MQL.md)
+  * [EKL / External / Java / MQL programs](CI_Program_Program.md)
   * [Page objects](CI_Program_Page.md)
 
 ----
