@@ -31,6 +31,7 @@ description      | always        | empty string  | string
 hidden flag      | always        | ***false***   | flag
 abstract flag    | if ***true*** | ***false***   | flag
 derived          | if defined    | empty list    | list of derived interfaces
+interfaces       | if defined    | empty list    | defined for interfaces
 types            | if defined    | empty list    | defined for types
 relationships    | if defined    | empty list    | defined for relationships
 attributes       | if defined    | empty list    | list of assigned global attributes
@@ -75,10 +76,12 @@ where **`OPTION`** is:
     | [!]hidden
     | attribute ATTRIBUTENAME
     | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
+    | for interface    | INTERFACE_NAME |
+    |                  | all            |
     | for relationship | RELATIONSHIP_NAME |
     |                  | all               |
-    | for type | TYPE_NAME |
-    |          | all       |
+    | for type         | TYPE_NAME |
+    |                  | all       |
     | property NAME [to TYPE NAME] [value VALUE_STRING]
 ```
 where **`LOCAL_ATTRIBUTE`** is:
