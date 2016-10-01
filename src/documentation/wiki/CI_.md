@@ -75,6 +75,16 @@ The parameters are used to control the behavior related to symbolic names. Symbo
     **Default Value:** `eServiceSchemaVariableMapping.tcl`
     Defines the name of the program where all administration objects are registered with symbolic names (except that the `Installer` property is set).
 
+###File Header
+A file header is written for all CI files. The parameter `{0}` is automatically replaced by the file name.
+*   **Name:** `ExportFileHeader`
+    **Default Value:**   `################################################################################`
+`# {0}`
+`#`
+`#            This file describes the target of a Configuration Item.`
+`################################################################################`
+    Header used for each exported CI file.
+
 ###Properties for Admin Objects
 For admin object following specific properties exists:
 
