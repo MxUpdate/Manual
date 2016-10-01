@@ -71,13 +71,6 @@ A lot of parameters for the MxUpdate Update tool could be defined. Some paramete
 
 ###Symbolic Names
 The parameters are used to control the behavior related to symbolic names. Symbolic names are used within MX for referencing administration objects so that the real name could be changed without changing the code where the administration object is referenced.
-*   **Name:** `CalcSymbolicNames`
-    **Parameter:** `‑‑calculatesymbolicnames`
-    **Default Value:** `false`
-    With this parameter the symbolic names are always calculated and not extracted from the MxUpdate file header. This is e.g. useful if symbolic names in the header of MxUpdate files are not defined correctly.
-*   **Name:** `CalcSymbolicNameRegExp`                                             
-    **Default Value:** allowed are numbers, upper or lower case characters, percent sign `%`, ampersand `&`, left `(}` or right `)` parenthesis, plus `+` or minus `-`, colon `:`, equal sign `=`, caret `^`, underscore `_` and tilde `~`
-    Defines the regular expression for special characters which are not allowed for symbolic names. This special characters are replaced "nothing", means by zero length string.
 *   **Name:** `RegisterSymbolicNames`
     **Default Value:** `eServiceSchemaVariableMapping.tcl`
     Defines the name of the program where all administration objects are registered with symbolic names (except that the `Installer` property is set).
@@ -120,7 +113,7 @@ To use this feature, the info properties are configured with parameters.
     **Type:** String
     **Default Value:** `################################################## Info End`
     Comment of the end line after the last information property is listed.
-    
+
 ####Example
 ```tcl
 mxUpdate type "${NAME}" {

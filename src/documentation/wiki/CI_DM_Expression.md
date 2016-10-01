@@ -28,12 +28,13 @@ instruction see the "MQL Guide" or "Business Modeler Guide" of the
 ##Handled Properties
 This expression properties could be handled from MxUpdate:
 
-Property    | Written            | Default Value | Kind
-------------|--------------------|---------------|----
-description | always             | empty string  | multi-line-string
-hidden      | always             | ***false***   | flag
-value       | if defined         | empty string  | multi-line-string
-properties  | if defined         | empty list    | list of values and referenced admin objects
+Property      | Written            | Default Value | Kind
+--------------|--------------------|---------------|----
+symbolic name | if defined         | empty list    | list of symbolic name strings
+description   | always             | empty string  | multi-line-string
+hidden        | always             | ***false***   | flag
+value         | if defined         | empty string  | multi-line-string
+properties    | if defined         | empty list    | list of values and referenced admin objects
 
 
 ----
@@ -42,38 +43,35 @@ No further parameters are defined.
 
 ----
 ## Syntax
-
-    mxUpdate expression NAME {
-        description DESCRIPTION_STRING
-        [!]hidden
-        value EXPRESSION_STRING
-        property NAME [to TYPE NAME] [value VALUE_STRING]
-    }
+```
+mxUpdate expression "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | value EXPRESSION_STRING
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
 
 ----
 ##Example
 ```TCL
 ################################################################################
-# EXPRESSION:
-# ~~~~~~~~~~~
-# TestExpression
+# EXPRESSION_TestExpression.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# expression_TestExpression
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Expression for test purposes.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mxUpdate expression "${NAME}" {
+mxUpdate expression "TestExpression" {
+    symbolicname "expression_TestExpression"
     description "Expression for test purposes."
     !hidden
     value "current"
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "TestExpression"
+    ################################################## Info End
 }
 ```
