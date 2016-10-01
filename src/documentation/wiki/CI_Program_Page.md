@@ -20,89 +20,59 @@
 
 ----
 ##Introduction
-Pages are typically not used from MX. For a page a mime type typ could be
-defined. A page is handled like an [inquiry](CI_UI_Inquiry.md).
+Pages are typically not used from MX. For a page a mime type typ could be defined. A page is handled like an [inquiry](CI_UI_Inquiry.md).
 
 ----
-##MX related Limitations
-Pages could not be linked with properties. This means that symbolic names could not be defined. A defined symbolic name in the configuration item file is ignored.
+##Handled Page Properties
+This page properties could be handled from MxUpdate:
 
-In the exported configuration item file the symbolic name is not included in the header.
+Property    | Written            | Default Value | Kind
+------------|--------------------|---------------|----
+description | always             | empty string  | multi-line-string
+hidden      | if ***true***      | ***false***   | flag
+mime type   | always             | empty string  | string
+content     | if defined         | empty string  | multi-line-string
+properties  | if defined         | empty list    | list of values and referenced admin objects
 
 ----
-##Separator between TCL Update Code and Page Content
-The page content and TCL update code are defined in the same configuration item update file. Before the separator a comment is defined as information:
-```TCL
-# do not change the next three lines, they are needed as separator information:
+## Syntax
 ```
-As separator is following text used:
-```TCL
-################################################################################
-# PAGE CONTENT                                                                 #
-################################################################################
+mxUpdate page "${NAME}" { [OPTION] }
 ```
-Below the separator the original content of the page must be defined. No special escaping is needed.
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | mime MIME_STRING
+    | property NAME [to ADMIN_TYPE ADMIN_NAME] [value VALUE_STRING]
+    | content CONTENT_STRING
+```
 
-----
-##Handled Page properties
-This page properties could be handled from !MxUpdate:
-* description
-* mime type
-* page content
-
-----
-##Steps of the Update Flow
-###Cleanup
-Following steps are done before the TCL update file is executed:
-* The description is set to zero length string.
-* The mime type is reset.
-* The page content is removed.
-
-###Update
-The page content defined in the configuration item file is extracted and written in a temporary file. The path of the file is defined as TCL variable `FILE`. When the TCL update code is executed the page content is updated to the value defined in the file.
-
-----
-##Parameter Definitions
-*   **Name:** `ProgramPageSeparatorComment`
-    **Default Value:** _see the page content separator_
-    Defines the used comment in front of the separator between the page TCL update code and the page content itself.
-*   **Name:** `ProgramPageSeparatorText`
-    **Default Value:** _see the page content separator_
-    Defines the used text for the separator between the page TCL update code and the page content itself.
-
-The parameters could be changed depending on project needs. For further information see the [Parameter Definition Format](UpdatePropertyFileFormat_ParameterDef.md).
+For better reading, the code **`CONTENT_STRING `** itself is automatically exported with new line, code content and new line. The import trims all trailing new lines and spaces.
 
 ----
 ##Example
-```TCL
+```tcl
 ################################################################################
 # PAGE:
 # ~~~~~
 # MxUpdate_Test.html
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# MxUpdate test page.
 #
 # AUTHOR:
 # ~~~~~~~
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod page "${NAME}" \
-    description "MxUpdate test page." \
-    mime "text/html" \
-    file [file join "${FILE}"]
-
-# do not change the next three lines, they are needed as separator information:
-################################################################################
-# PAGE CONTENT                                                                 #
-################################################################################
-
+mxUpdate page "${NAME}" {
+    description "MxUpdate test page."
+    mime "text/html"
+    content "
 <html>
     <head><title>Title</title></head>
     <body>
         <h1>Test</h1>
     </body>
 </html>
+"
+}
 ```
