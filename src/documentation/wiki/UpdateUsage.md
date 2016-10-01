@@ -75,31 +75,26 @@ To export configuration items parameter `‑‑update` (short `-u`) must be defi
 
 ###'Update is Required' Check
 An update of an existing object must not be done always. The default configuration is, that an update is done always.
-*   **Parameter:** `‑‑checkfiledate`
-    Check if an update is required by comparing the defined version against the value of the version property. 
-    E.g. if parameter `‑‑usefiledateasversion` is defined, the last modified date in seconds of the file is used to compare against the version property within database.
-*   **Parameter:** `‑‑checkversion`
-    Check if an update is required by comparing the last modified date against the value of the file date property.
-
-###Version Definition
-*   **Parameter:** `‑‑usefiledateasversion`
-    The last modified date in seconds of the file is used as version information.
-*   **Parameter:** `‑‑version <VERSIONNUMBER>`
-    Defines the version of administration objects (e.g. 1-0).
-
-###Symbolic Names
-*   **Parameter:** `‑‑calculatesymbolicnames`
-    With this parameter the symbolic names are always calculated and not extracted from the MxUpdate file header. This is e.g. useful if symbolic names in the header of MxUpdate files are not defined correctly.
+*   **Name:** `UpdateCheckFileDate`
+    **Parameter:** `‑‑checkfiledate`
+    Check if an update is required by comparing the defined version against the value of the version property.
 
 ###Further Configurations
-*   **Parameter:** `‑‑defaultapplication <APPLICATIONAME>`
+*   **Name:** `DefaultApplication`
+    **Parameter:** `‑‑defaultapplication <APPLICATIONAME>`
     Defines the default name of application which is defined as property / attribute on administration objects. The value is only used for the application on the administration objects if no application is in the update script or as parameter defined. (Default 'Unknown')
-*   **Parameter:** `‑‑defaultauthor <AUTHORNAME>`
+*   **Name:** `DefaultAuthor`
+    **Parameter:** `‑‑defaultauthor <AUTHORNAME>`
     Defines the default name of author which is defined as property / attribute on administration objects. The value is only used for the author on the administration objects if no author is in the update script or as parameter defined. (Default 'The MxUpdate Team')
-*   **Parameter:** `‑‑defaultinstaller <INSTALLERNAME>`
+*   **Name:** `DefaultInstaller`
+    **Parameter:** `‑‑defaultinstaller <INSTALLERNAME>`
     Defines the default name of installer which is defined as property / attribute on administration objects. The value is only used for the installer on the administration objects if no installer is in the update script or as parameter defined.
     The default value is 'The MxUpdate Team'.
-*   **Parameter:** `‑‑author <AUTHORNAME>`
+*   **Name:** `Application`
+    **Parameter:** `‑‑application <APPLICATIONAME>`
+    Defines the application for administration objects. The default application and application author in the update script is overwritten.
+*   **Name:** `Author`
+    **Parameter:** `‑‑author <AUTHORNAME>`
     Defines the author for administration objects. The default author and the author in the update script is overwritten.
 *   **Parameter:** `‑‑installer <INSTALLERNAME>`
     Defines the installer for administration objects. The default installer name and existing installer names in update scripts are overwritten.
