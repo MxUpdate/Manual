@@ -23,8 +23,32 @@
 Associations are a list of persons which could be defined as expression.
 
 ----
+##Handled Properties
+This group properties could be handled from MxUpdate:
+
+Property      | Written    | Default Value | Kind
+--------------|------------|---------------|----
+description   | always     | empty string  | string
+hidden        | always     | ***false***   | flag
+definition    | always     | empty string  | string of user expression
+properties    | if defined | empty list    | list of values and referenced admin objects
+
+----
+## Syntax
+```
+mxUpdate association "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | definition DEFINITION_STRING
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
+
+----
 ##Example
-```TCL
+```tcl
 ################################################################################
 # ASSOCIATION:
 # ~~~~~~~~~~~~
@@ -44,8 +68,9 @@ Associations are a list of persons which could be defined as expression.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod association "${NAME}" \
-    description "Used to give rights in a state expression testing if user has check in rights (like OOTB public read)." \
-    !hidden \
+mxUpdate association "${NAME}" {
+    description "Used to give rights in a state expression testing if user has check in rights (like OOTB public read)."
+    !hidden
     definition "\"!User Agent\""
+}
 ```
