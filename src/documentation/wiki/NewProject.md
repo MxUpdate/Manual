@@ -28,7 +28,6 @@ The following prerequisites are needed:
 1.  Install Eclipse
 2.  Create new workspace in Eclipse
 3.  Install MxUpdate
-4 . Install MxUpdate Eclipse Plug-In
 
 ###Create new project in Eclipse
 

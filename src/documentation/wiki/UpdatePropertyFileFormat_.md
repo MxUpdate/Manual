@@ -33,4 +33,3 @@ The keys and their related sub keys are described in:
 * [Key "PropertyDef"](UpdatePropertyFileFormat_PropertyDef.md)
 * [Key "TypeDef"](UpdatePropertyFileFormat_TypeDef.md)
 * [Key "TypeDefGroup"](UpdatePropertyFileFormat_TypeDefGroup.md)
-* [Key "TypeDefTree"](UpdatePropertyFileFormat_TypeDefTree.md)

@@ -197,23 +197,6 @@ ParameterDef.DefaultInstaller.Default = YOUR_VALUE
 Symbolic names are typically defined in the configuration item header.
 
 ----
-##MxUpdate Eclipse Plug-In
-
-###Why must the MX ADK installed as Eclipse Plug-In?
-If the ADK is not installed as Eclipse Plug-In, the MxUdate Eclipse Plug-In must include the ADK itself. Because of the legal this means that for each new MxUpdate Eclipse Plug-In version each user must create himself the plug-in by e.g. coping the ADK manually into the MxUpdate Eclipse Plug-In. Otherwise if the ADK is separated in an own plug-in the MxUpdate Eclipse Plug-In could be deployed separately with the Eclipse standard way, e.g. via a site.
-
-###Why using the MxUpdate Eclipse Plug-In site?
-If the MxUpdate Eclipse Plug-In site is used, an update of the Plug-In could be done via the standard Eclipse update functionality.
-
-###Could I install the MxUpdate Eclipse Plug-In manually?
-Yes, the plug-in is also located under the [downloads](http://code.google.com/p/mxupdate/downloads/list). A description also exists. The preferred way is to install the plug-in via the [MxUpdate Eclipse Plug-In site](http://mxupdate.googlecode.com/svn/mxupdate-eclipse-site/tags/).
-
-###I've compiled with Maven the Eclipse Plug-In, but where must I copy the ..-feature.jar ?
-The `org.mxupdate.eclipse_X.X.X-feature.jar` is only required if you are working with an Eclipse update site. If you are directly install the Plug-In in your Eclipse, you could ignore this created jar file.
-
-For more information see the [Eclipse Plug-In development](Development_EclipsePlugIn.md) description.
-
-----
 ##Configuration Items
 
 ###How could I define that a type is not derived from any other type?

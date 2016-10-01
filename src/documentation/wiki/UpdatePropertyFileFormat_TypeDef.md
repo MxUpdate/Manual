@@ -52,5 +52,4 @@ ParameterList           | Comma separated list of parameters. The parameters are
 ParameterListOpposite   | Comma separated list of opposite parameters. The parameters are not case sensitive. The list is defined in the same way as the ParameterList sub key.
 TextLogging             | Text used as logging entry.
 TextTitle               | Title entry in the MxUpdate file.
-Icon                    | Path to the icon used from the !MxUpdate Eclipse plug-in.
 Wiki                    | Name of the Wiki file used to reference.
