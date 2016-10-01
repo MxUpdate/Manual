@@ -29,6 +29,7 @@ This attribute properties could be handled from MxUpdate:
 
 Property          | Written                              | Default Value | Kind
 ------------------|--------------------------------------|---------------|----
+symbolic name     | if defined                           | empty list    | list of symbolic name strings
 description       | always                               | empty string  | string
 hidden            | always                               | ***false***   | flag
 multi-value       | always                               | ***false***   | flag
@@ -37,10 +38,10 @@ reset on revision | always                               | ***false***   | flag
 multiline         | always for string attributes         | ***false***   | flag
 maximum length    | always for string attributes         | ***0***       | number
 range value       | always for real / integer attributes | ***false***   | flag
-dimension         | if defined for real / integer attributes | empty string | string
+dimension     | if defined for real / integer attributes | empty string  | string
 rule              | if defined                           | empty string  | string
 default           | always                               | empty string  | string
-triggers          | if defined                           | empty list    |
+triggers          | if defined                           | empty list    | list
 ranges            | if defined                           | empty list    | list
 properties        | if defined                           | empty list    | list of values and referenced admin objects
 
@@ -109,25 +110,28 @@ Error Code | Description
 
 ## Syntax
 ```
-mxUpdate attribute NAME {
-    description DESCRIPTION_STRING
-    [!]hidden
-    [!]multivalue
-    [!]rangevalue
-    [!]resetonclone
-    [!]resetonrevision
-    [!]multiline
-    maxlength MAXLENGTH
-    dimension DIMENSION_NAME
-    default DEFAULT_STRING
-    range RANGE_ITEM
-    trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
-                       | check    |
-                       | override |
-    property NAME [to TYPE NAME] [value VALUE_STRING]
-}
+mxUpdate attribute "${NAME}" { [OPTION] }
 ```
-where **RANGE_ITEM** is:
+where **`OPTION`** is:
+```
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | [!]multivalue
+    | [!]rangevalue
+    | [!]resetonclone
+    | [!]resetonrevision
+    | [!]multiline
+    | maxlength MAXLENGTH
+    | dimension DIMENSION_NAME
+    | default DEFAULT_STRING
+    | range RANGE_ITEM
+    | trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+    |                    | check    |
+    |                    | override |
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
+where **`RANGE_ITEM`** is:
 ```
     | =  | VALUE
     | != |
@@ -135,9 +139,9 @@ where **RANGE_ITEM** is:
     | >  |
     | <= |
     | >= | 
-    between VALUE | inclusive | VALUE | inclusive |
-                  | exclusive |       | exclusive |
-    program PROGRAM_NAME [input ARG_STRING]
+    | between VALUE | inclusive | VALUE | inclusive |
+    |               | exclusive |       | exclusive |
+    | program PROGRAM_NAME [input ARG_STRING]
 ```
 
 ----
@@ -145,24 +149,13 @@ where **RANGE_ITEM** is:
 ## Example
 ```tcl
 ################################################################################
-# ATTRIBUTE:
-# ~~~~~~~~~~
-# MxUpdateTestAttribute
+# STRING_MxUpdateTestAttribute.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# attribute_MxUpdateTestAttribute
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# MxUpdate Test String Attribute.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate attribute "${NAME}" {
+    symbolicname "attribute_MxUpdateTestAttribute"
     description "MxUpdate Test String Attribute."
     !hidden
     !multivalue
@@ -171,5 +164,9 @@ mxUpdate attribute "${NAME}" {
     multiline
     maxlength "100"
     default ""
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdateTestAttribute"
+    ################################################## Info End
 }
 ```
