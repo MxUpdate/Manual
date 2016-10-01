@@ -23,28 +23,30 @@
 A number generator is used to create new numbers which e.g. could be used for names of business objects.
 
 ----
+## Syntax
+```
+mxUpdate numbergenerator "${NAME}" "${REVISION}" { [OPTION] }
+```
+where **`OPTION`** is:
+```
+    | description DESCRIPTION_STRING
+    | current CURRENT_STATE
+    | attribute ATTR_NAME ATTR_MULTI_LINE_VALUE
+```
+
+----
 ##Example
 ```TCL
 ################################################################################
-# NUMBERGENERATOR:
-# ~~~~~~~~~~~~~~~~
-# type_MxUpdateTestType
+# NUMBERGENERATOR_ type_MxUpdateTestType.mxu
 #
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Number Generator for MxUpdate Test Type Objects.
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
-mql mod bus "${OBJECTID}" \
+mxUpdate numbergenerator "${NAME}" "${REVISION}" {
     description "Number Generator for MxUpdate Test Type Objects."
-
-# update of the next number attribute only if not already set
-set sTmp [mql print bus "${OBJECTID}" select attribute\[eService Next Number\] dump]
-if {[string length "${sTmp}"]==0}  {
-  mql mod bus "${OBJECTID}" "eService Next Number" "0000001"
+    current "Exists"
+    # update of next attribute only if not already set
+    attribute "eService Next Number" "0000001"
 }
 ```
