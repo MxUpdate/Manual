@@ -43,6 +43,9 @@ column/relationship   | if defined         | empty string  | string
 column/range          | if defined         | empty string  | string
 column/href           | if defined         | empty string  | string
 column/alt            | if defined         | empty string  | string
+column/hidden         | if ***true***      | ***false***   | flag
+columm/user           | if defined         | empty list    | list of users
+column/sorttype       | if not ***none***  | ***none***    | enumeration of ***alpha***, ***numeric***, ***other***, ***none***
 column/setting        | if defined         | empty list    | list of key/value pair
 
 ----
@@ -68,6 +71,12 @@ where `COLUMN_OPTION` is:
     | range RANGE_HREF_STRING
     | href HREF_STRING
     | alt ALT_STRING
+    | [!]hidden
+    | user USER_STRING
+    | sorttype | alpha   |
+    |          | numeric |
+    |          | other   |
+    |          | none    |
     | setting KEY_STRING VALUE_STRING 
 ```
 

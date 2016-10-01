@@ -41,6 +41,7 @@ field/relationship    | if defined         | empty string  | string
 field/range           | if defined         | empty string  | string
 field/href            | if defined         | empty string  | string
 field/alt             | if defined         | empty string  | string
+field/user            | if defined         | empty list    | list of users
 field/setting         | if defined         | empty list    | list of key/value pair
 
 
@@ -66,6 +67,7 @@ where `FIELD_OPTION` is:
     | range RANGE_HREF_STRING
     | href HREF_STRING
     | alt ALT_STRING
+    | user USER_STRING
     | setting KEY_STRING VALUE_STRING 
 ```
 
