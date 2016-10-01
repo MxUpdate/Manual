@@ -19,8 +19,62 @@
 #Describes the special handling of groups as configuration item.
 
 ----
+##Handled Properties
+This group properties could be handled from MxUpdate:
+
+Property                       | Written            | Default Value | Kind
+-------------------------------|--------------------|---------------|----
+description                    | always             | empty string  | string
+hidden                         | always             | ***false***   | flag
+parent                         | is defined         | empty list    | list of parent groups
+properties                     | if defined         | empty list    | list of values and referenced admin objects
+
+
+----
 ##Parameter Definitions
 *   **Name:** `UserIgnoreWSO4Groups`
     **Parameter:** `‑‑ignoreworkspaceobjectsforgroup [GROUP_MATCH]`, `‑‑ignorewso4group [GROUP_MATCH]`
     Defines the match of groups for which workspace objects are not handled (neither exported nor updated).
     Attention! A workspace object defined in the TCL update file are not ignored and will be created!
+
+----
+## Syntax
+```
+mxUpdate group "${NAME}" { [OPTION] }
+```
+where `OPTION` is:
+```
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | side SIDE_NAME
+    | parent GROUP_NAME
+    | property NAME [to TYPE NAME] [value VALUE_STRING]
+```
+
+----
+##Example
+```TCL
+################################################################################
+# GROUP:
+# ~~~~~~
+# MxUpdate_Group
+#
+# SYMBOLIC NAME:
+# ~~~~~~~~~~~~~~
+# group_MxUpdate_Group
+#
+# DESCRIPTION:
+# ~~~~~~~~~~~~
+# Group for test purposes.
+#
+# AUTHOR:
+# ~~~~~~~
+# The MxUpdate Team
+################################################################################
+
+mxUpdate group "${NAME}" {
+    description "Group for test purposes."
+    !hidden
+    parent "Company"
+}
+```
