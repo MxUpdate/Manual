@@ -28,24 +28,37 @@ or "Business Modeler Guide" of the "ENOVIA Studio Modeling Platform".
 ##Handled Properties
 This relationship properties could be handled from MxUpdate:
 
-Property                       | Written    | Default Value
--------------------------------|------------|--------------
-description                    | always     | empty string
-hidden flag                    | always     | *false*
-prevent duplicate flag         | always     | *false*
-rule                           | if defined | empty string
-triggers                       | if defined | empty list
-attributes                     | if defined | empty list
-properties                     | if defined | empty list
-from / to meaning              | always     | empty string
-from / to propagate connection | always     | *false*
-from / to propagate modify     | always     | *false*
-from / to cardinality          | always     | string "many"
-from / to revision action      | always     | string "none"
-from / to clone action         | always     | string "none"
-from / to types                | if defined | empty list
-from / to relationships        | if defined | empty list
+Property                       | Written            | Default Value
+-------------------------------|--------------------|--------------
+kind                           | if not ***basic*** | ***basic***
+description                    | always             | empty string
+hidden flag                    | always             | ***false***
+prevent duplicate flag         | always             | ***false***
+rule                           | if set             | empty string
+triggers                       | if defined         | empty list
+attributes                     | if defined         | empty list
+properties                     | if defined         | empty list
+from / to meaning              | always             | empty string
+from / to propagate connection | always             | ***false***
+from / to propagate modify     | always             | ***false***
+from / to cardinality          | always             | ***many***
+from / to revision action      | always             | ***one***
+from / to clone action         | always             | ***one***
+from / to types                | if defined         | empty list
+from / to relationships        | if defined         | empty list
 
+###'Compositional' Relationships
+If a relationship is new created, the relationship has typically the kind ***basic***. The kind of such relationship can by changed once to ***compositional***, but the change is irreversible. Another change to any other kind is not possible anymore.
+
+Prerequisites for compositional relationships are:
+* prevent duplicates must be true
+* from cardinality must be ***one***
+* from propagateconnection must be false
+* to clone must be replicate
+* to revision must be replicate
+* to propagate connection must be false
+
+###'Dynamical' Relationships
 
 ----
 ##Parameter Definitions
@@ -65,12 +78,15 @@ from / to relationships        | if defined | empty list
 Error Code | Description
 -----------|------------
 12101      | The given attribute is not defined anymore in the update, but already assigned to the relationship. The attribute is not automatically removed because otherwise potentially data could be lost.
+11401      | Kind of a relationship can not be changed if the current kind is not ***basic****.
 
 ----
 ## Syntax
 
     mxUpdate relationship "${NAME}" {
         description DESCRIPTION_STRING
+        kind | basic         |
+             | compositional |
         [!]hidden
         [!]preventduplicates
         rule RULE_NAME
