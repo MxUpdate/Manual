@@ -28,6 +28,7 @@ This group properties could be handled from MxUpdate:
 
 Property      | Written    | Default Value | Kind
 --------------|------------|---------------|----
+symbolic name | if defined | empty list    | list of symbolic name strings
 description   | always     | empty string  | string
 hidden        | always     | ***false***   | flag
 definition    | always     | empty string  | string of user expression
@@ -40,6 +41,7 @@ mxUpdate association "${NAME}" { [OPTION] }
 ```
 where `OPTION` is:
 ```
+    | symbolicname SYMBOLICNAME_STRING
     | description DESCRIPTION_STRING
     | [!]hidden
     | definition DEFINITION_STRING
@@ -50,27 +52,19 @@ where `OPTION` is:
 ##Example
 ```tcl
 ################################################################################
-# ASSOCIATION:
-# ~~~~~~~~~~~~
-# MxUpdate_PublicCheckin
+# ASSOCIATION_MxUpdate_PublicCheckin.mxu
 #
-# SYMBOLIC NAME:
-# ~~~~~~~~~~~~~~
-# association_MxUpdate_PublicCheckin
-#
-# DESCRIPTION:
-# ~~~~~~~~~~~~
-# Used to give rights in a state expression testing if user has check in
-# rights (like OOTB public read).
-#
-# AUTHOR:
-# ~~~~~~~
-# The MxUpdate Team
+#            This file describes the target of a Configuration Item.
 ################################################################################
 
 mxUpdate association "${NAME}" {
+    symbolicname "association_MxUpdate_PublicCheckin"
     description "Used to give rights in a state expression testing if user has check in rights (like OOTB public read)."
     !hidden
     definition "\"!User Agent\""
+    ################################################## Info Start
+    property "author" value "The MxUpdate Team"
+    property "original name" value "MxUpdate_PublicCheckin"
+    ################################################## Info End
 }
 ```
