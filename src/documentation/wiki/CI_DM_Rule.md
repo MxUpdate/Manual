@@ -42,6 +42,8 @@ The governed objects are not handled in the rule configuration item file. They m
 
 ----
 ##Parameter Definitions
+*   **Name:** `DMRuleSupportsEnforceReserveAccess`
+    **Value:** `true` if the MX version supports the 'enforce reserve access' flag (tested by calling MQL command `help rule` and testing the result for `enforcereserveaccess`).
 
 ----
 ## Syntax
@@ -49,6 +51,7 @@ The governed objects are not handled in the rule configuration item file. They m
 mxUpdate rule NAME {
     description DESCRIPTION_STRING
     [!]hidden
+    [!]enforcereserveaccess
     [revoke] [login] | public    | [key KEY_STRING] {ACCESS_ITEM...} [USER_ITEM]
                      | owner     | 
                      | user NAME | 
