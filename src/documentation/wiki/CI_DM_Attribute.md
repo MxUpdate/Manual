@@ -25,51 +25,47 @@ are assigned to [types](CI_DM_Type.md), [relationships](CI_DM_Relationship.md) a
 
 ----
 ## Handled Properties
-This format properties could be handled from MxUpdate:
- * description
- * hidden flag
- * rules
- * default value
- * dimension (only for real and integer attributes)
- * flag to define that the attribute has multiple values
- * maximum length (only for string attributes)
- * multiline flag (only for string attributes)
- * flag to define that the value is reseted on clone of business object
- * flag to define that the value is reseted on revision of business object
- * flag to define that the value contains range values (only for real, integer and date attributes)
- * triggers
- * ranges
- * properties
+This attribute properties could be handled from MxUpdate:
+
+Property          | Written                              | Default Value | Kind
+------------------|--------------------------------------|---------------|----
+description       | always                               | empty string  | string
+hidden            | always                               | ***false***   | flag
+multi-value       | always                               | ***false***   | flag
+reset on clone    | always                               | ***false***   | flag
+reset on revision | always                               | ***false***   | flag
+multiline         | always for string attributes         | ***false***   | flag
+maximum length    | always for string attributes         | ***0***       | number
+range value       | always for real / integer attributes | ***false***   | flag
+dimension         | if defined for real / integer attributes | empty string | string
+rule              | if defined                           | empty string  | string
+default           | always                               | empty string  | string
+triggers          | if defined                           | empty list    |
+ranges            | if defined                           | empty list    | list
+properties        | if defined                           | empty list    | list of values and referenced admin objects
+
+
 
 ----
-## Steps of the Update Flow
-
-### Update
-The attribute CI file is defined with the so called *update format*. So an update of an attribute is done by calculating the delta between the target and the current existing definition.
-This calculating delta means also that the history of an attribute contains only the changes between the different milestone of an attribute definition.
-
-### Special Handling of *Loosing Data* Properties
+## Special Handling of *Loosing Data* Properties
 Some properties / flags can not be changed in some cases without loosing data information. In this cases the changes must be done manually from pre-update migration scripts.
 The idea behind is that e.g. a development system does not contain the complete productive data. So the exception will be also thrown in the development (and not the first time when an update of a productive system is tried).
 
-#### *Multi Value* flag
+### *Multi Value* flag
 All attributes can be defined as multi-value attribute. To define an attribute as multi-value attribute can be done without any lost data. In the case that the multi-value flag is reset to non-multi-value with potentially losing of data, the change is rejected.
 
-#### *Range Value* flag
+### *Range Value* flag
 Integer, real or date attributes can be defined to contain range values (e.g. 20% range). The definition of an attribute with range values can be done without loosing data. Otherwise removing range values can mean that data is lost. So this change is rejected.
 
-### *Dimension* property
+## *Dimension* property
 A Dimension can be defined for real and integer attributes. With change of the dimension existing data can be lost. So only a new definition of the Dimension is allowed and a change of a Dimension is rejected. For more information how to update a new dimension including automatically conversion see the Enovia MQL manual.
-
-----
-## Format
-The *update format* is used to define all attribute properties and flags. The *update format* is similar to the syntax to create new attributes. Only the type of the attribute (integer, real, string, date, boolean) is not define in the file itself, because the name of the attribute file contains itself the attribute type.
 
 ### File Names
 The file name of an attribute CI file contains prefixed attribute type, the escaped attribute name and as extension ".tcl".
 
 File Name Prefix | Attribute Type
 -----------------|----------------------
+```BINARY_```    | Binary attributes
 ```BOOLEAN_```   | Boolean attributes
 ```DATE_```      | Date/Time attributes
 ```INTEGER_```   | Integer attributes
@@ -118,9 +114,9 @@ mxUpdate attribute NAME {
     [!]hidden
     [!]multivalue
     [!]rangevalue
-    [!]multiline
     [!]resetonclone
     [!]resetonrevision
+    [!]multiline
     maxlength MAXLENGTH
     dimension DIMENSION_NAME
     default DEFAULT_STRING
