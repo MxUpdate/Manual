@@ -39,7 +39,8 @@ hidden                         | always             | ***false***   | flag
 prevent duplicate              | always             | ***false***   | flag
 rule                           | if set / not empty | empty string  | one referenced rule name
 triggers                       | if defined         | empty list    |
-attributes                     | if defined         | empty list    | list of assigned attributes
+attributes                     | if defined         | empty list    | list of assigned global attributes
+local attributes | if defined  | empty list         | list of assigned local attributes
 properties                     | if defined         | empty list    | list of values and referenced admin objects
 from+to/meaning                | always             | empty string  | string
 from+to/cardinality            | always             | ***many***    | enumeration of ***one*** and ***many***
@@ -124,6 +125,7 @@ where **`OPTION`** is:
     | from { [SIDE_INFO] }
     | to { [SIDE_INFO] }
     | attribute ATTRIBUTENAME
+    | local attribute ATTRIBUTE_NAME { [LOCAL_ATTRIBUTE] }
     | property NAME [to TYPE NAME] [value VALUE_STRING]
 ```
 where **`SIDE_INFO`** is
@@ -143,6 +145,43 @@ where **`SIDE_INFO`** is
     |      | all       |
     | relationship | RELATIONSHIP_NAME |
     |              | all               |
+```
+where **`LOCAL_ATTRIBUTE`** is:
+```
+    | kind | binary  |
+    |      | boolean |
+    |      | date    |
+    |      | integer |
+    |      | real    |
+    |      | string  |
+    | symbolicname SYMBOLICNAME_STRING
+    | description DESCRIPTION_STRING
+    | [!]hidden
+    | [!]multivalue
+    | [!]rangevalue
+    | [!]resetonclone
+    | [!]resetonrevision
+    | [!]multiline
+    | maxlength MAXLENGTH
+    | dimension DIMENSION_NAME
+    | default DEFAULT_STRING
+    | range RANGE_ITEM
+    | trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
+    |                    | check    |
+    |                    | override |
+    | property NAME [to ADMIN_TYPE NAME] [value VALUE_STRING]
+```
+where **`RANGE_ITEM`** is:
+```
+    | =  | VALUE
+    | != |
+    | <  |
+    | >  |
+    | <= |
+    | >= | 
+    | between VALUE | inclusive | VALUE | inclusive |
+    |               | exclusive |       | exclusive |
+    | program PROGRAM_NAME [input ARG_STRING]
 ```
 
 ----
@@ -180,6 +219,19 @@ mxUpdate relationship "${NAME}" {
     }
     attribute "MxUpdateTestAttribute1"
     attribute "MxUpdateTestAttribute2"
+    local attribute "MxUpdate Local Attribute"  {
+        kind string
+        symbolicname "attribute_MxUpdate_Local_Attribute"
+        description "A local MxUpdate Test Attribute"
+        !multivalue
+        !resetonclone
+        !resetonrevision
+        !multiline
+        maxlength 0
+        ################################################## Info Start
+        property "original name" value "MxUpdate Local Attribute"
+        ################################################## Info End
+    }
     ################################################## Info Start
     property "author" value "The MxUpdate Team"
     property "original name" value "MxUpdateTestRelationship"
