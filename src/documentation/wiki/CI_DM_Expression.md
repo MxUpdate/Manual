@@ -33,16 +33,18 @@ This expression properties could be handled from !MxUpdate:
  * properties
 
 ----
-##Steps of the Update Flow
+## Parameter Definitions
+No further parameters are defined.
 
-###Cleanup
-Following steps are done before the TCL update file is executed:
- * set to not hidden
- * reset description
- * remove value (no expression)
+----
+## Syntax
 
-###Update
-The TCL update file is executed.
+    mxUpdate expression NAME {
+        description DESCRIPTION_STRING
+        [!]hidden
+        value EXPRESSION_STRING
+        property NAME [to TYPE NAME] [value VALUE_STRING]
+    }
 
 ----
 ##Example
@@ -65,8 +67,9 @@ The TCL update file is executed.
 # The MxUpdate Team
 ################################################################################
 
-mql escape mod expression "${NAME}" \
-    description "Expression for test purposes." \
-    !hidden \
+mxUpdate expression "${NAME}" {
+    description "Expression for test purposes."
+    !hidden
     value "current"
+}
 ```
