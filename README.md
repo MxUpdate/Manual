@@ -16,10 +16,8 @@
  *
 -->
 
-#Wiki Start Page
+#Introduction
 
-##Introduction
+The [MxUpdate](http://www.mxupdate.org) Tools is based on the [Configuration Item](chapter-4-ci/README.md) philosophy. This means each administration object in MX is handled with a single update file.
 
-The [MxUpdate](http://www.mxupdate.org) Tools is based on the [Configuration Item](CI_.md) philosophy. This means each administration object in MX is handled with a single update file.
-
-To handle this philosophy the [MxUpdate](http://www.mxupdate.org) tool includes the MxUpdate Update Deployment Tool ([installation](UpdateInstallation.md), [usage](UpdateUsage.md)).
+To handle this philosophy the [MxUpdate](http://www.mxupdate.org) tool includes the MxUpdate Update Deployment Tool ([installation](chapter-1-installation/README.md), [usage](chapter-3-usage/README.md)).
