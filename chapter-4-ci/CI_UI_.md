@@ -20,7 +20,7 @@
 
 ----
 ##Introduction
-Currently following program objects are supported from MxUpdate:
+Currently following user interface configurations are supported from MxUpdate:
 * [Commands](CI_UI_Command.md)
 * [Menus](CI_UI_Menu.md)
 * [Channels](CI_UI_Channel.md)
