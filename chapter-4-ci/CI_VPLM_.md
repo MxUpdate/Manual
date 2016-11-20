@@ -22,3 +22,4 @@
 ##Introduction
 Currently following VPLM configurations are supported from MxUpdate:
 * [VPLM Project Template](CI_VPLM_ProjectTemplate.md)
+* [VPLM Synch Parameters](CI_VPLM_SynchParameters.md)

@@ -66,6 +66,7 @@
         * [Web Tables](chapter-4-ci/CI_UI_Table.md)
     * [VPLM](chapter-4-ci/CI_VPLM_.md)
         * [VPLM Project Template](chapter-4-ci/CI_VPLM_ProjectTemplate.md)
+        * [VPLM Synch Parameters](chapter-4-ci/CI_VPLM_SynchParameters.md)
 * [Property File Format](chapter-5-propertyfile/README.md)
     * [Mode](chapter-5-propertyfile/UpdatePropertyFileFormat_Mode.md)
     * [ParameterDef](chapter-5-propertyfile/UpdatePropertyFileFormat_ParameterDef.md)
