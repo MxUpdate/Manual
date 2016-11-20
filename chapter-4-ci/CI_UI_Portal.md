@@ -43,6 +43,7 @@ href          | always        | empty string  | string
 alt           | always        | empty string  | string
 settings      | if defined    | empty list    | list of settings
 channels      | if defined    | empty list    | list of child channels
+new row       | if defined    | empty         | new row flag after channel definition
 properties    | if defined    | empty list    | list of values and referenced admin objects
 
 ----
@@ -62,6 +63,7 @@ where **`OPTION`** is:
     | alt ALT_STRING
     | setting SETTING_NAME SETTING_VALUE
     | channel COMMAND_NAME
+    | newrow
     | property NAME [to TYPE NAME] [value VALUE_STRING]
 ```
 
@@ -79,7 +81,9 @@ mxUpdate portal "${NAME}" {
     description "Portal for test purposes."
     label ""
     setting "Registered Suite" "MxUpdateCentral"
-    channel "TestChannel"
+    channel "TestChannel_FirstLine"
+    newrow
+    channel "TestChannel_SecondLine"
     ################################################## Info Start
     property "author" value "The MxUpdate Team"
     property "original name" value "TestPortal"
