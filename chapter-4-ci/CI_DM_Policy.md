@@ -158,6 +158,7 @@ where **`STATE_ITEM`** is:
     | trigger EVENT_TYPE | action   | PROGRAMNAME [input ARG_STRING]
     |                    | check    |
     |                    | override |
+    | route ROUTE_USER ROUTE_MESSAGE
     | signature SIGNATURE_NAME { [SIGNATURE_ITEM] }
     | property NAME [to TYPE NAME] [value VALUE_STRING]
 
