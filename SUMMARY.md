@@ -44,6 +44,7 @@
         * [Global Registries](chapter-4-ci/CI_IEF_GlobalRegistry.md)
         * [Mass Promote Configuration](chapter-4-ci/CI_IEF_MassPromoteConfig.md)
         * [Unassigned Registries](chapter-4-ci/CI_IEF_UnassignedRegistry.md)
+    * [Onto Concept \/ Literal \/ Ontology \/ Property](chapter-4-ci/CI_Onto.md)
     * [Programs](chapter-4-ci/CI_Program_.md)
         * [EKL \/ External \/ Java \/ MQL programs](chapter-4-ci/CI_Program_Program.md)
         * [Pages](chapter-4-ci/CI_Program_Page.md)
