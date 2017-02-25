@@ -5,7 +5,7 @@
  *  MxUpdate is a deployment tool for a PLM platform to handle
  *  administration objects as single update files (configuration item).
  *
- *  Copyright (C) 2008-2016 The MxUpdate Team
+ *  Copyright (C) 2008-2017 The MxUpdate Team
  *
  *  The Manual of MxUpdate is licensed under a CC BY-NC-SA 4.0 license
  *  (Creative Commons Attribution-NonCommercial-ShareAlike 4.0 
@@ -48,6 +48,7 @@
         * [EKL \/ External \/ Java \/ MQL programs](chapter-4-ci/CI_Program_Program.md)
         * [Pages](chapter-4-ci/CI_Program_Page.md)
     * [System](chapter-4-ci/CI_System_.md)
+        * [Computing Environments](chapter-4-ci/CI_System_ComputingEnvironment.md)
         * [Index's](chapter-4-ci/CI_System_Index.md)
         * [Packages](chapter-4-ci/CI_System_Package.md)
         * [Unique Keys](chapter-4-ci/CI_System_UniqueKey.md)
@@ -77,4 +78,3 @@
     * [Update Tool](chapter-6-development/Development_Update.md)
     * [Manual](chapter-6-development/Development_Manual.md)
 * [Frequently Asked Questions](chapter-7-faq/README.md)
-
